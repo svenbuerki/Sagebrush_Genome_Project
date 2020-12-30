@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Sagebrush Biomass Production</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Sagebrush Genome Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Biomass_production.html">Biomass production</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Sagebrush Biomass Production</h1>
+
+</div>
+
+
+<div id="reproducible-workflow" class="section level1">
+<h1><span class="header-section-number">1</span> Reproducible workflow</h1>
+</div>
+<div id="references" class="section level1">
+<h1><span class="header-section-number">2</span> References</h1>
+<div id="refs">
+
+</div>
+</div>
+<div id="appendix-1" class="section level1 appendix">
+<h1><span class="header-section-number">3</span> Appendix 1</h1>
+<p>Citations of all R packages used to generate this report.</p>
+<p>[1] J. Allaire, Y. Xie, J. McPherson, et al. <em>rmarkdown: Dynamic
+Documents for R</em>. R package version 2.4. 2020. &lt;URL:
+<a href="https://github.com/rstudio/rmarkdown" class="uri">https://github.com/rstudio/rmarkdown</a>&gt;.</p>
+<p>[2] C. Boettiger. <em>knitcitations: Citations for Knitr Markdown Files</em>.
+R package version 1.0.10. 2019. &lt;URL:
+<a href="https://github.com/cboettig/knitcitations" class="uri">https://github.com/cboettig/knitcitations</a>&gt;.</p>
+<p>[3] D. Ebbert. <em>chisq.posthoc.test: A Post Hoc Analysis for Pearson’s
+Chi-Squared Test for Count Data</em>. R package version 0.1.2. 2019. &lt;URL:
+<a href="http://chisq-posthoc-test.ebbert.nrw/" class="uri">http://chisq-posthoc-test.ebbert.nrw/</a>&gt;.</p>
+<p>[4] T. Hothorn, A. Zeileis, R. W. Farebrother, et al. <em>lmtest: Testing
+Linear Regression Models</em>. R package version 0.9-38. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=lmtest" class="uri">https://CRAN.R-project.org/package=lmtest</a>&gt;.</p>
+<p>[5] S. Jackman, A. Tahk, A. Zeileis, et al. <em>pscl: Political Science
+Computational Laboratory</em>. R package version 1.5.5. 2020. &lt;URL:
+<a href="http://github.com/atahk/pscl" class="uri">http://github.com/atahk/pscl</a>&gt;.</p>
+<p>[6] A. Kassambara. <em>ggpubr: ggplot2 Based Publication Ready Plots</em>. R
+package version 0.4.0. 2020. &lt;URL:
+<a href="https://rpkgs.datanovia.com/ggpubr/" class="uri">https://rpkgs.datanovia.com/ggpubr/</a>&gt;.</p>
+<p>[7] R. Lenth. <em>emmeans: Estimated Marginal Means, aka Least-Squares
+Means</em>. R package version 1.5.2-1. 2020. &lt;URL:
+<a href="https://github.com/rvlenth/emmeans" class="uri">https://github.com/rvlenth/emmeans</a>&gt;.</p>
+<p>[8] R. Lenth. <em>lsmeans: Least-Squares Means</em>. R package version 2.30-0.
+2018. &lt;URL: <a href="https://CRAN.R-project.org/package=lsmeans" class="uri">https://CRAN.R-project.org/package=lsmeans</a>&gt;.</p>
+<p>[9] R. V. Lenth. “Least-Squares Means: The R Package lsmeans”. In:
+<em>Journal of Statistical Software</em> 69.1 (2016), pp. 1-33. DOI:
+10.18637/jss.v069.i01.</p>
+<p>[10] E. Neuwirth. <em>RColorBrewer: ColorBrewer Palettes</em>. R package
+version 1.1-2. 2014. &lt;URL:
+<a href="https://CRAN.R-project.org/package=RColorBrewer" class="uri">https://CRAN.R-project.org/package=RColorBrewer</a>&gt;.</p>
+<p>[11] E. Paradis, S. Blomberg, B. Bolker, et al. <em>ape: Analyses of
+Phylogenetics and Evolution</em>. R package version 5.4-1. 2020. &lt;URL:
+<a href="http://ape-package.ird.fr/" class="uri">http://ape-package.ird.fr/</a>&gt;.</p>
+<p>[12] E. Paradis and K. Schliep. “ape 5.0: an environment for modern
+phylogenetics and evolutionary analyses in R”. In: <em>Bioinformatics</em> 35
+(2019), pp. 526-528.</p>
+<p>[13] R Core Team. <em>R: A Language and Environment for Statistical
+Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
+2019. &lt;URL: <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
+<p>[14] B. Ripley. <em>MASS: Support Functions and Datasets for Venables and
+Ripley’s MASS</em>. R package version 7.3-53. 2020. &lt;URL:
+<a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
+<p>[15] M. R. Smith. <em>TreeTools: Create, Modify and Analyse Phylogenetic
+Trees</em>. R package version 1.4.0. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=TreeTools" class="uri">https://CRAN.R-project.org/package=TreeTools</a>&gt;.</p>
+<p>[16] W. N. Venables and B. D. Ripley. <em>Modern Applied Statistics with
+S</em>. Fourth. ISBN 0-387-95457-0. New York: Springer, 2002. &lt;URL:
+<a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
+<p>[17] G. R. Warnes, B. Bolker, L. Bonebakker, et al. <em>gplots: Various R
+Programming Tools for Plotting Data</em>. R package version 3.1.0. 2020.
+&lt;URL: <a href="https://github.com/talgalili/gplots" class="uri">https://github.com/talgalili/gplots</a>&gt;.</p>
+<p>[18] H. Wickham. <em>forcats: Tools for Working with Categorical Variables
+(Factors)</em>. R package version 0.5.0. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=forcats" class="uri">https://CRAN.R-project.org/package=forcats</a>&gt;.</p>
+<p>[19] H. Wickham. <em>ggplot2: Elegant Graphics for Data Analysis</em>.
+Springer-Verlag New York, 2016. ISBN: 978-3-319-24277-4. &lt;URL:
+<a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>&gt;.</p>
+<p>[20] H. Wickham. <em>stringr: Simple, Consistent Wrappers for Common
+String Operations</em>. R package version 1.4.0. 2019. &lt;URL:
+<a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>&gt;.</p>
+<p>[21] H. Wickham and J. Bryan. <em>usethis: Automate Package and Project
+Setup</em>. R package version 1.6.3. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=usethis" class="uri">https://CRAN.R-project.org/package=usethis</a>&gt;.</p>
+<p>[22] H. Wickham, W. Chang, L. Henry, et al. <em>ggplot2: Create Elegant
+Data Visualisations Using the Grammar of Graphics</em>. R package version
+3.3.2. 2020. &lt;URL: <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>&gt;.</p>
+<p>[23] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
+Developing R Packages Easier</em>. R package version 2.3.2. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=devtools" class="uri">https://CRAN.R-project.org/package=devtools</a>&gt;.</p>
+<p>[24] C. O. Wilke. <em>ggridges: Ridgeline Plots in ggplot2</em>. R package
+version 0.5.2. 2020. &lt;URL: <a href="https://wilkelab.org/ggridges" class="uri">https://wilkelab.org/ggridges</a>&gt;.</p>
+<p>[25] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
+Markdown</em>. ISBN 978-1138700109. Boca Raton, Florida: Chapman and
+Hall/CRC, 2016. &lt;URL: <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>&gt;.</p>
+<p>[26] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
+Markdown</em>. R package version 0.21. 2020. &lt;URL:
+<a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>&gt;.</p>
+<p>[27] Y. Xie. <em>Dynamic Documents with R and knitr</em>. 2nd. ISBN
+978-1498716963. Boca Raton, Florida: Chapman and Hall/CRC, 2015. &lt;URL:
+<a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
+<p>[28] Y. Xie. <em>formatR: Format R Code Automatically</em>. R package version
+1.7. 2019. &lt;URL: <a href="https://github.com/yihui/formatR" class="uri">https://github.com/yihui/formatR</a>&gt;.</p>
+<p>[29] Y. Xie. “knitr: A Comprehensive Tool for Reproducible Research in
+R”. In: <em>Implementing Reproducible Computational Research</em>. Ed. by V.
+Stodden, F. Leisch and R. D. Peng. ISBN 978-1466561595. Chapman and
+Hall/CRC, 2014. &lt;URL:
+<a href="http://www.crcpress.com/product/isbn/9781466561595" class="uri">http://www.crcpress.com/product/isbn/9781466561595</a>&gt;.</p>
+<p>[30] Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
+Generation in R</em>. R package version 1.30. 2020. &lt;URL:
+<a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
+<p>[31] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
+Guide</em>. ISBN 9781138359338. Boca Raton, Florida: Chapman and Hall/CRC,
+2018. &lt;URL: <a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</p>
+<p>[32] Y. Xie, J. Cheng, and X. Tan. <em>DT: A Wrapper of the JavaScript
+Library DataTables</em>. R package version 0.16. 2020. &lt;URL:
+<a href="https://github.com/rstudio/DT" class="uri">https://github.com/rstudio/DT</a>&gt;.</p>
+<p>[33] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
+9780367563837. Boca Raton, Florida: Chapman and Hall/CRC, 2020. &lt;URL:
+<a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>&gt;.</p>
+<p>[34] G. Yu and T. T. Lam. <em>ggtree: an R package for visualization of
+tree and annotation data</em>. R package version 2.0.4. 2020. &lt;URL:
+<a href="https://yulab-smu.github.io/treedata-book/" class="uri">https://yulab-smu.github.io/treedata-book/</a>&gt;.</p>
+<p>[35] G. Yu, T. T. Lam, H. Zhu, et al. “Two methods for mapping and
+visualizing associated data on phylogeny using ggtree.” In: <em>Molecular
+Biology and Evolution</em> 35 (2 2018), pp. 3041-3043. DOI:
+10.1093/molbev/msy194. &lt;URL: <a href="https://doi.org/10.1093/molbev/msy194" class="uri">https://doi.org/10.1093/molbev/msy194</a>&gt;.</p>
+<p>[36] G. Yu, D. Smith, H. Zhu, et al. “ggtree: an R package for
+visualization and annotation of phylogenetic trees with their
+covariates and other associated data.” In: <em>Methods in Ecology and
+Evolution</em> 8 (1 2017), pp. 28-36. DOI: 10.1111/2041-210X.12628. &lt;URL:
+<a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12628/abstract" class="uri">http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12628/abstract</a>&gt;.</p>
+<p>[37] A. Zeileis and G. Grothendieck. “zoo: S3 Infrastructure for
+Regular and Irregular Time Series”. In: <em>Journal of Statistical
+Software</em> 14.6 (2005), pp. 1-27. DOI: 10.18637/jss.v014.i06.</p>
+<p>[38] A. Zeileis, G. Grothendieck, and J. A. Ryan. <em>zoo: S3
+Infrastructure for Regular and Irregular Time Series (Z’s Ordered
+Observations)</em>. R package version 1.8-8. 2020. &lt;URL:
+<a href="http://zoo.R-Forge.R-project.org/" class="uri">http://zoo.R-Forge.R-project.org/</a>&gt;.</p>
+<p>[39] A. Zeileis and T. Hothorn. “Diagnostic Checking in Regression
+Relationships”. In: <em>R News</em> 2.3 (2002), pp. 7-10. &lt;URL:
+<a href="https://CRAN.R-project.org/doc/Rnews/" class="uri">https://CRAN.R-project.org/doc/Rnews/</a>&gt;.</p>
+<p>[40] A. Zeileis, C. Kleiber, and S. Jackman. “Regression Models for
+Count Data in R”. In: <em>Journal of Statistical Software</em> 27.8 (2008).
+&lt;URL: <a href="http://www.jstatsoft.org/v27/i08/" class="uri">http://www.jstatsoft.org/v27/i08/</a>&gt;.</p>
+</div>
+<div id="appendix-2" class="section level1 appendix">
+<h1><span class="header-section-number">4</span> Appendix 2</h1>
+<p>Version information about R, the operating system (OS) and attached or R loaded packages. This appendix was generated using <code>sessionInfo()</code>.</p>
+<pre><code>## R version 3.6.1 (2019-07-05)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS Mojave 10.14.6
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] MASS_7.3-53              forcats_0.5.0            TreeTools_1.4.0         
+##  [4] ggridges_0.5.2           stringr_1.4.0            ape_5.4-1               
+##  [7] ggtree_2.0.4             ggpubr_0.4.0             ggplot2_3.3.2           
+## [10] chisq.posthoc.test_0.1.2 DT_0.16                  lsmeans_2.30-0          
+## [13] emmeans_1.5.2-1          lmtest_0.9-38            zoo_1.8-8               
+## [16] pscl_1.5.5               RColorBrewer_1.1-2       gplots_3.1.0            
+## [19] devtools_2.3.2           usethis_1.6.3            formatR_1.7             
+## [22] knitcitations_1.0.10     bookdown_0.21            rmarkdown_2.4           
+## [25] knitr_1.30              
+## 
+## loaded via a namespace (and not attached):
+##   [1] colorspace_1.4-1    ggsignif_0.6.0      ellipsis_0.3.1     
+##   [4] rio_0.5.16          rprojroot_1.3-2     estimability_1.3   
+##   [7] fs_1.5.0            remotes_2.2.0       bit64_4.0.5        
+##  [10] fansi_0.4.1         mvtnorm_1.1-1       lubridate_1.7.9    
+##  [13] RefManageR_1.2.12   xml2_1.3.2          R.methodsS3_1.8.1  
+##  [16] pkgload_1.1.0       jsonlite_1.7.1      broom_0.7.1        
+##  [19] R.oo_1.24.0         BiocManager_1.30.10 compiler_3.6.1     
+##  [22] httr_1.4.2          rvcheck_0.1.8       backports_1.1.10   
+##  [25] Matrix_1.2-18       assertthat_0.2.1    lazyeval_0.2.2     
+##  [28] cli_2.1.0           htmltools_0.5.0     prettyunits_1.1.1  
+##  [31] tools_3.6.1         igraph_1.2.6        coda_0.19-4        
+##  [34] gtable_0.3.0        glue_1.4.2          dplyr_1.0.2        
+##  [37] fastmatch_1.1-0     Rcpp_1.0.5          carData_3.0-4      
+##  [40] cellranger_1.1.0    vctrs_0.3.4         nlme_3.1-149       
+##  [43] gbRd_0.4-11         xfun_0.18           rbibutils_1.4      
+##  [46] ps_1.4.0            openxlsx_4.2.2      testthat_2.3.2     
+##  [49] lifecycle_0.2.0     phangorn_2.5.5      gtools_3.8.2       
+##  [52] rstatix_0.6.0       scales_1.1.1        hms_0.5.3          
+##  [55] parallel_3.6.1      yaml_2.2.1          curl_4.3           
+##  [58] memoise_1.1.0       stringi_1.5.3       desc_1.2.0         
+##  [61] tidytree_0.3.3      caTools_1.18.0      pkgbuild_1.1.0     
+##  [64] zip_2.1.1           bibtex_0.4.2.3      Rdpack_2.1         
+##  [67] rlang_0.4.8         pkgconfig_2.0.3     bitops_1.0-6       
+##  [70] evaluate_0.14       lattice_0.20-41     purrr_0.3.4        
+##  [73] treeio_1.10.0       htmlwidgets_1.5.2   bit_4.0.4          
+##  [76] processx_3.4.4      tidyselect_1.1.0    plyr_1.8.6         
+##  [79] magrittr_1.5        R6_2.4.1            generics_0.0.2     
+##  [82] pillar_1.4.6        haven_2.3.1         foreign_0.8-75     
+##  [85] withr_2.3.0         abind_1.4-5         tibble_3.0.4       
+##  [88] crayon_1.3.4        car_3.0-10          KernSmooth_2.23-17 
+##  [91] grid_3.6.1          readxl_1.3.1        data.table_1.12.8  
+##  [94] callr_3.5.1         digest_0.6.25       R.cache_0.14.0     
+##  [97] xtable_1.8-4        tidyr_1.1.2         R.utils_2.10.1     
+## [100] munsell_0.5.0       quadprog_1.5-8      sessioninfo_1.1.1</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
