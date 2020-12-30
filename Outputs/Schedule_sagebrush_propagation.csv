@@ -1,0 +1,11 @@
+Generation,Type,Date_start,Date_end,N_plant_start,N_plant_end,N_vessels,Volume_media_litre,N_Autoclave,Time_Autoclave (hrs),Media_prep_time (hrs),Time_Cutting (hrs)
+1,Growth,2020-09-02,2020-10-28,5,5,5,1,1,1.5,1,NA
+1,Cutting,2020-10-28,2020-10-28,5,75,NA,NA,NA,NA,NA,1
+1,Rooting,2020-10-28,2020-11-11,75,67,9,1,1,2,1.5,NA
+2,Growth,2020-11-11,2021-01-06,67,30,67,7,2,3,2,NA
+2,Cutting,2021-01-06,2021-01-06,30,450,NA,NA,NA,NA,NA,6
+2,Rooting,2021-01-06,2021-01-27,450,405,50,3,3,6,4.5,NA
+3,Growth,2021-01-27,2021-03-24,405,182,405,41,7,10.5,7,NA
+3,Cutting,2021-03-24,2021-03-24,182,2730,NA,NA,NA,NA,NA,36.4
+3,Rooting,2021-03-24,2021-04-14,2730,2457,304,16,16,32,24,NA
+4,Growth,2021-04-14,2021-06-09,2457,1105,2457,246,41,61.5,41,NA

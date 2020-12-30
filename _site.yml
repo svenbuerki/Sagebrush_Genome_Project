@@ -1,0 +1,9 @@
+name: "Sagebrush Genome Project"
+output_dir: "."
+navbar:
+  title: "Sagebrush Genome Project"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Biomass production"
+      href: Biomass_production.html

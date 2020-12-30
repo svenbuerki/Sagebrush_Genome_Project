@@ -1,0 +1,91 @@
+--- 
+title: 'Sagebrush Biomass Production'
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_depth: 4
+    toc_float: TRUE
+link-citations: yes
+fontsize: 12pt
+bibliography: packages.bib
+---
+
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(gplots)
+library(RColorBrewer)
+library(grDevices)
+library(pscl)
+library(lmtest)
+library(lsmeans)
+library(emmeans)
+library(DT)
+library(chisq.posthoc.test)
+library(ggpubr)
+library(ggtree)
+library(ape)
+library(stringr)
+library(ggridges)
+library(ggplot2)
+library(TreeTools)
+library(forcats)
+library(MASS)
+
+#Generate BibTex citation file for all R packages used to produce report
+knitr::write_bib(.packages(), file = 'packages.bib')
+```
+
+
+```{r setup, include=FALSE, cache=FALSE, message = FALSE}
+#Load packages
+library(knitr)
+library(rmarkdown)
+# Chunk options: see http://yihui.name/knitr/options/ ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = TRUE, message = TRUE, include = TRUE)
+
+## Code decoration
+#opts_chunk$set(tidy = TRUE, R.options = list(width = 60), highlight = TRUE)
+
+## Caching code
+opts_chunk$set(cache = 2, cache.path = "cache/")
+
+## Plots
+#opts_chunk$set(fig.path = "Figures_MS/", dev=c('pdf', 'png'), dpi = 300)
+
+## Locate figures as close as possible to requested position (=code)
+#opts_chunk$set(fig.pos = "H")
+```
+
+# Reproducible workflow
+
+
+# References
+
+<div id="refs"></div>
+
+# Appendix 1 {.appendix}
+
+Citations of all R packages used to generate this report. 
+
+```{r generateBibliography, eval = T, results="asis", cache = F, echo=F, warning = FALSE, message=FALSE}
+library("knitcitations")
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "packages.bib")
+``` 
+
+# Appendix 2 {.appendix}
+
+Version information about R, the operating system (OS) and attached or R loaded packages. This appendix was generated using `sessionInfo()`.
+
+```{r eval=T, echo=F, warning = FALSE, message=FALSE}
+sessionInfo()
+```
