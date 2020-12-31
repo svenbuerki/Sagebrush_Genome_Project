@@ -11,7 +11,7 @@
 
 
 
-<title>Sagebrush Biomass Production</title>
+<title>Details on genome sequencing, phasing and annotation</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -380,183 +380,49 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sagebrush Biomass Production</h1>
+<h1 class="title toc-ignore">Details on genome sequencing, phasing and annotation</h1>
 
 </div>
 
 
-<div id="biomass-requirements-for-genome-project" class="section level1">
-<h1><span class="header-section-number">1</span> Biomass requirements for genome project</h1>
-<p>We aim at applying the newly developed <em>in vitro</em> tissue culture technique <span class="citation">(Barron et al. <a href="#ref-Barron2020">2020</a>)</span> to G2_b24_1 (from UTT2, drought-sensitive genotype; see Figure <a href="#fig:plantlets">1.1</a>) to produce the ca. 120 gr of leaf biomass necessary for genome sequencing, phasing and annotation.</p>
-<div class="figure" style="text-align: center"><span id="fig:plantlets"></span>
-<img src="Figures/G2_b20_1_15wk_old_plantlet.jpg" alt="Example of a 15-week old plantlet grown in vitro in Magenta vessel." width="50%" />
-<p class="caption">
-Figure 1.1: Example of a 15-week old plantlet grown in vitro in Magenta vessel.
-</p>
+<div id="overview-of-wet-lab-and-bioinformatic-procedures" class="section level1">
+<h1><span class="header-section-number">1</span> Overview of wet-lab and bioinformatic procedures</h1>
+<p>Please find below summaries of the procedures applied in this project to sequence, phase and annotate the sagebrush genome.</p>
+<div id="wet-lab-procedures" class="section level2">
+<h2><span class="header-section-number">1.1</span> Wet-lab procedures</h2>
+<p>Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass.</p>
+<ol style="list-style-type: decimal">
+<li>Dovetail Genomics will extract HMW DNA with an average fragment size ca. 50-100kb based on biomass supplied by the team (see <a href="Biomass_production.html">Biomass production</a>).</li>
+<li>Whole genome sequencing (WGS) will be conducted using PacBio technology. We aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp). To achieve this objective, 5 PacBio CLR (continuous long-read) libraries will be built and sequenced on the PacBio Sequel II using 8M SMRT cells. A SMRT cell should generate &gt;50Gb of raw data. In our case, 250Gb (5x 50Gb) of raw data will be generated, which corresponds to 55X haploid genome coverage (we are on the low side, but it should be fine). These data will be used to assemble the haploid draft genome (used as input for phasing based on Omni-C libraries).</li>
+<li>Three <a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (= proximity ligation libraries) will be constructed (one library per 3 Gbp of the organism’s genome) based on the HMW DNA extractions. These libraries will be sequenced on an Illumina HiSeq X instrument (ca. 100M PE150bp read pairs per Gbp of genome size). Before final sequencing, Dovetail will conduct some shallow sequencing (ca. 2M PE75 bp) to assess library quality.</li>
+<li>RNA will be extracted from leaf tissue (20mg) by Dovetail and a standard RNA library will be prepared with rRNA-depletion. 2x150bp read will be sequenced on an Illumina platform and raw data from ca. 20M read pairs per sample (1 in this project) will be used for genome annotation.</li>
+</ol>
 </div>
-<p>After 15 weeks of <em>in vitro</em> culture, <strong>a plantlet produces 0.8 gr. of leaf biomass</strong> that can be used for the genome project (Figure <a href="#fig:plantletweight">1.2</a>). To meet our requirements <strong>a minimum of 150 plantlets have to be produced at BSU</strong> (see Table <a href="#tab:tabproject">1.1</a>).</p>
-<p>The biomass can be flash frozen (using liquid nitrogen) and stored at -80C. The estimation of biomass provided here does not account for a DNA extraction trial required to optimize protocol (we need at least 15ug of HMW DNA for PacBio sequencing). We will have to discuss with the project manager at Dovetail Genomics.</p>
-<div class="figure" style="text-align: center"><span id="fig:plantletweight"></span>
-<img src="Figures/G2_b20_1_Biomass_0.855g_after2min.jpg" alt="A 15-week old plantlet grown in vitro in Magenta vessel generates 0.8 gr of leaf biomass for sequencing." width="50%" />
-<p class="caption">
-Figure 1.2: A 15-week old plantlet grown in vitro in Magenta vessel generates 0.8 gr of leaf biomass for sequencing.
-</p>
-</div>
-<div id="biomass-requirements-per-sequencing-technology" class="section level2">
-<h2><span class="header-section-number">1.1</span> Biomass requirements per sequencing technology</h2>
-<p>Table <a href="#tab:tabproject">1.1</a> provides a summary of sequencing technologies applied in this project (see <a href="Sequencing.html">Sequencing &amp; Bioinformatics</a> for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.</p>
-<table>
-<caption><span id="tab:tabproject">Table 1.1: </span>Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.</caption>
-<colgroup>
-<col width="32%" />
-<col width="17%" />
-<col width="18%" />
-<col width="16%" />
-<col width="14%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Type</th>
-<th align="left">Purpose</th>
-<th align="left">Unit/Biomass</th>
-<th align="left">Total units / biomass</th>
-<th align="right">Number of plantlets</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">PacBio sequencing</td>
-<td align="left">De novo genome assembly</td>
-<td align="left">1 cell = 20 gr</td>
-<td align="left">5 cells = 100 gr</td>
-<td align="right">125</td>
-</tr>
-<tr class="even">
-<td align="left">Proximity ligation (Hi-C for phasing genome)</td>
-<td align="left">Phasing</td>
-<td align="left">1 Illumina library = 6 gr</td>
-<td align="left">3 libraries = 18 gr</td>
-<td align="right">23</td>
-</tr>
-<tr class="odd">
-<td align="left">RNA-seq</td>
-<td align="left">Annotation</td>
-<td align="left">1 library = 20 mg</td>
-<td align="left">1 library = 20 mg</td>
-<td align="right">1</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="in-vitro-propagation-of-g2_b24_1" class="section level1">
-<h1><span class="header-section-number">2</span> <em>In vitro</em> propagation of G2_b24_1</h1>
-<p>G2_b24_1 is among the top performers identified by <span class="citation">Barron et al. (<a href="#ref-Barron2020">2020</a>)</span>. Here, we will be propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project.</p>
-<div id="overview-of-the-propagationpred-r-function" class="section level2">
-<h2><span class="header-section-number">2.1</span> Overview of the <em>propagationPred</em> R function</h2>
-<p>To predict how long it will take to produce the 150 plantlets for the project we have developed the <em>propagationPred</em> R function.</p>
-<p>This function depends on the following arguments provided by the user:
-- <code>n</code>: number of plantlets to seed the experiment.
-- <code>ns</code>: number of shoot tips cut per plantlet (after growth period).
-- <code>r</code>: vector of rooting rates (0 to 1) at each rooting phase.
-- <code>s</code>: vector of survival rates (0 to 1) at each growth phase.
-- <code>g</code>: number of generations (for <em>in vitro</em> propagation).
-- <code>biobank</code>: vector with proportion (0 to 1) of plantlets biobanked per generation (at end of growth) (e.g: c(0,0,0.4,0)).
-- <code>date_user</code>: starting date of the experiment (mdy from <em>ludridate</em> or any date format).
-- <code>growth_time_g</code>: vector with number of days/weeks for growth for g.
-- <code>biobanking_time</code>: one value (either weeks() or days()) compatible with <em>lubridate</em> describing the duration of biobanking to generated the biomass (here 15 weeks corresponding to 0.8 gr).
-- <code>rooting_time_g</code>: vector with number of days/weeks for rooting for g
-- <code>biomass_plantlet</code>: numerical value of biomass of a single plantlet.</p>
-<pre class="r"><code>source(&quot;Functions/Propagation.R&quot;)
-
-#b24 11/13/2020 10 week old 
-# 57 shoot tips
-# 53 alive
-# 4 weeks in rooting media
-# biomass &lt;- 1x 15-week old plantlet = 0.8gr
-# How many plantlets to get at biomass with some wiggle room
-#Apply propagationPred to top performer (G2_b24_1 from UTT2)
-
-OUTdat &lt;- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy(&quot;11/13/2020&quot;)-weeks(10), 
-                          growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
-
-OUTdat &lt;- OUTdat[1:11,]
-
-
-write.csv(OUTdat, file=&quot;Propagation_schedule_G2_b24_1.csv&quot;, row.names=F)
-
-###~~~
-#Plot data
-###~~~
-#pdf(&quot;Schedule_sagebrush_propagation_G2_b24_1.pdf&quot;)
-#Populate plot
-Type &lt;- levels(OUTdat$Type)[c(3,2,4,1)]
-colSeg &lt;- c(&quot;black&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;orange&quot;)
-
-#Create empty plot
-plot(x=c(as.Date(OUTdat$Date_start)), y= c(as.numeric(as.vector(OUTdat$N_plant_start))), 
-     xlim= c(min(as.Date(OUTdat$Date_start)), max(as.Date(OUTdat$Date_end))+20), 
-     ylim=c(0, max(as.numeric(as.vector(OUTdat$N_plant_start)))+50), type=&#39;n&#39;, xlab=&quot;Time (days)&quot;, ylab = &quot;Number of Plantlets&quot;) 
-
-biomassTot &lt;- 120
-biomass_plantlet &lt;- 0.8
-#Add objective of N plantlets
-abline(h=biomassTot/biomass_plantlet, col=&#39;grey&#39;)
-text(x=as.Date(OUTdat$Date_start[1]), y=biomassTot/biomass_plantlet+10, labels=paste(&quot;Number of Plantlets for Project (N: &quot;, biomassTot/biomass_plantlet, &quot; = &quot;, biomassTot, &quot; gr. )&quot;, sep=&quot;&quot;), adj=0, col=&quot;grey&quot;, cex=.65)
-
-#Add segments
-for(i in 1:length(Type)){
-  tmp &lt;- OUTdat[which(OUTdat$Type == Type[i]),]
-  segments(x0=as.Date(tmp$Date_start), x1=as.Date(tmp$Date_end), y0=as.numeric(as.vector(tmp$N_plant_start)), y1=as.numeric(as.vector(tmp$N_plant_end)), col=colSeg[i], lwd=1.5)
-  #Add points to better see beginning and end of phases
-  points(x=as.Date(tmp$Date_start), y=as.numeric(as.vector(tmp$N_plant_start)), col=colSeg[i], pch=16, cex=.8)
-  points(x=as.Date(tmp$Date_end), y=as.numeric(as.vector(tmp$N_plant_end)), col=colSeg[i], pch=16, cex=.8)
-  
-  if(Type[i] == &quot;Cutting&quot;){
-    text(x=as.Date(tmp$Date_start), y=as.numeric(as.vector(tmp$N_plant_end))+20, labels = as.Date(tmp$Date_start), srt=45, adj=0.5, cex=.6)
-  }
-  if(Type[i] == &quot;Rooting&quot;){
-    text(x=as.Date(tmp$Date_end), y=as.numeric(as.vector(tmp$N_plant_end))+8, labels = as.Date(tmp$Date_end), srt=45, adj=0, cex=.6)
-  }
-  if(Type[i] == &quot;Growth&quot;){
-    #Start of experiment
-    startExp &lt;- which(tmp$Date_start == as.character(min(as.Date(tmp$Date_start))))
-    text(x=as.Date(tmp$Date_start)[startExp], y=as.numeric(as.vector(tmp$N_plant_start))[startExp]+8, labels = as.Date(tmp$Date_start)[startExp], srt=90, adj=0, cex=.6)
-    
-    #End of experiment
-    endExp &lt;- which(tmp$Date_end == as.character(max(as.Date(tmp$Date_end))))
-    text(x=as.Date(tmp$Date_end)[endExp], y=as.numeric(as.vector(tmp$N_plant_end))[endExp]+8, labels = as.Date(tmp$Date_end)[endExp], srt=90, adj=0, cex=.6)
-  }
-  if(Type[i] == &quot;Biobanking&quot;){
-    #Add segment(s) showing when rooted shoot tips are split between growth and biobanking
-    ystart &lt;- as.numeric(as.vector(OUTdat$N_plant_start[which(OUTdat$Date_start == tmp$Date_start &amp; OUTdat$Type == &quot;Growth&quot;)]))
-    yend &lt;- as.numeric(as.vector(OUTdat$N_plant_end[which(OUTdat$Date_end == as.character(tmp$Date_start) &amp; OUTdat$Type == &quot;Rooting&quot;)]))
-    segments(x0=as.Date(tmp$Date_start), x1=as.Date(tmp$Date_start), y0=ystart, y1=yend, lty=2) 
-    text(x=as.Date(tmp$Date_start)-4, y=ystart, paste(&quot;Split rooted shoot tips:&quot;, paste(as.character(tmp$Type), &quot; (&quot;, tmp$N_plant_start, &quot;)&quot;, &quot; &amp; Growth (&quot;, ystart, &quot;)&quot;, sep=&quot;&quot;)), adj=0, srt=90, cex=.6)
-    
-    #End of experiment
-    endExp &lt;- which(tmp$Date_end == as.character(max(as.Date(tmp$Date_end))))
-    text(x=as.Date(tmp$Date_end)[endExp], y=as.numeric(as.vector(tmp$N_plant_end))[endExp]+8, labels = paste(as.Date(tmp$Date_end)[endExp], &quot; (&quot;, as.character(tmp$`Total_Biomass (gr)`), &quot; gr.)&quot;, sep=&#39;&#39;), srt=90, adj=0, cex=.6)
-  }
-  
-}
-
-#Add legend
-legend(&quot;topleft&quot;, legend = Type, lty=1, col=colSeg, cex=.6)</code></pre>
-<p><img src="Biomass_production_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<pre class="r"><code>#dev.off()</code></pre>
+<div id="bioinformatic-procedures" class="section level2">
+<h2><span class="header-section-number">1.2</span> Bioinformatic procedures</h2>
+<ol style="list-style-type: decimal">
+<li>PacBio <em>de novo</em> assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb (needed for HiRise pipeline).</li>
+<li>The haploid daft assembly will be scaffolded (phased) through the HiRise software pipeline using the proximity ligation data (this software is owned by Dovetail). The Omni-C libraries can be used for genome assembly and haplotype phasing. We will also be able to use this data to call SNPs and look at structural variations.</li>
+<li>Whole genome annotation will be conducted using RNA-seq data. The basic services will be included:
+<ol style="list-style-type: lower-alpha">
+<li>Repeat masking.</li>
+<li><em>Ab initio</em> gene prediction using related species (e.g. <em>Artemisia annua</em>).</li>
+<li>RNAseq mapping to enhance annotation.</li>
+<li>Manual curation of 5 genes (not very interesting for us). The work done by Anthony Melton based on seedlings from GxE experiment will be key here.</li>
+<li>Assignment of functional tags to genes.</li>
+</ol></li>
+<li>Results files will be delivered electronically via secure FTP.</li>
+</ol>
 </div>
 </div>
 <div id="references" class="section level1">
-<h1><span class="header-section-number">3</span> References</h1>
+<h1><span class="header-section-number">2</span> References</h1>
 <div id="refs">
-<div id="ref-Barron2020">
-<p>Barron, Rachael, Peggy Martinez, Marcelo Serpe, and Sven Buerki. 2020. “Development of an in Vitro Method of Propagation for Artemisia Tridentata Subsp. Tridentata to Support Genome Sequencing and Genotype-by-Environment Research.” <em>Plants</em> 9 (12). <a href="https://doi.org/10.3390/plants9121717">https://doi.org/10.3390/plants9121717</a>.</p>
-</div>
+
 </div>
 </div>
 <div id="appendix-1" class="section level1 appendix">
-<h1><span class="header-section-number">4</span> Appendix 1</h1>
+<h1><span class="header-section-number">3</span> Appendix 1</h1>
 <p>Citations of all R packages used to generate this report.</p>
 <p>[1] J. Allaire, Y. Xie, J. McPherson, et al. <em>rmarkdown: Dynamic
 Documents for R</em>. R package version 2.4. 2020. &lt;URL:
@@ -564,52 +430,135 @@ Documents for R</em>. R package version 2.4. 2020. &lt;URL:
 <p>[2] C. Boettiger. <em>knitcitations: Citations for Knitr Markdown Files</em>.
 R package version 1.0.10. 2019. &lt;URL:
 <a href="https://github.com/cboettig/knitcitations" class="uri">https://github.com/cboettig/knitcitations</a>&gt;.</p>
-<p>[3] G. Grolemund and H. Wickham. “Dates and Times Made Easy with
+<p>[3] D. Ebbert. <em>chisq.posthoc.test: A Post Hoc Analysis for Pearson’s
+Chi-Squared Test for Count Data</em>. R package version 0.1.2. 2019. &lt;URL:
+<a href="http://chisq-posthoc-test.ebbert.nrw/" class="uri">http://chisq-posthoc-test.ebbert.nrw/</a>&gt;.</p>
+<p>[4] G. Grolemund and H. Wickham. “Dates and Times Made Easy with
 lubridate”. In: <em>Journal of Statistical Software</em> 40.3 (2011),
 pp. 1-25. &lt;URL: <a href="http://www.jstatsoft.org/v40/i03/" class="uri">http://www.jstatsoft.org/v40/i03/</a>&gt;.</p>
-<p>[4] R Core Team. <em>R: A Language and Environment for Statistical
+<p>[5] T. Hothorn, A. Zeileis, R. W. Farebrother, et al. <em>lmtest: Testing
+Linear Regression Models</em>. R package version 0.9-38. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=lmtest" class="uri">https://CRAN.R-project.org/package=lmtest</a>&gt;.</p>
+<p>[6] S. Jackman, A. Tahk, A. Zeileis, et al. <em>pscl: Political Science
+Computational Laboratory</em>. R package version 1.5.5. 2020. &lt;URL:
+<a href="http://github.com/atahk/pscl" class="uri">http://github.com/atahk/pscl</a>&gt;.</p>
+<p>[7] A. Kassambara. <em>ggpubr: ggplot2 Based Publication Ready Plots</em>. R
+package version 0.4.0. 2020. &lt;URL:
+<a href="https://rpkgs.datanovia.com/ggpubr/" class="uri">https://rpkgs.datanovia.com/ggpubr/</a>&gt;.</p>
+<p>[8] R. Lenth. <em>emmeans: Estimated Marginal Means, aka Least-Squares
+Means</em>. R package version 1.5.2-1. 2020. &lt;URL:
+<a href="https://github.com/rvlenth/emmeans" class="uri">https://github.com/rvlenth/emmeans</a>&gt;.</p>
+<p>[9] R. Lenth. <em>lsmeans: Least-Squares Means</em>. R package version 2.30-0.
+2018. &lt;URL: <a href="https://CRAN.R-project.org/package=lsmeans" class="uri">https://CRAN.R-project.org/package=lsmeans</a>&gt;.</p>
+<p>[10] R. V. Lenth. “Least-Squares Means: The R Package lsmeans”. In:
+<em>Journal of Statistical Software</em> 69.1 (2016), pp. 1-33. DOI:
+10.18637/jss.v069.i01.</p>
+<p>[11] E. Neuwirth. <em>RColorBrewer: ColorBrewer Palettes</em>. R package
+version 1.1-2. 2014. &lt;URL:
+<a href="https://CRAN.R-project.org/package=RColorBrewer" class="uri">https://CRAN.R-project.org/package=RColorBrewer</a>&gt;.</p>
+<p>[12] E. Paradis, S. Blomberg, B. Bolker, et al. <em>ape: Analyses of
+Phylogenetics and Evolution</em>. R package version 5.4-1. 2020. &lt;URL:
+<a href="http://ape-package.ird.fr/" class="uri">http://ape-package.ird.fr/</a>&gt;.</p>
+<p>[13] E. Paradis and K. Schliep. “ape 5.0: an environment for modern
+phylogenetics and evolutionary analyses in R”. In: <em>Bioinformatics</em> 35
+(2019), pp. 526-528.</p>
+<p>[14] R Core Team. <em>R: A Language and Environment for Statistical
 Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
 2019. &lt;URL: <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
-<p>[5] V. Spinu, G. Grolemund, and H. Wickham. <em>lubridate: Make Dealing
+<p>[15] B. Ripley. <em>MASS: Support Functions and Datasets for Venables and
+Ripley’s MASS</em>. R package version 7.3-53. 2020. &lt;URL:
+<a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
+<p>[16] M. R. Smith. <em>TreeTools: Create, Modify and Analyse Phylogenetic
+Trees</em>. R package version 1.4.0. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=TreeTools" class="uri">https://CRAN.R-project.org/package=TreeTools</a>&gt;.</p>
+<p>[17] V. Spinu, G. Grolemund, and H. Wickham. <em>lubridate: Make Dealing
 with Dates a Little Easier</em>. R package version 1.7.9. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=lubridate" class="uri">https://CRAN.R-project.org/package=lubridate</a>&gt;.</p>
-<p>[6] H. Wickham and J. Bryan. <em>usethis: Automate Package and Project
+<p>[18] W. N. Venables and B. D. Ripley. <em>Modern Applied Statistics with
+S</em>. Fourth. ISBN 0-387-95457-0. New York: Springer, 2002. &lt;URL:
+<a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="uri">http://www.stats.ox.ac.uk/pub/MASS4/</a>&gt;.</p>
+<p>[19] G. R. Warnes, B. Bolker, L. Bonebakker, et al. <em>gplots: Various R
+Programming Tools for Plotting Data</em>. R package version 3.1.0. 2020.
+&lt;URL: <a href="https://github.com/talgalili/gplots" class="uri">https://github.com/talgalili/gplots</a>&gt;.</p>
+<p>[20] H. Wickham. <em>forcats: Tools for Working with Categorical Variables
+(Factors)</em>. R package version 0.5.0. 2020. &lt;URL:
+<a href="https://CRAN.R-project.org/package=forcats" class="uri">https://CRAN.R-project.org/package=forcats</a>&gt;.</p>
+<p>[21] H. Wickham. <em>ggplot2: Elegant Graphics for Data Analysis</em>.
+Springer-Verlag New York, 2016. ISBN: 978-3-319-24277-4. &lt;URL:
+<a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>&gt;.</p>
+<p>[22] H. Wickham. <em>stringr: Simple, Consistent Wrappers for Common
+String Operations</em>. R package version 1.4.0. 2019. &lt;URL:
+<a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a>&gt;.</p>
+<p>[23] H. Wickham and J. Bryan. <em>usethis: Automate Package and Project
 Setup</em>. R package version 1.6.3. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=usethis" class="uri">https://CRAN.R-project.org/package=usethis</a>&gt;.</p>
-<p>[7] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
+<p>[24] H. Wickham, W. Chang, L. Henry, et al. <em>ggplot2: Create Elegant
+Data Visualisations Using the Grammar of Graphics</em>. R package version
+3.3.2. 2020. &lt;URL: <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>&gt;.</p>
+<p>[25] H. Wickham, J. Hester, and W. Chang. <em>devtools: Tools to Make
 Developing R Packages Easier</em>. R package version 2.3.2. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=devtools" class="uri">https://CRAN.R-project.org/package=devtools</a>&gt;.</p>
-<p>[8] H. Wickham and D. Seidel. <em>scales: Scale Functions for
+<p>[26] H. Wickham and D. Seidel. <em>scales: Scale Functions for
 Visualization</em>. R package version 1.1.1. 2020. &lt;URL:
 <a href="https://CRAN.R-project.org/package=scales" class="uri">https://CRAN.R-project.org/package=scales</a>&gt;.</p>
-<p>[9] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
+<p>[27] C. O. Wilke. <em>ggridges: Ridgeline Plots in ggplot2</em>. R package
+version 0.5.2. 2020. &lt;URL: <a href="https://wilkelab.org/ggridges" class="uri">https://wilkelab.org/ggridges</a>&gt;.</p>
+<p>[28] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
 Markdown</em>. ISBN 978-1138700109. Boca Raton, Florida: Chapman and
 Hall/CRC, 2016. &lt;URL: <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>&gt;.</p>
-<p>[10] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
+<p>[29] Y. Xie. <em>bookdown: Authoring Books and Technical Documents with R
 Markdown</em>. R package version 0.21. 2020. &lt;URL:
 <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>&gt;.</p>
-<p>[11] Y. Xie. <em>Dynamic Documents with R and knitr</em>. 2nd. ISBN
+<p>[30] Y. Xie. <em>Dynamic Documents with R and knitr</em>. 2nd. ISBN
 978-1498716963. Boca Raton, Florida: Chapman and Hall/CRC, 2015. &lt;URL:
 <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
-<p>[12] Y. Xie. <em>formatR: Format R Code Automatically</em>. R package version
+<p>[31] Y. Xie. <em>formatR: Format R Code Automatically</em>. R package version
 1.7. 2019. &lt;URL: <a href="https://github.com/yihui/formatR" class="uri">https://github.com/yihui/formatR</a>&gt;.</p>
-<p>[13] Y. Xie. “knitr: A Comprehensive Tool for Reproducible Research in
+<p>[32] Y. Xie. “knitr: A Comprehensive Tool for Reproducible Research in
 R”. In: <em>Implementing Reproducible Computational Research</em>. Ed. by V.
 Stodden, F. Leisch and R. D. Peng. ISBN 978-1466561595. Chapman and
 Hall/CRC, 2014. &lt;URL:
 <a href="http://www.crcpress.com/product/isbn/9781466561595" class="uri">http://www.crcpress.com/product/isbn/9781466561595</a>&gt;.</p>
-<p>[14] Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
+<p>[33] Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
 Generation in R</em>. R package version 1.30. 2020. &lt;URL:
 <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
-<p>[15] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
+<p>[34] Y. Xie, J. Allaire, and G. Grolemund. <em>R Markdown: The Definitive
 Guide</em>. ISBN 9781138359338. Boca Raton, Florida: Chapman and Hall/CRC,
 2018. &lt;URL: <a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a>&gt;.</p>
-<p>[16] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
+<p>[35] Y. Xie, J. Cheng, and X. Tan. <em>DT: A Wrapper of the JavaScript
+Library DataTables</em>. R package version 0.16. 2020. &lt;URL:
+<a href="https://github.com/rstudio/DT" class="uri">https://github.com/rstudio/DT</a>&gt;.</p>
+<p>[36] Y. Xie, C. Dervieux, and E. Riederer. <em>R Markdown Cookbook</em>. ISBN
 9780367563837. Boca Raton, Florida: Chapman and Hall/CRC, 2020. &lt;URL:
 <a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>&gt;.</p>
+<p>[37] G. Yu and T. T. Lam. <em>ggtree: an R package for visualization of
+tree and annotation data</em>. R package version 2.0.4. 2020. &lt;URL:
+<a href="https://yulab-smu.github.io/treedata-book/" class="uri">https://yulab-smu.github.io/treedata-book/</a>&gt;.</p>
+<p>[38] G. Yu, T. T. Lam, H. Zhu, et al. “Two methods for mapping and
+visualizing associated data on phylogeny using ggtree.” In: <em>Molecular
+Biology and Evolution</em> 35 (2 2018), pp. 3041-3043. DOI:
+10.1093/molbev/msy194. &lt;URL: <a href="https://doi.org/10.1093/molbev/msy194" class="uri">https://doi.org/10.1093/molbev/msy194</a>&gt;.</p>
+<p>[39] G. Yu, D. Smith, H. Zhu, et al. “ggtree: an R package for
+visualization and annotation of phylogenetic trees with their
+covariates and other associated data.” In: <em>Methods in Ecology and
+Evolution</em> 8 (1 2017), pp. 28-36. DOI: 10.1111/2041-210X.12628. &lt;URL:
+<a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12628/abstract" class="uri">http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12628/abstract</a>&gt;.</p>
+<p>[40] A. Zeileis and G. Grothendieck. “zoo: S3 Infrastructure for
+Regular and Irregular Time Series”. In: <em>Journal of Statistical
+Software</em> 14.6 (2005), pp. 1-27. DOI: 10.18637/jss.v014.i06.</p>
+<p>[41] A. Zeileis, G. Grothendieck, and J. A. Ryan. <em>zoo: S3
+Infrastructure for Regular and Irregular Time Series (Z’s Ordered
+Observations)</em>. R package version 1.8-8. 2020. &lt;URL:
+<a href="http://zoo.R-Forge.R-project.org/" class="uri">http://zoo.R-Forge.R-project.org/</a>&gt;.</p>
+<p>[42] A. Zeileis and T. Hothorn. “Diagnostic Checking in Regression
+Relationships”. In: <em>R News</em> 2.3 (2002), pp. 7-10. &lt;URL:
+<a href="https://CRAN.R-project.org/doc/Rnews/" class="uri">https://CRAN.R-project.org/doc/Rnews/</a>&gt;.</p>
+<p>[43] A. Zeileis, C. Kleiber, and S. Jackman. “Regression Models for
+Count Data in R”. In: <em>Journal of Statistical Software</em> 27.8 (2008).
+&lt;URL: <a href="http://www.jstatsoft.org/v27/i08/" class="uri">http://www.jstatsoft.org/v27/i08/</a>&gt;.</p>
 </div>
 <div id="appendix-2" class="section level1 appendix">
-<h1><span class="header-section-number">5</span> Appendix 2</h1>
+<h1><span class="header-section-number">4</span> Appendix 2</h1>
 <p>Version information about R, the operating system (OS) and attached or R loaded packages. This appendix was generated using <code>sessionInfo()</code>.</p>
 <pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)

@@ -1,0 +1,98 @@
+--- 
+title: 'Details on genome sequencing, phasing and annotation'
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_depth: 4
+    toc_float: TRUE
+link-citations: yes
+fontsize: 12pt
+bibliography: References.bib
+---
+
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(usethis)
+
+#Generate BibTex citation file for all R packages used to produce report
+knitr::write_bib(.packages(), file = 'packages.bib')
+```
+
+
+```{r setup, include=FALSE, cache=FALSE, message = FALSE}
+#Load packages
+library(knitr)
+library(rmarkdown)
+# Chunk options: see http://yihui.name/knitr/options/ ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = TRUE, message = TRUE, include = TRUE)
+
+## Code decoration
+#opts_chunk$set(tidy = TRUE, R.options = list(width = 60), highlight = TRUE)
+
+## Caching code
+opts_chunk$set(cache = 2, cache.path = "cache/")
+
+## Plots
+#opts_chunk$set(fig.path = "Figures_MS/", dev=c('pdf', 'png'), dpi = 300)
+
+## Locate figures as close as possible to requested position (=code)
+#opts_chunk$set(fig.pos = "H")
+```
+
+# Overview of wet-lab and bioinformatic procedures
+
+Please find below summaries of the procedures applied in this project to sequence, phase and annotate the sagebrush genome.
+
+## Wet-lab procedures
+
+Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass.
+
+1. Dovetail Genomics will extract HMW DNA with an average fragment size ca. 50-100kb based on biomass supplied by the team (see [Biomass production](Biomass_production.html)).
+2. Whole genome sequencing (WGS) will be conducted using PacBio technology. We aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp). To achieve this objective, 5 PacBio CLR (continuous long-read) libraries will be built and sequenced on the PacBio Sequel II using 8M SMRT cells. A SMRT cell should generate >50Gb of raw data. In our case, 250Gb (5x 50Gb) of raw data will be generated, which corresponds to 55X haploid genome coverage (we are on the low side, but it should be fine). These data will be used to assemble the haploid draft genome (used as input for phasing based on Omni-C libraries).
+3. Three [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (= proximity ligation libraries) will be constructed (one library per 3 Gbp of the organism’s genome) based on the HMW DNA extractions. These libraries will be sequenced on an Illumina HiSeq X instrument (ca. 100M PE150bp read pairs per Gbp of genome size). Before final sequencing, Dovetail will conduct some shallow sequencing (ca. 2M PE75 bp) to assess library quality.
+4. RNA will be extracted from leaf tissue (20mg) by Dovetail and a standard RNA library will be prepared with rRNA-depletion. 2x150bp read will be sequenced on an Illumina platform and raw data from ca. 20M read pairs per sample (1 in this project) will be used for genome annotation.  
+
+## Bioinformatic procedures
+
+1. PacBio *de novo* assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb (needed for HiRise pipeline).
+2. The haploid daft assembly will be scaffolded (phased) through the HiRise software pipeline using the proximity ligation data (this software is owned by Dovetail). The Omni-C libraries can be used for genome assembly and haplotype phasing. We will also be able to use this data to call SNPs and look at structural variations.
+3. Whole genome annotation will be conducted using RNA-seq data. The basic services will be included:
+    a. Repeat masking.
+    b. *Ab initio* gene prediction using related species (e.g. *Artemisia annua*).
+    c. RNAseq mapping to enhance annotation.
+    d. Manual curation of 5 genes (not very interesting for us). The work done by Anthony Melton based on seedlings from GxE experiment will be key here.
+    e. Assignment of functional tags to genes.
+4. Results files will be delivered electronically via secure FTP.
+
+
+
+# References
+
+<div id="refs"></div>
+
+# Appendix 1 {.appendix}
+
+Citations of all R packages used to generate this report. 
+
+```{r generateBibliography, eval = T, results="asis", cache = F, echo=F, warning = FALSE, message=FALSE}
+library("knitcitations")
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "packages.bib")
+``` 
+
+# Appendix 2 {.appendix}
+
+Version information about R, the operating system (OS) and attached or R loaded packages. This appendix was generated using `sessionInfo()`.
+
+```{r eval=T, echo=F, warning = FALSE, message=FALSE}
+sessionInfo()
+```

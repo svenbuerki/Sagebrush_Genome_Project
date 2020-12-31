@@ -7,7 +7,7 @@ output:
     toc_float: TRUE
 link-citations: yes
 fontsize: 12pt
-bibliography: packages.bib
+bibliography: References.bib
 ---
 
 ```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
@@ -18,24 +18,9 @@ library(bookdown)
 library(knitcitations)
 library(formatR)
 library(devtools)
-library(gplots)
-library(RColorBrewer)
-library(grDevices)
-library(pscl)
-library(lmtest)
-library(lsmeans)
-library(emmeans)
-library(DT)
-library(chisq.posthoc.test)
-library(ggpubr)
-library(ggtree)
-library(ape)
-library(stringr)
-library(ggridges)
-library(ggplot2)
-library(TreeTools)
-library(forcats)
-library(MASS)
+library(usethis)
+library(lubridate)
+library(scales)
 
 #Generate BibTex citation file for all R packages used to produce report
 knitr::write_bib(.packages(), file = 'packages.bib')
@@ -64,8 +49,144 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 #opts_chunk$set(fig.pos = "H")
 ```
 
-# Reproducible workflow
+# Biomass requirements for genome project
 
+We aim at applying the newly developed *in vitro* tissue culture technique [@Barron2020] to G2_b24_1 (from UTT2, drought-sensitive genotype; see Figure \@ref(fig:plantlets)) to produce the ca. 120 gr of leaf biomass necessary for genome sequencing, phasing and annotation.
+
+```{r plantlets, echo=F, eval=T, out.width="50%", fig.align='center', fig.cap= "Example of a 15-week old plantlet grown in vitro in Magenta vessel."}
+knitr::include_graphics("Figures/G2_b20_1_15wk_old_plantlet.jpg")
+```
+
+After 15 weeks of *in vitro* culture, **a plantlet produces 0.8 gr. of leaf biomass** that can be used for the genome project (Figure \@ref(fig:plantletweight)). To meet our requirements **a minimum of `r 120/0.8` plantlets have to be produced at BSU** (see Table \@ref(tab:tabproject)). 
+
+The biomass can be flash frozen (using liquid nitrogen) and stored at -80C. The estimation of biomass provided here does not account for a DNA extraction trial required to optimize protocol (we need at least 15ug of HMW DNA for PacBio sequencing). We will have to discuss with the project manager at Dovetail Genomics.
+
+```{r plantletweight, echo=F, eval=T, out.width="50%", fig.align='center', fig.cap= "A 15-week old plantlet grown in vitro in Magenta vessel generates 0.8 gr of leaf biomass for sequencing."}
+knitr::include_graphics("Figures/G2_b20_1_Biomass_0.855g_after2min.jpg")
+```
+
+## Biomass requirements per sequencing technology
+
+Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project (see [Sequencing & Bioinformatics](Sequencing.html) for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.
+
+```{r tabproject, echo=FALSE, eval=TRUE}
+#Table with data on sequencing and number of plantlets requiered for project
+dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
+                    #Add purpose
+                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
+                    # add requirements 
+                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
+                    # add Total for project
+                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
+                    #Add Number of plantlets
+                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
+                  )
+colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
+#Plot table
+knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
+```
+
+# *In vitro* propagation of G2_b24_1
+
+G2_b24_1 is among the top performers identified by @Barron2020. Here, we will be propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project.
+
+## Overview of the *propagationPred* R function
+
+To predict how long it will take to produce the `r 120/0.8` plantlets for the project we have developed the *propagationPred* R function.   
+
+This function depends on the following arguments provided by the user:
+- `n`: number of plantlets to seed the experiment.
+- `ns`: number of shoot tips cut per plantlet (after growth period).
+- `r`: vector of rooting rates (0 to 1) at each rooting phase. 
+- `s`: vector of survival rates (0 to 1) at each growth phase.
+- `g`: number of generations (for *in vitro* propagation).
+- `biobank`: vector with proportion (0 to 1) of plantlets biobanked per generation (at end of growth) (e.g: c(0,0,0.4,0)).
+- `date_user`: starting date of the experiment (mdy from *ludridate* or any date format).
+- `growth_time_g`: vector with number of days/weeks for growth for g.
+- `biobanking_time`: one value (either weeks() or days()) compatible with *lubridate* describing the duration of biobanking to generated the biomass (here 15 weeks corresponding to 0.8 gr).
+- `rooting_time_g`: vector with number of days/weeks for rooting for g
+- `biomass_plantlet`: numerical value of biomass of a single plantlet.
+
+
+```{r}
+source("Functions/Propagation.R")
+
+#b24 11/13/2020 10 week old 
+# 57 shoot tips
+# 53 alive
+# 4 weeks in rooting media
+# biomass <- 1x 15-week old plantlet = 0.8gr
+# How many plantlets to get at biomass with some wiggle room
+#Apply propagationPred to top performer (G2_b24_1 from UTT2)
+
+OUTdat <- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy("11/13/2020")-weeks(10), 
+                          growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
+
+OUTdat <- OUTdat[1:11,]
+
+
+write.csv(OUTdat, file="Propagation_schedule_G2_b24_1.csv", row.names=F)
+
+###~~~
+#Plot data
+###~~~
+#pdf("Schedule_sagebrush_propagation_G2_b24_1.pdf")
+#Populate plot
+Type <- levels(OUTdat$Type)[c(3,2,4,1)]
+colSeg <- c("black","green","blue","orange")
+
+#Create empty plot
+plot(x=c(as.Date(OUTdat$Date_start)), y= c(as.numeric(as.vector(OUTdat$N_plant_start))), 
+     xlim= c(min(as.Date(OUTdat$Date_start)), max(as.Date(OUTdat$Date_end))+20), 
+     ylim=c(0, max(as.numeric(as.vector(OUTdat$N_plant_start)))+50), type='n', xlab="Time (days)", ylab = "Number of Plantlets") 
+
+biomassTot <- 120
+biomass_plantlet <- 0.8
+#Add objective of N plantlets
+abline(h=biomassTot/biomass_plantlet, col='grey')
+text(x=as.Date(OUTdat$Date_start[1]), y=biomassTot/biomass_plantlet+10, labels=paste("Number of Plantlets for Project (N: ", biomassTot/biomass_plantlet, " = ", biomassTot, " gr. )", sep=""), adj=0, col="grey", cex=.65)
+
+#Add segments
+for(i in 1:length(Type)){
+  tmp <- OUTdat[which(OUTdat$Type == Type[i]),]
+  segments(x0=as.Date(tmp$Date_start), x1=as.Date(tmp$Date_end), y0=as.numeric(as.vector(tmp$N_plant_start)), y1=as.numeric(as.vector(tmp$N_plant_end)), col=colSeg[i], lwd=1.5)
+  #Add points to better see beginning and end of phases
+  points(x=as.Date(tmp$Date_start), y=as.numeric(as.vector(tmp$N_plant_start)), col=colSeg[i], pch=16, cex=.8)
+  points(x=as.Date(tmp$Date_end), y=as.numeric(as.vector(tmp$N_plant_end)), col=colSeg[i], pch=16, cex=.8)
+  
+  if(Type[i] == "Cutting"){
+    text(x=as.Date(tmp$Date_start), y=as.numeric(as.vector(tmp$N_plant_end))+20, labels = as.Date(tmp$Date_start), srt=45, adj=0.5, cex=.6)
+  }
+  if(Type[i] == "Rooting"){
+    text(x=as.Date(tmp$Date_end), y=as.numeric(as.vector(tmp$N_plant_end))+8, labels = as.Date(tmp$Date_end), srt=45, adj=0, cex=.6)
+  }
+  if(Type[i] == "Growth"){
+    #Start of experiment
+    startExp <- which(tmp$Date_start == as.character(min(as.Date(tmp$Date_start))))
+    text(x=as.Date(tmp$Date_start)[startExp], y=as.numeric(as.vector(tmp$N_plant_start))[startExp]+8, labels = as.Date(tmp$Date_start)[startExp], srt=90, adj=0, cex=.6)
+    
+    #End of experiment
+    endExp <- which(tmp$Date_end == as.character(max(as.Date(tmp$Date_end))))
+    text(x=as.Date(tmp$Date_end)[endExp], y=as.numeric(as.vector(tmp$N_plant_end))[endExp]+8, labels = as.Date(tmp$Date_end)[endExp], srt=90, adj=0, cex=.6)
+  }
+  if(Type[i] == "Biobanking"){
+    #Add segment(s) showing when rooted shoot tips are split between growth and biobanking
+    ystart <- as.numeric(as.vector(OUTdat$N_plant_start[which(OUTdat$Date_start == tmp$Date_start & OUTdat$Type == "Growth")]))
+    yend <- as.numeric(as.vector(OUTdat$N_plant_end[which(OUTdat$Date_end == as.character(tmp$Date_start) & OUTdat$Type == "Rooting")]))
+    segments(x0=as.Date(tmp$Date_start), x1=as.Date(tmp$Date_start), y0=ystart, y1=yend, lty=2) 
+    text(x=as.Date(tmp$Date_start)-4, y=ystart, paste("Split rooted shoot tips:", paste(as.character(tmp$Type), " (", tmp$N_plant_start, ")", " & Growth (", ystart, ")", sep="")), adj=0, srt=90, cex=.6)
+    
+    #End of experiment
+    endExp <- which(tmp$Date_end == as.character(max(as.Date(tmp$Date_end))))
+    text(x=as.Date(tmp$Date_end)[endExp], y=as.numeric(as.vector(tmp$N_plant_end))[endExp]+8, labels = paste(as.Date(tmp$Date_end)[endExp], " (", as.character(tmp$`Total_Biomass (gr)`), " gr.)", sep=''), srt=90, adj=0, cex=.6)
+  }
+  
+}
+
+#Add legend
+legend("topleft", legend = Type, lty=1, col=colSeg, cex=.6)
+#dev.off()
+```
 
 # References
 
