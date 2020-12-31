@@ -88,44 +88,150 @@ knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose a
 
 # *In vitro* propagation of G2_b24_1
 
-G2_b24_1 is among the top performers identified by @Barron2020. Here, we will be propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project.
+G2_b24_1 is among the top performers identified by @Barron2020. Here, we are propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project (see Table \@ref(tab:tabproject)).
 
-## Overview of the *propagationPred* R function
+To predict how long it will take to produce the `r 120/0.8` plantlets for the project, we have developed the *propagationPred* R function. In addition to a time frame, this function provides estimates of labor time required to produce the growth and rooting media as well as the associated amount of media and required vessels (plates and Magenta vessels).    
 
-To predict how long it will take to produce the `r 120/0.8` plantlets for the project we have developed the *propagationPred* R function.   
+## Presenting the *propagationPred* R function
 
 This function depends on the following arguments provided by the user:
+
 - `n`: number of plantlets to seed the experiment.
-- `ns`: number of shoot tips cut per plantlet (after growth period).
+- `ns`: number of shoot tips cut per plantlet (after the growth period).
 - `r`: vector of rooting rates (0 to 1) at each rooting phase. 
 - `s`: vector of survival rates (0 to 1) at each growth phase.
 - `g`: number of generations (for *in vitro* propagation).
-- `biobank`: vector with proportion (0 to 1) of plantlets biobanked per generation (at end of growth) (e.g: c(0,0,0.4,0)).
+- `biobank`: vector with proportion (0 to 1) of plantlets biobanked per generation (at end of growth) (e.g: c(0,0,0.4,0)). This argument is important since it is equal to the number of plantlets set aside for biomass production.
 - `date_user`: starting date of the experiment (mdy from *ludridate* or any date format).
-- `growth_time_g`: vector with number of days/weeks for growth for g.
+- `growth_time_g`: vector with number of days/weeks allocated for growth per `g` (how long will it take for your plantlets to produce `ns`).
 - `biobanking_time`: one value (either weeks() or days()) compatible with *lubridate* describing the duration of biobanking to generated the biomass (here 15 weeks corresponding to 0.8 gr).
-- `rooting_time_g`: vector with number of days/weeks for rooting for g
-- `biomass_plantlet`: numerical value of biomass of a single plantlet.
+- `rooting_time_g`: vector with number of days/weeks for rooting per `g`. The rooting time is a key factor, you want to allocate enough time for roots to develop and growth.
+- `biomass_plantlet`: numerical value of biomass of a single plantlet (here 0.8 gr).
 
+The function outputs a `data.frame` with the following columns:
 
-```{r}
+- `Generation`: Generation ID.
+- `Type`: Type of *in vitro* activity (`Growth`, `Cutting`, `Rooting`, `Biobanking`).
+- `Date_start` and `Date_end`: Start and end date associated to `Type`.
+- `N_plant_start` and `N_plant_end`: Number of plantelts at stat and end dates.
+- `N_vessels`: Number of plates (for `Rooting`) or Magenta (for `Growth`) vessels. 1 plate = 9 shoot tips, whereas rooted shoot tips are on individual Magenta vessels.            
+- `Volume_media_litre`: Amount of `Rooting` (0.05 liter per plate) or `Growth` (0.1 liter per Magenta vessel) media to be prepared.    
+- `N_Autoclave` and `Time_Autoclave (hrs)`: Number of autoclaves used to prepare `Rooting` (1 liter per autoclave) or `Growth` (60 Magenta vessels per autoclave) media and associated times (120 minutes for `Rooting` media vs. 90 minutes for `Growth` media). 
+- `Media_prep_time (hrs)` and `Time_Cutting (hrs)`: Lab our time to prepare `Rooting` (90 minutes for 1 liter) or `Growth` (1 hr for 60 boxes) media and conduct cutting (5 plantlets per hour).   
+- `Total_Biomass (gr)`: This is estimated based on fraction of plantlets allocated to biobanking (based on `biomass_plantlet`).    
+  
+## Applying *propagationPred* to G2_b24_1 {.tabset .tabset-pills}
+
+### Analyses
+
+The function has been applied with the following parameters (see section \@ref(predcode) for R code):
+
+- `n`: 6 (plantlets).
+- `ns`: 9.5 (on average after 10 weeks of growth).
+- `r`: 0.93 (equal through generations). 
+- `s`: 0.8 (equal through generations).
+- `g`: 4 (generations).
+- `biobank`: c(0,0,0.9,0). Meaning that 90% of plantets will be biobanked at generation 3. 
+- `date_user`: `r mdy("11/13/2020")-weeks(10)`.
+- `growth_time_g`: c(weeks(10),weeks(8),weeks(8),weeks(8)).
+- `biobanking_time`: weeks(15) (time requiered to get at 0.8 gr per plantlet).
+- `rooting_time_g`: c(weeks(4),weeks(3),weeks(3),weeks(3)).
+- `biomass_plantlet`: 0.8 (in gr).
+
+The function outputs the table below allowing to prepare for key dates and tasks to successfuly produce the biomass. 
+
+```{r predictionprop, echo=FALSE, eval=TRUE}
+#Source user-made function
 source("Functions/Propagation.R")
 
-#b24 11/13/2020 10 week old 
-# 57 shoot tips
-# 53 alive
-# 4 weeks in rooting media
-# biomass <- 1x 15-week old plantlet = 0.8gr
-# How many plantlets to get at biomass with some wiggle room
 #Apply propagationPred to top performer (G2_b24_1 from UTT2)
+OUTdat <- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy("11/13/2020")-weeks(10), growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
 
-OUTdat <- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy("11/13/2020")-weeks(10), 
-                          growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
-
+#Subset OUTdat to only contain rows of interests
 OUTdat <- OUTdat[1:11,]
 
+#Plot table
+DT::datatable(OUTdat, extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+```
 
-write.csv(OUTdat, file="Propagation_schedule_G2_b24_1.csv", row.names=F)
+To better visualize the project, a plot (see Figure \@ref(fig:plotpred)) was produced and here are the key dates:
+
+```{r plotpred, echo=FALSE, eval=TRUE, out.width="100%", fig.align='center', fig.cap= "Plot showing the time frame to conduct the in vitro propagation of G2_b24_1 to produce the biomass for the Sagebrush Genome Project and maintain the individual line."}
+###~~~
+#Plot data
+###~~~
+#pdf("Schedule_sagebrush_propagation_G2_b24_1.pdf")
+#Populate plot
+Type <- levels(OUTdat$Type)[c(3,2,4,1)]
+colSeg <- c("black","green","blue","orange")
+
+#Create empty plot
+plot(x=c(as.Date(OUTdat$Date_start)), y= c(as.numeric(as.vector(OUTdat$N_plant_start))), 
+     xlim= c(min(as.Date(OUTdat$Date_start)), max(as.Date(OUTdat$Date_end))+20), 
+     ylim=c(0, max(as.numeric(as.vector(OUTdat$N_plant_start)))+50), type='n', xlab="Time (days)", ylab = "Number of Plantlets") 
+
+biomassTot <- 120
+biomass_plantlet <- 0.8
+#Add objective of N plantlets
+abline(h=biomassTot/biomass_plantlet, col='grey')
+text(x=as.Date(OUTdat$Date_start[1]), y=biomassTot/biomass_plantlet+10, labels=paste("Number of Plantlets for Project (N: ", biomassTot/biomass_plantlet, " = ", biomassTot, " gr. )", sep=""), adj=0, col="grey", cex=.65)
+
+#Add segments
+for(i in 1:length(Type)){
+  tmp <- OUTdat[which(OUTdat$Type == Type[i]),]
+  segments(x0=as.Date(tmp$Date_start), x1=as.Date(tmp$Date_end), y0=as.numeric(as.vector(tmp$N_plant_start)), y1=as.numeric(as.vector(tmp$N_plant_end)), col=colSeg[i], lwd=1.5)
+  #Add points to better see beginning and end of phases
+  points(x=as.Date(tmp$Date_start), y=as.numeric(as.vector(tmp$N_plant_start)), col=colSeg[i], pch=16, cex=.8)
+  points(x=as.Date(tmp$Date_end), y=as.numeric(as.vector(tmp$N_plant_end)), col=colSeg[i], pch=16, cex=.8)
+  
+  if(Type[i] == "Cutting"){
+    text(x=as.Date(tmp$Date_start), y=as.numeric(as.vector(tmp$N_plant_end))+20, labels = as.Date(tmp$Date_start), srt=45, adj=0.5, cex=.6)
+  }
+  if(Type[i] == "Rooting"){
+    text(x=as.Date(tmp$Date_end), y=as.numeric(as.vector(tmp$N_plant_end))+8, labels = as.Date(tmp$Date_end), srt=45, adj=0, cex=.6)
+  }
+  if(Type[i] == "Growth"){
+    #Start of experiment
+    startExp <- which(tmp$Date_start == as.character(min(as.Date(tmp$Date_start))))
+    text(x=as.Date(tmp$Date_start)[startExp], y=as.numeric(as.vector(tmp$N_plant_start))[startExp]+8, labels = as.Date(tmp$Date_start)[startExp], srt=90, adj=0, cex=.6)
+    
+    #End of experiment
+    endExp <- which(tmp$Date_end == as.character(max(as.Date(tmp$Date_end))))
+    text(x=as.Date(tmp$Date_end)[endExp], y=as.numeric(as.vector(tmp$N_plant_end))[endExp]+8, labels = as.Date(tmp$Date_end)[endExp], srt=90, adj=0, cex=.6)
+  }
+  if(Type[i] == "Biobanking"){
+    #Add segment(s) showing when rooted shoot tips are split between growth and biobanking
+    ystart <- as.numeric(as.vector(OUTdat$N_plant_start[which(OUTdat$Date_start == tmp$Date_start & OUTdat$Type == "Growth")]))
+    yend <- as.numeric(as.vector(OUTdat$N_plant_end[which(OUTdat$Date_end == as.character(tmp$Date_start) & OUTdat$Type == "Rooting")]))
+    segments(x0=as.Date(tmp$Date_start), x1=as.Date(tmp$Date_start), y0=ystart, y1=yend, lty=2) 
+    text(x=as.Date(tmp$Date_start)-4, y=ystart, paste("Split rooted shoot tips:", paste(as.character(tmp$Type), " (", tmp$N_plant_start, ")", " & Growth (", ystart, ")", sep="")), adj=0, srt=90, cex=.6)
+    
+    #End of experiment
+    endExp <- which(tmp$Date_end == as.character(max(as.Date(tmp$Date_end))))
+    text(x=as.Date(tmp$Date_end)[endExp], y=as.numeric(as.vector(tmp$N_plant_end))[endExp]+8, labels = paste(as.Date(tmp$Date_end)[endExp], " (", as.character(tmp$`Total_Biomass (gr)`), " gr.)", sep=''), srt=90, adj=0, cex=.6)
+  }
+  
+}
+
+#Add legend
+legend("topleft", legend = Type, lty=1, col=colSeg, cex=.6)
+#dev.off()
+```
+
+### R code {#predcode}
+
+```{r predictionpropcode, echo=TRUE, eval=FALSE}
+#Source user-made function
+source("Functions/Propagation.R")
+
+#Apply propagationPred to top performer (G2_b24_1 from UTT2)
+OUTdat <- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy("11/13/2020")-weeks(10), growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
+
+#Subset OUTdat to only contain rows of interests
+OUTdat <- OUTdat[1:11,]
+
+#Plot table
+DT::datatable(OUTdat, extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 
 ###~~~
 #Plot data

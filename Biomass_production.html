@@ -13,7 +13,7 @@
 
 <title>Sagebrush Biomass Production</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -25,6 +25,23 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="site_libs/jszip-1.10.20/jszip.min.js"></script>
+<script src="site_libs/pdfmake-1.10.20/pdfmake.js"></script>
+<script src="site_libs/pdfmake-1.10.20/vfs_fonts.js"></script>
+<link href="site_libs/dt-ext-buttons-1.10.20/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="site_libs/dt-ext-buttons-1.10.20/js/dataTables.buttons.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.flash.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.html5.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.colVis.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.20/js/buttons.print.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -451,39 +468,82 @@ Figure 1.2: A 15-week old plantlet grown in vitro in Magenta vessel generates 0.
 </div>
 <div id="in-vitro-propagation-of-g2_b24_1" class="section level1">
 <h1><span class="header-section-number">2</span> <em>In vitro</em> propagation of G2_b24_1</h1>
-<p>G2_b24_1 is among the top performers identified by <span class="citation">Barron et al. (<a href="#ref-Barron2020">2020</a>)</span>. Here, we will be propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project.</p>
-<div id="overview-of-the-propagationpred-r-function" class="section level2">
-<h2><span class="header-section-number">2.1</span> Overview of the <em>propagationPred</em> R function</h2>
-<p>To predict how long it will take to produce the 150 plantlets for the project we have developed the <em>propagationPred</em> R function.</p>
-<p>This function depends on the following arguments provided by the user:
-- <code>n</code>: number of plantlets to seed the experiment.
-- <code>ns</code>: number of shoot tips cut per plantlet (after growth period).
-- <code>r</code>: vector of rooting rates (0 to 1) at each rooting phase.
-- <code>s</code>: vector of survival rates (0 to 1) at each growth phase.
-- <code>g</code>: number of generations (for <em>in vitro</em> propagation).
-- <code>biobank</code>: vector with proportion (0 to 1) of plantlets biobanked per generation (at end of growth) (e.g: c(0,0,0.4,0)).
-- <code>date_user</code>: starting date of the experiment (mdy from <em>ludridate</em> or any date format).
-- <code>growth_time_g</code>: vector with number of days/weeks for growth for g.
-- <code>biobanking_time</code>: one value (either weeks() or days()) compatible with <em>lubridate</em> describing the duration of biobanking to generated the biomass (here 15 weeks corresponding to 0.8 gr).
-- <code>rooting_time_g</code>: vector with number of days/weeks for rooting for g
-- <code>biomass_plantlet</code>: numerical value of biomass of a single plantlet.</p>
-<pre class="r"><code>source(&quot;Functions/Propagation.R&quot;)
+<p>G2_b24_1 is among the top performers identified by <span class="citation">Barron et al. (<a href="#ref-Barron2020">2020</a>)</span>. Here, we are propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project (see Table <a href="#tab:tabproject">1.1</a>).</p>
+<p>To predict how long it will take to produce the 150 plantlets for the project, we have developed the <em>propagationPred</em> R function. In addition to a time frame, this function provides estimates of labor time required to produce the growth and rooting media as well as the associated amount of media and required vessels (plates and Magenta vessels).</p>
+<div id="presenting-the-propagationpred-r-function" class="section level2">
+<h2><span class="header-section-number">2.1</span> Presenting the <em>propagationPred</em> R function</h2>
+<p>This function depends on the following arguments provided by the user:</p>
+<ul>
+<li><code>n</code>: number of plantlets to seed the experiment.</li>
+<li><code>ns</code>: number of shoot tips cut per plantlet (after the growth period).</li>
+<li><code>r</code>: vector of rooting rates (0 to 1) at each rooting phase.</li>
+<li><code>s</code>: vector of survival rates (0 to 1) at each growth phase.</li>
+<li><code>g</code>: number of generations (for <em>in vitro</em> propagation).</li>
+<li><code>biobank</code>: vector with proportion (0 to 1) of plantlets biobanked per generation (at end of growth) (e.g: c(0,0,0.4,0)). This argument is important since it is equal to the number of plantlets set aside for biomass production.</li>
+<li><code>date_user</code>: starting date of the experiment (mdy from <em>ludridate</em> or any date format).</li>
+<li><code>growth_time_g</code>: vector with number of days/weeks allocated for growth per <code>g</code> (how long will it take for your plantlets to produce <code>ns</code>).</li>
+<li><code>biobanking_time</code>: one value (either weeks() or days()) compatible with <em>lubridate</em> describing the duration of biobanking to generated the biomass (here 15 weeks corresponding to 0.8 gr).</li>
+<li><code>rooting_time_g</code>: vector with number of days/weeks for rooting per <code>g</code>. The rooting time is a key factor, you want to allocate enough time for roots to develop and growth.</li>
+<li><code>biomass_plantlet</code>: numerical value of biomass of a single plantlet (here 0.8 gr).</li>
+</ul>
+<p>The function outputs a <code>data.frame</code> with the following columns:</p>
+<ul>
+<li><code>Generation</code>: Generation ID.</li>
+<li><code>Type</code>: Type of <em>in vitro</em> activity (<code>Growth</code>, <code>Cutting</code>, <code>Rooting</code>, <code>Biobanking</code>).</li>
+<li><code>Date_start</code> and <code>Date_end</code>: Start and end date associated to <code>Type</code>.</li>
+<li><code>N_plant_start</code> and <code>N_plant_end</code>: Number of plantelts at stat and end dates.</li>
+<li><code>N_vessels</code>: Number of plates (for <code>Rooting</code>) or Magenta (for <code>Growth</code>) vessels. 1 plate = 9 shoot tips, whereas rooted shoot tips are on individual Magenta vessels.<br />
+</li>
+<li><code>Volume_media_litre</code>: Amount of <code>Rooting</code> (0.05 liter per plate) or <code>Growth</code> (0.1 liter per Magenta vessel) media to be prepared.<br />
+</li>
+<li><code>N_Autoclave</code> and <code>Time_Autoclave (hrs)</code>: Number of autoclaves used to prepare <code>Rooting</code> (1 liter per autoclave) or <code>Growth</code> (60 Magenta vessels per autoclave) media and associated times (120 minutes for <code>Rooting</code> media vs. 90 minutes for <code>Growth</code> media).</li>
+<li><code>Media_prep_time (hrs)</code> and <code>Time_Cutting (hrs)</code>: Lab our time to prepare <code>Rooting</code> (90 minutes for 1 liter) or <code>Growth</code> (1 hr for 60 boxes) media and conduct cutting (5 plantlets per hour).<br />
+</li>
+<li><code>Total_Biomass (gr)</code>: This is estimated based on fraction of plantlets allocated to biobanking (based on <code>biomass_plantlet</code>).</li>
+</ul>
+</div>
+<div id="applying-propagationpred-to-g2_b24_1" class="section level2 tabset tabset-pills">
+<h2><span class="header-section-number">2.2</span> Applying <em>propagationPred</em> to G2_b24_1</h2>
+<div id="analyses" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Analyses</h3>
+<p>The function has been applied with the following parameters (see section <a href="#predcode">2.2.2</a> for R code):</p>
+<ul>
+<li><code>n</code>: 6 (plantlets).</li>
+<li><code>ns</code>: 9.5 (on average after 10 weeks of growth).</li>
+<li><code>r</code>: 0.93 (equal through generations).</li>
+<li><code>s</code>: 0.8 (equal through generations).</li>
+<li><code>g</code>: 4 (generations).</li>
+<li><code>biobank</code>: c(0,0,0.9,0). Meaning that 90% of plantets will be biobanked at generation 3.</li>
+<li><code>date_user</code>: 2020-09-04.</li>
+<li><code>growth_time_g</code>: c(weeks(10),weeks(8),weeks(8),weeks(8)).</li>
+<li><code>biobanking_time</code>: weeks(15) (time requiered to get at 0.8 gr per plantlet).</li>
+<li><code>rooting_time_g</code>: c(weeks(4),weeks(3),weeks(3),weeks(3)).</li>
+<li><code>biomass_plantlet</code>: 0.8 (in gr).</li>
+</ul>
+<p>The function outputs the table below allowing to prepare for key dates and tasks to successfuly produce the biomass.</p>
+<div id="htmlwidget-bdc1a8eb30daaaa6e162" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bdc1a8eb30daaaa6e162">{"x":{"filter":"none","extensions":["Buttons"],"data":[["1","3","4","5","7","8","9","10","11","12","13"],["1","1","1","2","2","2","3","3","3","3","4"],["Growth","Cutting","Rooting","Growth","Cutting","Rooting","Growth","Biobanking","Cutting","Rooting","Growth"],["2020-09-04","2020-11-13","2020-11-13","2020-12-11","2021-02-05","2021-02-05","2021-02-26","2021-02-26","2021-04-23","2021-04-23","2021-05-14"],["2020-11-13","2020-11-13","2020-12-11","2021-02-05","2021-02-05","2021-02-26","2021-04-23","2021-06-11","2021-04-23","2021-05-14","2021-07-09"],["6","6","57","53","42","399","38","333","30","285","265"],["6","57","53","42","399","371","30","266","285","265","212"],["6",null,"7","53",null,"45","38","333",null,"32","265"],["1",null,"1","6",null,"3","4","1",null,"2","27"],["1",null,"1","1",null,"3","1","6",null,"2","5"],["1.5",null,"2","1.5",null,"6","1.5","9",null,"4","7.5"],["1",null,"1.5","1",null,"4.5","1","6",null,"3","5"],[null,"1.2",null,null,"8.4",null,null,null,"6",null,null],[null,null,null,null,null,null,null,"212.8",null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Generation<\/th>\n      <th>Type<\/th>\n      <th>Date_start<\/th>\n      <th>Date_end<\/th>\n      <th>N_plant_start<\/th>\n      <th>N_plant_end<\/th>\n      <th>N_vessels<\/th>\n      <th>Volume_media_litre<\/th>\n      <th>N_Autoclave<\/th>\n      <th>Time_Autoclave (hrs)<\/th>\n      <th>Media_prep_time (hrs)<\/th>\n      <th>Time_Cutting (hrs)<\/th>\n      <th>Total_Biomass (gr)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Blfrtip","buttons":["copy","csv","excel","pdf","print"],"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<p>To better visualize the project, a plot (see Figure <a href="#fig:plotpred">2.1</a>) was produced and here are the key dates:</p>
+<div class="figure" style="text-align: center"><span id="fig:plotpred"></span>
+<img src="Biomass_production_files/figure-html/plotpred-1.png" alt="Plot showing the time frame to conduct the in vitro propagation of G2_b24_1 to produce the biomass for the Sagebrush Genome Project and maintain the individual line." width="100%" />
+<p class="caption">
+Figure 2.1: Plot showing the time frame to conduct the in vitro propagation of G2_b24_1 to produce the biomass for the Sagebrush Genome Project and maintain the individual line.
+</p>
+</div>
+</div>
+<div id="predcode" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> R code</h3>
+<pre class="r"><code>#Source user-made function
+source(&quot;Functions/Propagation.R&quot;)
 
-#b24 11/13/2020 10 week old 
-# 57 shoot tips
-# 53 alive
-# 4 weeks in rooting media
-# biomass &lt;- 1x 15-week old plantlet = 0.8gr
-# How many plantlets to get at biomass with some wiggle room
 #Apply propagationPred to top performer (G2_b24_1 from UTT2)
+OUTdat &lt;- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy(&quot;11/13/2020&quot;)-weeks(10), growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
 
-OUTdat &lt;- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank=c(0,0,0.9,0), date_user=mdy(&quot;11/13/2020&quot;)-weeks(10), 
-                          growth_time_g=c(weeks(10),weeks(8),weeks(8),weeks(8)), biobanking_time = weeks(15), rooting_time_g=c(weeks(4),weeks(3),weeks(3),weeks(3)), biomass_plantlet = 0.8)
-
+#Subset OUTdat to only contain rows of interests
 OUTdat &lt;- OUTdat[1:11,]
 
-
-write.csv(OUTdat, file=&quot;Propagation_schedule_G2_b24_1.csv&quot;, row.names=F)
+#Plot table
+DT::datatable(OUTdat, extensions = &#39;Buttons&#39;, options = list(dom = &#39;Blfrtip&#39;, buttons = c(&#39;copy&#39;, &#39;csv&#39;, &#39;excel&#39;, &#39;pdf&#39;, &#39;print&#39;)))
 
 ###~~~
 #Plot data
@@ -542,9 +602,9 @@ for(i in 1:length(Type)){
 }
 
 #Add legend
-legend(&quot;topleft&quot;, legend = Type, lty=1, col=colSeg, cex=.6)</code></pre>
-<p><img src="Biomass_production_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<pre class="r"><code>#dev.off()</code></pre>
+legend(&quot;topleft&quot;, legend = Type, lty=1, col=colSeg, cex=.6)
+#dev.off()</code></pre>
+</div>
 </div>
 </div>
 <div id="references" class="section level1">
