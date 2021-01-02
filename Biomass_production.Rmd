@@ -51,13 +51,25 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 
 # Biomass requirements for genome project
 
-We aim at applying the newly developed *in vitro* tissue culture technique [@Barron2020] to G2_b24_1 (from UTT2, drought-sensitive genotype; see Figure \@ref(fig:plantlets)) to produce the ca. 120 gr of leaf biomass necessary for genome sequencing, phasing and annotation.
+We aim at applying the newly developed *in vitro* tissue culture technique [@Barron2020] to the G2_b24_1 individual line (from UTT2, drought-sensitive genotype; see Figure \@ref(fig:plantlets)) to produce the ca. 120 gr of leaf biomass necessary for genome sequencing, phasing and annotation. As mentioned in our introduction, we also need to make sure that we are maintaining the individual line beyond biomass production. 
 
 ```{r plantlets, echo=F, eval=T, out.width="50%", fig.align='center', fig.cap= "Example of a 15-week old plantlet grown in vitro in Magenta vessel."}
 knitr::include_graphics("Figures/G2_b20_1_15wk_old_plantlet.jpg")
 ```
 
-After 15 weeks of *in vitro* culture, **a plantlet produces 0.8 gr. of leaf biomass** that can be used for the genome project (Figure \@ref(fig:plantletweight)). To meet our requirements **a minimum of `r 120/0.8` plantlets have to be produced at BSU** (see Table \@ref(tab:tabproject)). 
+# Overview of *in vitro* tissue culture
+
+The *in vitro* tissue culture propagation that we have recently published for *Artemisia tridentata* subsp. *tridentata* is composed of three steps [@Barron2020]:
+
+1. <span style="color: black;font-weight:bold">Growth</span>: During the first generation, we started from seeds, but later this step was based on rooted shoot tips cultured on MS growth media in Magenta vessels.
+2. <span style="color: green;font-weight:bold">Cutting</span>: Here, shoot tips are cut from the grown seedlings or plantlets and transferred into rooting media.
+3. <span style="color: blue;font-weight:bold">Rooting</span>: Shoot tips are cultivated on a rooting media containing IBA growth regulator (1 ml/l) in plates to initiate rooting. Rooted shoot tips are then transferred into growth media and we are back to step 1.
+
+The <span style="color: black;font-weight:bold">Growth</span> and <span style="color: blue;font-weight:bold">Rooting</span> steps are taking 8 to 10 and 3 weeks respectively, while <span style="color: green;font-weight:bold">Cutting</span> is labor intensive and usually takes 1 hour to process 5 plantlets. After 8-10 weeks of growth a plantlet generates ca. 9 shoot tips, which are transferred into 1 plate of rooting media to initiate rooting (after 3 weeks of growth). This process works very well to keep the line, but at after 8-10 weeks of growth a plantlet only generate ca. 0.15 gr of biomass for genome sequencing. If we were to apply to approach to generate the necessary 120 gr, we would need `r 120/0.15` plantlets. This large number of plantlet is logistically challenging and could prove difficult to handle for our small lab. This is even more challenging because although our methodology has a high (>90%) rooting response, the survival rate during the <span style="color: black;font-weight:bold">Growth</span> step is highly variable between individual lines between 45 and 80%. This means that far more plantlets will have to be grown to reach the `r 120/0.15` plantlet mark and this is without accounting for a cushion to be able to maintain the line. In this context, we have favored i) selecting an individual with a high survival rate and ii) growing plantlets for a longer period to obtain more biomass.    
+
+## How many plantlets of G2_b24_1 do we need to generate the required biomass?
+
+After 15 weeks of *in vitro* tissue culture, **a plantlet produces 0.8 gr. of leaf biomass** that can be used for the genome project (Figure \@ref(fig:plantletweight)). To meet our requirements **a minimum of `r 120/0.8` plantlets have to be produced at BSU** (see Table \@ref(tab:tabproject)). 
 
 The biomass can be flash frozen (using liquid nitrogen) and stored at -80C. The estimation of biomass provided here does not account for a DNA extraction trial required to optimize protocol (we need at least 15ug of HMW DNA for PacBio sequencing). We will have to discuss with the project manager at Dovetail Genomics.
 
@@ -65,32 +77,7 @@ The biomass can be flash frozen (using liquid nitrogen) and stored at -80C. The 
 knitr::include_graphics("Figures/G2_b20_1_Biomass_0.855g_after2min.jpg")
 ```
 
-## Biomass requirements per sequencing technology
 
-Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project (see [Sequencing & Bioinformatics](Sequencing.html) for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.
-
-```{r tabproject, echo=FALSE, eval=TRUE}
-#Table with data on sequencing and number of plantlets requiered for project
-dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
-                    #Add purpose
-                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
-                    # add requirements 
-                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
-                    # add Total for project
-                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
-                    #Add Number of plantlets
-                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
-                  )
-colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
-#Plot table
-knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
-```
-
-# *In vitro* propagation of G2_b24_1
-
-G2_b24_1 is among the top performers identified by @Barron2020. Here, we are propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project (see Table \@ref(tab:tabproject)).
-
-To predict how long it will take to produce the `r 120/0.8` plantlets for the project, we have developed the *propagationPred* R function. In addition to a time frame, this function provides estimates of labor time required to produce the growth and rooting media as well as the associated amount of media and required vessels (plates and Magenta vessels).    
 
 ## Presenting the *propagationPred* R function
 
@@ -119,6 +106,40 @@ The function outputs a `data.frame` with the following columns:
 - `N_Autoclave` and `Time_Autoclave (hrs)`: Number of autoclaves used to prepare `Rooting` (1 liter per autoclave) or `Growth` (60 Magenta vessels per autoclave) media and associated times (120 minutes for `Rooting` media vs. 90 minutes for `Growth` media). 
 - `Media_prep_time (hrs)` and `Time_Cutting (hrs)`: Lab our time to prepare `Rooting` (90 minutes for 1 liter) or `Growth` (1 hr for 60 boxes) media and conduct cutting (5 plantlets per hour).   
 - `Total_Biomass (gr)`: This is estimated based on fraction of plantlets allocated to biobanking (based on `biomass_plantlet`).    
+
+
+
+
+## Biomass requirements per sequencing technology
+
+Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project (see [Sequencing & Bioinformatics](Sequencing.html) for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.
+
+```{r tabproject, echo=FALSE, eval=TRUE}
+#Table with data on sequencing and number of plantlets requiered for project
+dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
+                    #Add purpose
+                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
+                    # add requirements 
+                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
+                    # add Total for project
+                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
+                    #Add Number of plantlets
+                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
+                  )
+colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
+#Plot table
+knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
+```
+
+
+
+
+# *In vitro* propagation of G2_b24_1
+
+G2_b24_1 is among the top performers identified by @Barron2020. Here, we are propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project (see Table \@ref(tab:tabproject)).
+
+To predict how long it will take to produce the `r 120/0.8` plantlets for the project, we have developed the *propagationPred* R function. In addition to a time frame, this function provides estimates of labor time required to produce the growth and rooting media as well as the associated amount of media and required vessels (plates and Magenta vessels).    
+
   
 ## Applying *propagationPred* to G2_b24_1 {.tabset .tabset-pills}
 
@@ -131,14 +152,14 @@ The function has been applied with the following parameters (see section \@ref(p
 - `r`: 0.93 (equal through generations). 
 - `s`: 0.8 (equal through generations).
 - `g`: 4 (generations).
-- `biobank`: c(0,0,0.9,0). Meaning that 90% of plantets will be biobanked at generation 3. 
+- `biobank`: c(0,0,0.9,0). Meaning that 90% of plantlets will be biobanked at generation 3. 
 - `date_user`: `r mdy("11/13/2020")-weeks(10)`.
 - `growth_time_g`: c(weeks(10),weeks(8),weeks(8),weeks(8)).
-- `biobanking_time`: weeks(15) (time requiered to get at 0.8 gr per plantlet).
+- `biobanking_time`: weeks(15) (time required to get at 0.8 gr per plantlet).
 - `rooting_time_g`: c(weeks(4),weeks(3),weeks(3),weeks(3)).
 - `biomass_plantlet`: 0.8 (in gr).
 
-The function outputs the table below allowing to prepare for key dates and tasks to successfuly produce the biomass. 
+The function outputs the table below allowing to prepare for key dates and tasks to successfully produce the biomass. 
 
 ```{r predictionprop, echo=FALSE, eval=TRUE}
 #Source user-made function

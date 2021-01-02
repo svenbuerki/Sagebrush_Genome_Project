@@ -11,13 +11,13 @@ bibliography: References.bib
 
 # Aim
 
-Sequencing, phasing and annotating the diploid genome of basin big sagebrush (*Artemisia tridentata* subsp. *tridentata*). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp [see @Barron2020]. In addition, preliminary analyses demonstrated that the genome is highly out-bred. 
+Sequencing, phasing and annotating the diploid genome of basin big sagebrush (*Artemisia tridentata* subsp. *tridentata*). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp [see @Barron2020]. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both *in vitro* and *ex vitro* to support genotype-by-environment experiments. 
 
 # Overall approach & Requirements
 
 To be able to phase such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. **120 gr. of leaf biomass**.
 
-Please see the following section of the webiste for more details on:
+Please see the following section of the website for more details on:
 
 - [Biomass production](Biomass_production.html).
 - [Sequencing & Bioinformatics](Sequencing.html).
