@@ -71,7 +71,7 @@ The <span style="color: black;font-weight:bold">growth</span> and <span style="c
 
 The process described above works very well to keep the individual line *in vitro*, but after 8-10 weeks of growth a plantlet only generate ca. 0.15 gr of biomass for genome sequencing. This is only when allocating 1 plantlet per Magenta vessel. Indeed, sagebrush are competing using chemical compounds and putting several individuals per Magenta vessel decreases growth and increases mortality. Overall, if we were to apply to approach to generate the necessary 120 gr for the sagebrush genome project, we would need **`r 120/0.15` plantlets**. This large number of plantlet is logistically challenging and could prove difficult to handle for our small to middle size lab. This is even more challenging because although our methodology has a high (>90%) rooting response, the survival rate during the <span style="color: black;font-weight:bold">growth</span> step is highly variable between individual lines. For instance, the top performer as identified by @Barron2020, `G2_b27_1`, has only a 45% survival rate in the second round of propagation, whereas `G2_b24_1` has a 80% survival rate at the same stage. This evidence means that far more plantlets would have to be cultivated to reach the **`r 120/0.15` plantlets** mark (corresponding to 120 gr.). This latter estimate is without accounting for a cushion to maintain the individual line for genome to phenome research. In this context, we have favored i) selecting an individual with a high survival rate and ii) growing plantlets for a longer period to obtain more biomass. To differentiate this stage of the propagation to our regular steps, we will be referring to the allocation of plantlets to biomass production as <span style="color: orange;font-weight:bold">biobanking</span> (see below for more details).    
 
-## Using 15-week old G2_b24_1 plantlets to produce biomass
+### Using 15-week old G2_b24_1 plantlets to produce biomass
 
 After 15 weeks of *in vitro* tissue culture, **a plantlet produces ca. 0.8 gr. of leaf biomass** that can be used for sequencing (Figure \@ref(fig:plantletweight)). Thus, **a minimum of `r 120/0.8` plantlets have to be produced** to sequence the genome (see Table \@ref(tab:tabproject)). This number is much more manageable and means that all the plantlets can be grown in individual Magenta vessels under optimum growth conditions in our Percival culture chamber. When ready, the biomass will be flash frozen (using liquid nitrogen) and stored at -80C before being shipped to the sequencing facility. However, the estimation of biomass provided here does not account for a DNA extraction trial required to optimize protocol (we need at least 15<span>&#181;</span>g of HMW DNA for PacBio sequencing). We will have to discuss this with the project manager at Dovetail Genomics.
 
@@ -79,9 +79,35 @@ After 15 weeks of *in vitro* tissue culture, **a plantlet produces ca. 0.8 gr. o
 knitr::include_graphics("Figures/G2_b20_1_Biomass_0.855g_after2min.jpg")
 ```
 
-## Presenting the *propagationPred* R function
+### Biomass requirements per sequencing technology
 
-This function depends on the following arguments provided by the user:
+Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project (see [Sequencing & Bioinformatics](Sequencing.html) for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.
+
+```{r tabproject, echo=FALSE, eval=TRUE}
+#Table with data on sequencing and number of plantlets requiered for project
+dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
+                    #Add purpose
+                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
+                    # add requirements 
+                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
+                    # add Total for project
+                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
+                    #Add Number of plantlets
+                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
+                  )
+colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
+#Plot table
+knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
+```
+
+
+# Planning biomass production for sequencing
+
+To be able to plan the biomass production for genome sequencing, while also maintaining the individual line, we have developed an R function called *propagationPred*. This function incorporates 4 steps (<span style="color: black;font-weight:bold">Growth</span>, <span style="color: green;font-weight:bold">Cutting</span>, <span style="color: blue;font-weight:bold">Rooting</span> and <span style="color: orange;font-weight:bold">Biobanking</span>) as well as the rooting and survival rates. In addition, the use can define duration for the <span style="color: black;font-weight:bold">Growth</span>, <span style="color: blue;font-weight:bold">Rooting</span> and <span style="color: orange;font-weight:bold">Biobanking</span> steps, which allows establishing a schedule. Finally, this function also incorporates details on times necessary for preparing media and number of plates and Magenta vessels required to complete propagation protocols. The function is presented below. 
+
+## Presenting R *propagationPred* function
+
+*propagationPred* depends on the following set of arguments provided by the user:
 
 - `n`: number of plantlets to seed the experiment.
 - `ns`: number of shoot tips cut per plantlet (after the growth period).
@@ -107,59 +133,35 @@ The function outputs a `data.frame` with the following columns:
 - `Media_prep_time (hrs)` and `Time_Cutting (hrs)`: Lab our time to prepare `Rooting` (90 minutes for 1 liter) or `Growth` (1 hr for 60 boxes) media and conduct cutting (5 plantlets per hour).   
 - `Total_Biomass (gr)`: This is estimated based on fraction of plantlets allocated to biobanking (based on `biomass_plantlet`).    
 
+The output can directly be used to plan *in vitro* propagation, but can also be easily used as input to produce a plot showing the different steps through time (see below).
+
+# Scheduling propagation of G2_b24_1
+
+As mentioned above, we have selected the `G2_b24_1` individual line as candidate for the Sagebrush Genome Project. In this section, we are using *propagationPred* to:
+
+- Provide timetable of biomass production, especially to identify when the biomass will be ready to be delivered to Dovetail Genomics for sequencing.
+- Logistically organize the biomass production.
 
 
+## Settings applied for analyses
 
-## Biomass requirements per sequencing technology
+The *propagationPred* function has been applied with the following parameters (see section \@ref(predcode) for R code):
 
-Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project (see [Sequencing & Bioinformatics](Sequencing.html) for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.
-
-```{r tabproject, echo=FALSE, eval=TRUE}
-#Table with data on sequencing and number of plantlets requiered for project
-dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
-                    #Add purpose
-                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
-                    # add requirements 
-                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
-                    # add Total for project
-                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
-                    #Add Number of plantlets
-                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
-                  )
-colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
-#Plot table
-knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
-```
-
-
-
-
-# *In vitro* propagation of G2_b24_1
-
-G2_b24_1 is among the top performers identified by @Barron2020. Here, we are propagating this individual line to produce the ca. 120 gr of biomass necessary for the sagebrush genome project (see Table \@ref(tab:tabproject)).
-
-To predict how long it will take to produce the `r 120/0.8` plantlets for the project, we have developed the *propagationPred* R function. In addition to a time frame, this function provides estimates of labor time required to produce the growth and rooting media as well as the associated amount of media and required vessels (plates and Magenta vessels).    
-
-  
-## Applying *propagationPred* to G2_b24_1 {.tabset .tabset-pills}
-
-### Analyses
-
-The function has been applied with the following parameters (see section \@ref(predcode) for R code):
-
-- `n`: 6 (plantlets).
-- `ns`: 9.5 (on average after 10 weeks of growth).
-- `r`: 0.93 (equal through generations). 
-- `s`: 0.8 (equal through generations).
-- `g`: 4 (generations).
-- `biobank`: c(0,0,0.9,0). Meaning that 90% of plantlets will be biobanked at generation 3. 
-- `date_user`: `r mdy("11/13/2020")-weeks(10)`.
+- `n`: 6 plantlets at generation 1.
+- `ns`: 9.5 (on average) shoot tips per plantlets after 10 weeks of growth.
+- `r`: 0.93 rooting rate (same at each generation). 
+- `s`: 0.8 survival rate (same at each generation).
+- `g`: 4 generations of propagation.
+- `biobank`: c(0,0,0.9,0). Meaning that 90% of plantlets will be biobanked at generation 3. Based on preliminary analyses, this should provide sufficient number of plantlets for biomass production. 
+- `date_user`: `r mdy("11/13/2020")-weeks(10)` is the beginning of growth period at generation 1.
 - `growth_time_g`: c(weeks(10),weeks(8),weeks(8),weeks(8)).
-- `biobanking_time`: weeks(15) (time required to get at 0.8 gr per plantlet).
+- `biobanking_time`: weeks(15). This corresponds to the duration required for a plantlet to produce 0.8 gr of leaf biomass.
 - `rooting_time_g`: c(weeks(4),weeks(3),weeks(3),weeks(3)).
 - `biomass_plantlet`: 0.8 (in gr).
 
-The function outputs the table below allowing to prepare for key dates and tasks to successfully produce the biomass. 
+## Timetable of biomass production
+
+A detailed timetable for each steps of the propagation procedure of the `G2_b24_1` individual line is available below. 
 
 ```{r predictionprop, echo=FALSE, eval=TRUE}
 #Source user-made function
@@ -172,12 +174,16 @@ OUTdat <- propagationPred(n=6, ns=9.5, r=rep(0.93,4), s=rep(0.8,4), g=4, biobank
 OUTdat <- OUTdat[1:11,]
 
 #Plot table
-DT::datatable(OUTdat, extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+DT::datatable(OUTdat[,1:6], extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 ```
 
-To better visualize the project, a plot (see Figure \@ref(fig:plotpred)) was produced and here are the key dates:
+### Key highlights
 
-```{r plotpred, echo=FALSE, eval=TRUE, out.width="100%", fig.align='center', fig.cap= "Plot showing the time frame to conduct the in vitro propagation of G2_b24_1 to produce the biomass for the Sagebrush Genome Project and maintain the individual line."}
+- On `r OUTdat[8,3]`, `r OUTdat[8,5]` rooted plantlets transferred into individual Magenta vessels will be <span style="color: orange;font-weight:bold">biobanked</span> in a dedicated Percival. Based on our prediction, **`r OUTdat[8,6]` plantlets will survived and produce `r OUTdat[8,13]` gr. of biomass by `r OUTdat[8,4]`**. 
+- The biomass production should largely exceed the needs of the project, which might suggest that we could deliver the biomass sooner. However, this remains a prediction, which will have to be confirmed.  
+- To better visualize the timetable, a plot was produced and it highlights the key dates and facts (see Figure \@ref(fig:plotpred)).
+
+```{r plotpred, echo=FALSE, eval=TRUE, fig.width=10, fig.height=10, fig.align='center', fig.cap= "Plot showing the time frame to conduct the in vitro propagation of G2_b24_1 to produce the biomass for the Sagebrush Genome Project and maintain the individual line."}
 ###~~~
 #Plot data
 ###~~~
@@ -239,7 +245,21 @@ legend("topleft", legend = Type, lty=1, col=colSeg, cex=.6)
 #dev.off()
 ```
 
-### R code {#predcode}
+## Logistical organization
+
+To prepare with each step of the propagation, we are providing key knowledge in the table below:
+
+```{r predictionprop2, eval=T, echo=F}
+#Plot table
+DT::datatable(OUTdat[,c(1:4,7:12)], extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
+```
+
+### Key highlights
+
+- The <span style="color: green;font-weight:bold">Cutting</span> on `r OUTdat[5,3]` will require `r OUTdat[5,10]` hours of labor. We will have to make sure to coordinate and take 2-3 days to complete this step.
+- A total of `r OUTdat[6,5]` Magenta vessels will be needed by `r OUTdat[6,3]`.
+
+## R code {#predcode}
 
 ```{r predictionpropcode, echo=TRUE, eval=FALSE}
 #Source user-made function
