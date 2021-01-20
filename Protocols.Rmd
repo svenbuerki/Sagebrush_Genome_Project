@@ -96,7 +96,7 @@ Recipes to prepare solutions presented here were adapted from this [document](Da
 
 For 1000 mL for acetocarmin solution: 
 
-1. Measure 450 mL of 45% glacial acetic acid and pour in **XXX** (a vessel that we can heat). See Figure in this [document](Data/Carmin_acétique_acétate_de_fer.docx).
+1. Measure 450 mL of 45% glacial acetic acid and pour in **XXX** (a vessel that we can heat). See Figure in this [document](Data/Carmin_acétique_acétate_de_fer.pdf).
 2. Measure 550 mL of distilled water and add to vessel.
 3. Weigh 5 gr. of carmin (Fisher C579-25). Carmine is a basic dye that is prepared from the insect *Coccus cacti*.
 4. Add boileezers, and reflux for 2-3 hours.
