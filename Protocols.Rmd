@@ -106,5 +106,49 @@ This solution can be stored for a long time. Staining can be intensified by addi
 
 Kansas State University as also put together a slightly different protocol for the acetocarmin solution: https://www.k-state.edu/wgrc/electronic_lab/aceto_stain.html
 
+# Flow cytometry
 
+## Objective
+
+Estimate 2C genome size of *Artemisia tridentata* based on leaf material using the one-step protocol with general purpose buffer (GPB) by @Loureiro2007 and the protocol described in @Pellicer2014. 
+
+## Challenge
+
+Propidium iodide is widely used in a range of medical applications, so I assume the laser fitted in the instrument would also allow estimating nuclear DNA content in plant tissues. However, most medical applications aim at separating nuclei populations rather than detecting changes in small fluorescence intensity for estimating DNA contents. One thing we need to bear in mind is the coefficient of variation of the fluorescence peaks, which should be below 5%, and the measurements taken using a linear scale rather that a logarithmic scale. This might be the trickiest point depending on the instrument we are using at BSU.
+
+## Plant material
+
+Genome size is estimated using **young, fresh leaves for both our target (sagebrush) and internal standards**. 
+
+Concerning reference internal standards, we recommend that several species, covering a broad range of genome sizes, are kept growing in the laboratory to enable the most appropriate standard to be selected for each particular analysis.
+
+### Internal standards
+
+Check what seeds we have in the lab.:
+
+- *Petroselinum crispum* ‘Curled moss’ (2C=4.5 pg).
+- *Pisum sativum* ‘Ctirad’ (2C=9.09 pg).
+- *Solanum lycopersicum* L. ‘Stupiké polní rane’ (2C=2 pg).
+
+
+## Protocol
+
+The recipe of the buffer and the steps are described in the paper, but briefly:
+
+- Work under cold conditions (keep samples and buffers on ice).
+- Cut a small portion of leaf tissue (1cm^2^, or less) from both the target and the internal standard.
+- Place samples in a small petri dish with 1ml of ice-cold buffer.
+- Chop with a sharp new razor blade till obtaining a fine lysate.
+- Add another 1ml of buffer.
+- Filter through a 30 um nylon mesh.
+- Stain with 100 ul of 1mg/ml Propidium iodide. Nuclei were stained with 50 µg mL−1 propidium iodide (PI; Fluka, Buchs, Switzerland), and 50 µg mL−1 RNase (Sigma, St Louis, MO, USA) was added to nuclear suspension to prevent staining of double-stranded RNA.
+- Incubate 5-10 min on ice.
+- Measure on the flow cytometer.
+
+## Preparing buffer
+
+GBP: 0.5 mM spermine.4HCl, 30 mM sodium citrate, 20 mM MOPS (MOPS, 4-Morpholinepropane sulfonate), 80 mM KCl, 20 mM NaCl, 0.5 % (v/v) Triton X-100, pH 7.0.
+
+
+# References
 

@@ -81,6 +81,28 @@ h6 {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 
@@ -455,6 +477,61 @@ div.tocify {
 </ol>
 <p>This solution can be stored for a long time. Staining can be intensified by adding ferric chloride (FeCl<sub>2</sub>·6H<sub>2</sub>O); add 5 mL of a 10 % ferric chloride solution per 100 mL of % acetocarmine.</p>
 <p>Kansas State University as also put together a slightly different protocol for the acetocarmin solution: <a href="https://www.k-state.edu/wgrc/electronic_lab/aceto_stain.html" class="uri">https://www.k-state.edu/wgrc/electronic_lab/aceto_stain.html</a></p>
+</div>
+</div>
+</div>
+<div id="flow-cytometry" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Flow cytometry</h1>
+<div id="objective-1" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Objective</h2>
+<p>Estimate 2C genome size of <em>Artemisia tridentata</em> based on leaf material using the one-step protocol with general purpose buffer (GPB) by <span class="citation"><a href="#ref-Loureiro2007" role="doc-biblioref">Loureiro et al.</a> (<a href="#ref-Loureiro2007" role="doc-biblioref">2007</a>)</span> and the protocol described in <span class="citation"><a href="#ref-Pellicer2014" role="doc-biblioref">Pellicer and Leitch</a> (<a href="#ref-Pellicer2014" role="doc-biblioref">2014</a>)</span>.</p>
+</div>
+<div id="challenge" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Challenge</h2>
+<p>Propidium iodide is widely used in a range of medical applications, so I assume the laser fitted in the instrument would also allow estimating nuclear DNA content in plant tissues. However, most medical applications aim at separating nuclei populations rather than detecting changes in small fluorescence intensity for estimating DNA contents. One thing we need to bear in mind is the coefficient of variation of the fluorescence peaks, which should be below 5%, and the measurements taken using a linear scale rather that a logarithmic scale. This might be the trickiest point depending on the instrument we are using at BSU.</p>
+</div>
+<div id="plant-material-1" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Plant material</h2>
+<p>Genome size is estimated using <strong>young, fresh leaves for both our target (sagebrush) and internal standards</strong>.</p>
+<p>Concerning reference internal standards, we recommend that several species, covering a broad range of genome sizes, are kept growing in the laboratory to enable the most appropriate standard to be selected for each particular analysis.</p>
+<div id="internal-standards" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Internal standards</h3>
+<p>Check what seeds we have in the lab.:</p>
+<ul>
+<li><em>Petroselinum crispum</em> ‘Curled moss’ (2C=4.5 pg).</li>
+<li><em>Pisum sativum</em> ‘Ctirad’ (2C=9.09 pg).</li>
+<li><em>Solanum lycopersicum</em> L. ‘Stupiké polní rane’ (2C=2 pg).</li>
+</ul>
+</div>
+</div>
+<div id="protocol" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Protocol</h2>
+<p>The recipe of the buffer and the steps are described in the paper, but briefly:</p>
+<ul>
+<li>Work under cold conditions (keep samples and buffers on ice).</li>
+<li>Cut a small portion of leaf tissue (1cm<sup>2</sup>, or less) from both the target and the internal standard.</li>
+<li>Place samples in a small petri dish with 1ml of ice-cold buffer.</li>
+<li>Chop with a sharp new razor blade till obtaining a fine lysate.</li>
+<li>Add another 1ml of buffer.</li>
+<li>Filter through a 30 um nylon mesh.</li>
+<li>Stain with 100 ul of 1mg/ml Propidium iodide. Nuclei were stained with 50 µg mL−1 propidium iodide (PI; Fluka, Buchs, Switzerland), and 50 µg mL−1 RNase (Sigma, St Louis, MO, USA) was added to nuclear suspension to prevent staining of double-stranded RNA.</li>
+<li>Incubate 5-10 min on ice.</li>
+<li>Measure on the flow cytometer.</li>
+</ul>
+</div>
+<div id="preparing-buffer" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Preparing buffer</h2>
+<p>GBP: 0.5 mM spermine.4HCl, 30 mM sodium citrate, 20 mM MOPS (MOPS, 4-Morpholinepropane sulfonate), 80 mM KCl, 20 mM NaCl, 0.5 % (v/v) Triton X-100, pH 7.0.</p>
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Loureiro2007" class="csl-entry">
+Loureiro, João, Eleazar Rodriguez, Jaroslav Doležel, and Conceição Santos. 2007. <span>“<span class="nocase">Two New Nuclear Isolation Buffers for Plant DNA Flow Cytometry: A Test with 37 Species</span>.”</span> <em>Annals of Botany</em> 100 (4): 875–88. <a href="https://doi.org/10.1093/aob/mcm152">https://doi.org/10.1093/aob/mcm152</a>.
+</div>
+<div id="ref-Pellicer2014" class="csl-entry">
+Pellicer, Jaume, and Ilia J. Leitch. 2014. <span>“The Application of Flow Cytometry for Estimating Genome Size and Ploidy Level in Plants.”</span> In <em>Molecular Plant Taxonomy: Methods and Protocols</em>, edited by Pascale Besse, 279–307. Totowa, NJ: Humana Press. <a href="https://doi.org/10.1007/978-1-62703-767-9_14">https://doi.org/10.1007/978-1-62703-767-9_14</a>.
 </div>
 </div>
 </div>

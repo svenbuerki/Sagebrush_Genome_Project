@@ -58,8 +58,6 @@ Please find below summaries of the procedures applied in this project to sequenc
 2. Infer chromosome numbers (using squash technique; 2n=2x=18).
 3. Perform some shallow Illumina sequencing to assess genome complexity and confirm genome size estimates.
 
-Petroselinum crispum ‘Curled moss’ (2C=4.5 pg), Pisum sativum ‘Ctirad’ (2C=9.09 pg) or Solanum lycopersicum L. ‘Stupiké polní rane’ (2C=2 pg)
-
 
 ## Wet-lab procedures
 
