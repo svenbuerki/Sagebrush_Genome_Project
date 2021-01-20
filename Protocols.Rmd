@@ -1,0 +1,110 @@
+--- 
+title: 'Protocols'
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_depth: 4
+    toc_float: TRUE
+link-citations: yes
+fontsize: 12pt
+bibliography: References.bib
+---
+
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(usethis)
+library(lubridate)
+library(scales)
+
+#Generate BibTex citation file for all R packages used to produce report
+knitr::write_bib(.packages(), file = 'packages.bib')
+```
+
+
+```{r setup, include=FALSE, cache=FALSE, message = FALSE}
+#Load packages
+library(knitr)
+library(rmarkdown)
+# Chunk options: see http://yihui.name/knitr/options/ ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = TRUE, message = TRUE, include = TRUE)
+
+## Code decoration
+#opts_chunk$set(tidy = TRUE, R.options = list(width = 60), highlight = TRUE)
+
+## Caching code
+opts_chunk$set(cache = 2, cache.path = "cache/")
+
+## Plots
+#opts_chunk$set(fig.path = "Figures_MS/", dev=c('pdf', 'png'), dpi = 300)
+
+## Locate figures as close as possible to requested position (=code)
+#opts_chunk$set(fig.pos = "H")
+```
+
+
+# Chromosome counting
+
+## Objective
+
+Counting chromosomes of *Artemisia tridentata* using root meristems of individual lines maintained *in vitro* at BSU. This approach will help ascertaining the ploidy level (2n) of our individual lines.
+
+## Plant material
+
+Young whitish roots are sampled from individuals cultured *in vitro* either at <span style="color: black;font-weight:bold">Growth</span> or <span style="color: blue;font-weight:bold">Rooting</span> phases. 
+
+## Sampling and fixing tissue
+
+1. Sample young whitish roots and place them in a Petri dish.
+2. Use achromatic spindle inhibitors to stop mitotic divisions (at metaphase) and contract chromosomes. This can be done following two approaches: 
+    - Treat roots with saturated solution of water and <span>&#x3B1;</span>-monobromonaphtalene for 3 hours at room temperature. Start by homogenizing the stock solution and adding supernatant to cover roots in the Petri dish. 
+    - Treat roots in a mix of water and crushed ice (4<span>&deg;</span>C) for 10 hours.
+3. Plant tissue fixation and conserving chromosomes. 
+    - Prepare a falcon tube with the solution of ethanol:acetic acid (3:1). Add few drops of the acetocarmin solution and one drop of iron acetate. Homogenize the solution by gently shaking the falcon tube.
+    - Transfer roots into falcon tube and store at room temperature for 1-2 days. 
+
+## Staining tissue
+
+4. Pour acetocarmin solution in a porcelain crucible and add roots. Cover crucible with a lid.
+5. Prepare a Petri dish filled with 45% acetic acid. This will be used to cool down stained roots and preserve them until chromosome numbers is established.
+6. Gently heat solution in porcelain crucible with a Bunsen burner for ca. 2 minutes. Avoid boiling! This will stain chromosomes in red.
+7. Pour content of porcelain crucible into Petri dish.    
+
+## Squashing tissue
+
+8. Put a drop of the solution in the Petri dish on a microscope slide and add a root tip in it. 
+9. Remove the root cap under the scope using tweezers.This will facilitate the squash and observation of chromosomes.
+10. Cover with a plastic coverslip and use handle of tweezers to squash the tissue. Go gently! 
+11. Observe under microscope and take picture to validate chromosome count.
+
+## Preparing stock solutions
+
+Recipes to prepare solutions presented here were adapted from this [document](Data/Caryologie_methodes_INRA_091118.pdf) (in french).
+
+### 3:1 ethanol:acetic acid solution
+
+- Mix one volume of acetic acid for three volumes of ethanol. Store at 4<span>&deg;</span>C.
+
+### Acetocarmin solution
+
+For 1000 mL for acetocarmin solution: 
+
+1. Measure 450 mL of 45% glacial acetic acid and pour in **XXX** (a vessel that we can heat). See Figure in this [document](Data/Carmin_acétique_acétate_de_fer.docx).
+2. Measure 550 mL of distilled water and add to vessel.
+3. Weigh 5 gr. of carmin (Fisher C579-25). Carmine is a basic dye that is prepared from the insect *Coccus cacti*.
+4. Add boileezers, and reflux for 2-3 hours.
+5. Filter into dark bottles and store at 4<span>&deg;</span>C.
+
+This solution can be stored for a long time. Staining can be intensified by adding ferric chloride (FeCl~2~·6H~2~O); add 5 mL of a 10 % ferric chloride solution per 100 mL of % acetocarmine.
+
+Kansas State University as also put together a slightly different protocol for the acetocarmin solution: https://www.k-state.edu/wgrc/electronic_lab/aceto_stain.html
+
+
+

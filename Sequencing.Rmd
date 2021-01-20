@@ -51,6 +51,16 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 
 Please find below summaries of the procedures applied in this project to sequence, phase and annotate the sagebrush genome.
 
+
+## Work to complete prior to start wet-lab
+
+1. Infer 2C genome size using flow cytometry (should be around 9 Gbp). 
+2. Infer chromosome numbers (using squash technique; 2n=2x=18).
+3. Perform some shallow Illumina sequencing to assess genome complexity and confirm genome size estimates.
+
+Petroselinum crispum ‘Curled moss’ (2C=4.5 pg), Pisum sativum ‘Ctirad’ (2C=9.09 pg) or Solanum lycopersicum L. ‘Stupiké polní rane’ (2C=2 pg)
+
+
 ## Wet-lab procedures
 
 Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass.

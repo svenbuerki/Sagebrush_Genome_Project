@@ -11,7 +11,7 @@
 
 
 
-<title>Sagebrush Genome Project</title>
+<title>Protocols</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -81,28 +81,6 @@ h6 {
 }
 </style>
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 
 
@@ -407,57 +385,76 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sagebrush Genome Project</h1>
+<h1 class="title toc-ignore">Protocols</h1>
 
 </div>
 
 
-<div id="aim" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Aim</h1>
-<p>Sequencing, phasing and annotating the diploid genome of basin big sagebrush (<em>Artemisia tridentata</em> subsp. <em>tridentata</em>). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp <span class="citation">(see <a href="#ref-Barron2020" role="doc-biblioref">Barron et al. 2020</a>)</span>. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both <em>in vitro</em> and <em>ex vitro</em> to support genotype-by-environment experiments.</p>
+<div id="chromosome-counting" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Chromosome counting</h1>
+<div id="objective" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Objective</h2>
+<p>Counting chromosomes of <em>Artemisia tridentata</em> using root meristems of individual lines maintained <em>in vitro</em> at BSU. This approach will help ascertaining the ploidy level (2n) of our individual lines.</p>
 </div>
-<div id="overall-approach-requirements" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Overall approach &amp; Requirements</h1>
-<p>To be able to phase such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. <strong>120 gr. of leaf biomass</strong>.</p>
-<p>Please see the following section of the website for more details on:</p>
+<div id="plant-material" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Plant material</h2>
+<p>Young whitish roots are sampled from individuals cultured <em>in vitro</em> either at <span style="color: black;font-weight:bold">Growth</span> or <span style="color: blue;font-weight:bold">Rooting</span> phases.</p>
+</div>
+<div id="sampling-and-fixing-tissue" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Sampling and fixing tissue</h2>
+<ol style="list-style-type: decimal">
+<li>Sample young whitish roots and place them in a Petri dish.</li>
+<li>Use achromatic spindle inhibitors to stop mitotic divisions (at metaphase) and contract chromosomes. This can be done following two approaches:
 <ul>
-<li><a href="Biomass_production.html">Biomass production</a>.</li>
-<li><a href="Sequencing.html">Sequencing &amp; Bioinformatics</a>.</li>
+<li>Treat roots with saturated solution of water and <span>α</span>-monobromonaphtalene for 3 hours at room temperature. Start by homogenizing the stock solution and adding supernatant to cover roots in the Petri dish.</li>
+<li>Treat roots in a mix of water and crushed ice (4<span>°</span>C) for 10 hours.</li>
+</ul></li>
+<li>Plant tissue fixation and conserving chromosomes.
+<ul>
+<li>Prepare a falcon tube with the solution of ethanol:acetic acid (3:1). Add few drops of the acetocarmin solution and one drop of iron acetate. Homogenize the solution by gently shaking the falcon tube.</li>
+<li>Transfer roots into falcon tube and store at room temperature for 1-2 days.</li>
+</ul></li>
+</ol>
+</div>
+<div id="staining-tissue" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Staining tissue</h2>
+<ol start="4" style="list-style-type: decimal">
+<li>Pour acetocarmin solution in a porcelain crucible and add roots. Cover crucible with a lid.</li>
+<li>Prepare a Petri dish filled with 45% acetic acid. This will be used to cool down stained roots and preserve them until chromosome numbers is established.</li>
+<li>Gently heat solution in porcelain crucible with a Bunsen burner for ca. 2 minutes. Avoid boiling! This will stain chromosomes in red.</li>
+<li>Pour content of porcelain crucible into Petri dish.</li>
+</ol>
+</div>
+<div id="squashing-tissue" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Squashing tissue</h2>
+<ol start="8" style="list-style-type: decimal">
+<li>Put a drop of the solution in the Petri dish on a microscope slide and add a root tip in it.</li>
+<li>Remove the root cap under the scope using tweezers.This will facilitate the squash and observation of chromosomes.</li>
+<li>Cover with a plastic coverslip and use handle of tweezers to squash the tissue. Go gently!</li>
+<li>Observe under microscope and take picture to validate chromosome count.</li>
+</ol>
+</div>
+<div id="preparing-stock-solutions" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Preparing stock solutions</h2>
+<p>Recipes to prepare solutions presented here were adapted from this <a href="Data/Caryologie_methodes_INRA_091118.pdf">document</a> (in french).</p>
+<div id="ethanolacetic-acid-solution" class="section level3" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> 3:1 ethanol:acetic acid solution</h3>
+<ul>
+<li>Mix one volume of acetic acid for three volumes of ethanol. Store at 4<span>°</span>C.</li>
 </ul>
 </div>
-<div id="meet-the-team" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Meet the team</h1>
-<div id="at-boise-state-university" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> At Boise State University</h2>
-<ul>
-<li><strong>Sven Buerki, Ph.D</strong> (<a href="mailto:sven.buerki@boisestate.edu" class="email">sven.buerki@boisestate.edu</a>): Assistant Professor at Boise State University and PI of this project funded by <a href="funding.html">GEM3</a>.</li>
-<li><strong>Peggy Martinez, M.S.</strong> (<a href="mailto:peggymartinez@boisestate.edu" class="email">peggymartinez@boisestate.edu</a>): Laboratory Technician leading the sagebrush <em>in vitro</em> culture program at Boise State University.</li>
-<li><strong>Rachael Barron, M.S.</strong> (<a href="mailto:rachael.barron@simplot.com" class="email">rachael.barron@simplot.com</a>): Associate Scientist at Simplot who has contributed her expertise on <em>in vitro</em> culture to this project.</li>
-<li><strong>Marcelo Serpe, Ph.D</strong>: Professor at Boise State University.</li>
-<li><strong>Anthony Melton, Ph.D.</strong>:</li>
-<li><strong>Stephen Novak, Ph.D.</strong>:</li>
-<li><strong>Jennifer Forbey, Ph.D.</strong>:</li>
-</ul>
-</div>
-<div id="at-dovetail-genomics" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> At Dovetail Genomics</h2>
-<ul>
-<li>Current contact <strong>Mark Daly</strong> (<a href="mailto:mark@dovetail-genomics.com" class="email">mark@dovetail-genomics.com</a>). The company will assign a project manager as soon as we have a signed contract.</li>
-</ul>
-</div>
-<div id="at-hudsonalpha" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> At HudsonAlpha</h2>
-<ul>
-<li><strong>Jeremy Schmutz</strong></li>
-<li><strong>Jane Grimwood, Ph.D.</strong></li>
-</ul>
-</div>
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Barron2020" class="csl-entry">
-Barron, Rachael, Peggy Martinez, Marcelo Serpe, and Sven Buerki. 2020. <span>“Development of an in Vitro Method of Propagation for Artemisia Tridentata Subsp. Tridentata to Support Genome Sequencing and Genotype-by-Environment Research.”</span> <em>Plants</em> 9 (12). <a href="https://doi.org/10.3390/plants9121717">https://doi.org/10.3390/plants9121717</a>.
+<div id="acetocarmin-solution" class="section level3" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Acetocarmin solution</h3>
+<p>For 1000 mL for acetocarmin solution:</p>
+<ol style="list-style-type: decimal">
+<li>Measure 450 mL of 45% glacial acetic acid and pour in <strong>XXX</strong> (a vessel that we can heat). See Figure in this <a href="Data/Carmin_acétique_acétate_de_fer.docx">document</a>.</li>
+<li>Measure 550 mL of distilled water and add to vessel.</li>
+<li>Weigh 5 gr. of carmin (Fisher C579-25). Carmine is a basic dye that is prepared from the insect <em>Coccus cacti</em>.</li>
+<li>Add boileezers, and reflux for 2-3 hours.</li>
+<li>Filter into dark bottles and store at 4<span>°</span>C.</li>
+</ol>
+<p>This solution can be stored for a long time. Staining can be intensified by adding ferric chloride (FeCl<sub>2</sub>·6H<sub>2</sub>O); add 5 mL of a 10 % ferric chloride solution per 100 mL of % acetocarmine.</p>
+<p>Kansas State University as also put together a slightly different protocol for the acetocarmin solution: <a href="https://www.k-state.edu/wgrc/electronic_lab/aceto_stain.html" class="uri">https://www.k-state.edu/wgrc/electronic_lab/aceto_stain.html</a></p>
 </div>
 </div>
 </div>
@@ -508,7 +505,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

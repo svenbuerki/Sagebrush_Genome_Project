@@ -9,6 +9,8 @@ navbar:
       href: Biomass_production.html
     - text: "Sequencing & Bioinformatics"
       href: Sequencing.html
+    - text: "Protocols"
+      href: Protocols.html
     - text: "Funding"
       href: Funding.html
       
