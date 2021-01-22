@@ -56,6 +56,17 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 
 Counting chromosomes of *Artemisia tridentata* using root meristems of individual lines maintained *in vitro* at BSU. This approach will help ascertaining the ploidy level (2n) of our individual lines.
 
+## Material & reagents
+
+**Day 1**
+
+- Little cooler for getting ice (room XXX).
+- Labeled glass large Petri dishes.
+- Tweezers (to pull roots out of Magenta vessels).
+- Distilled water.
+- Space in the fridge to store at 4<span>&deg;</span>C for at least 10 hours (can do 24 hours).
+
+
 ## Plant material
 
 Young whitish roots are sampled from individuals cultured *in vitro* either at <span style="color: black;font-weight:bold">Growth</span> or <span style="color: blue;font-weight:bold">Rooting</span> phases. 
@@ -88,7 +99,7 @@ Young whitish roots are sampled from individuals cultured *in vitro* either at <
 
 Recipes to prepare solutions presented here were adapted from this [document](Data/Caryologie_methodes_INRA_091118.pdf) (in french).
 
-### 3:1 ethanol:acetic acid solution
+### Ethanol:acetic acid solution
 
 - Mix one volume of acetic acid for three volumes of ethanol. Store at 4<span>&deg;</span>C.
 
@@ -110,7 +121,7 @@ Kansas State University as also put together a slightly different protocol for t
 
 ## Objective
 
-Estimate 2C genome size of *Artemisia tridentata* based on leaf material using the one-step protocol with general purpose buffer (GPB) by @Loureiro2007 and the protocol described in @Pellicer2014. 
+Estimate 2C genome size of *Artemisia tridentata* based on leaf material using the one-step protocol with general purpose buffer (GPB) by @Loureiro2007 and the protocol described in @Pellicer2014. The publications are accessible [here](Data/). 
 
 ## Challenge
 
@@ -147,8 +158,25 @@ The recipe of the buffer and the steps are described in the paper, but briefly:
 
 ## Preparing buffer
 
-GBP: 0.5 mM spermine.4HCl, 30 mM sodium citrate, 20 mM MOPS (MOPS, 4-Morpholinepropane sulfonate), 80 mM KCl, 20 mM NaCl, 0.5 % (v/v) Triton X-100, pH 7.0.
+### General composition of the lysis buffer
 
+**GBP:** 0.5 mM spermine.4HCl, 30 mM sodium citrate, 20 mM MOPS (MOPS, 4-Morpholinepropane sulfonate), 80 mM KCl, 20 mM NaCl, 0.5 % (v/v) Triton X-100, pH 7.0.
+
+### Procedure to prepare the lysis buffer (GBP)
+
+1. Weigh the following chemicals into a glass (final volume of 200 mL):
+    - Spermine 0.5 mM (0.0348 g)
+    - Sodium citrate 3mM (1.764 g)
+    - MOPS 20 mM (0.836 g)
+    - KCl 80 mM (1.193 g)
+    - NaCl 20 mM (0.233 g)
+2. Add double distilled water to 200 mL and mix with a rotating magnet and dissolve the chemicals
+3. Add 1 mL of Triton X-100 and mix until diluted
+4. Adjust to pH 7
+5. Add 6 g of PVP-40 and mix until dissolved (Add PVP while the buffer is being mixed as it tends to clog. Be patient and leave it with a rotating magnet until completely dissolved)
+6. Store in the fridge or prepare aliquots of 50 mL which can be stored on the freezer. Use one each time and once thawed do not freeze again. It can be stored in the fridge for weeks.
+
+The buffer is now ready to use. If you notice that the sample becomes dark when prepared, add 200 ul of B-mercaptoethanol to the buffer and mix (or equivalent if aliquots have been prepared).
 
 # References
 
