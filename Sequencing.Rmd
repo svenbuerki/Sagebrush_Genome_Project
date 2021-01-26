@@ -47,16 +47,30 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 #opts_chunk$set(fig.pos = "H")
 ```
 
+# Ascertaining taxonomic identity, ploidy, genome size and complexity
+
+Before conducting the sequencing and bioinformatic analyses, we have to ascertain i) the species identity, ii) ploidy level, iii) genome size and iv) genome complexity of our candidate individual, `G2_b24_1`.
+
+## Taxonomic identity
+
+The seed used to generate the `G2_b24_1` individual line originated from the UT2 population. The taxonomic identity of the seven mother plants collected by our colleagues at the US Forest Service [cite Richardson] from UT2 were confirmed by inferring ploidy level and UV fluorescence test. All mother plants were determined as diploid (2n=2x=18) *Artemisia tridentata* subsp. *tridentata*.
+
+
+## Inferring ploidy level
+
+2. Infer chromosome numbers (using squash technique; 2n=2x=18).
+
+## Inferring genome size
+
+1. Infer 2C genome size using flow cytometry (should be around 9 Gbp). 
+
+## Inferring genome size and complexity
+
+3. Perform some shallow Illumina sequencing to assess genome complexity and confirm genome size estimates.
+
 # Overview of wet-lab and bioinformatic procedures
 
 Please find below summaries of the procedures applied in this project to sequence, phase and annotate the sagebrush genome.
-
-
-## Work to complete prior to start wet-lab
-
-1. Infer 2C genome size using flow cytometry (should be around 9 Gbp). 
-2. Infer chromosome numbers (using squash technique; 2n=2x=18).
-3. Perform some shallow Illumina sequencing to assess genome complexity and confirm genome size estimates.
 
 
 ## Wet-lab procedures
