@@ -123,9 +123,11 @@ Kansas State University as also put together a slightly different protocol for t
 
 Estimate 2C genome size of *Artemisia tridentata* based on leaf material using the one-step protocol with general purpose buffer (GPB) by @Loureiro2007 and the protocol described in @Pellicer2014. The publications are accessible [here](Data/). 
 
+The flow cytometry will be conducted at BSU using a [BD Accuri™ C6 Flow Cytometer](Data/bd_accuri_optical_filter_guide.pdf).
+
 ## Challenge
 
-Propidium iodide is widely used in a range of medical applications, so I assume the laser fitted in the instrument would also allow estimating nuclear DNA content in plant tissues. However, most medical applications aim at separating nuclei populations rather than detecting changes in small fluorescence intensity for estimating DNA contents. One thing we need to bear in mind is the coefficient of variation of the fluorescence peaks, which should be below 5%, and the measurements taken using a linear scale rather that a logarithmic scale. This might be the trickiest point depending on the instrument we are using at BSU.
+One thing that we need to bear in mind is that the coefficient of variation of the fluorescence peaks should be below 5%, and that the measurements should be taken using a linear scale rather that a logarithmic scale.
 
 ## Plant material
 
@@ -154,7 +156,7 @@ The recipe of the buffer and the steps are described in the paper, but briefly:
 - Filter through a 30 um nylon mesh.
 - Stain with 100 ul of 1mg/ml Propidium iodide. Nuclei were stained with 50 µg mL−1 propidium iodide (PI; Fluka, Buchs, Switzerland), and 50 µg mL−1 RNase (Sigma, St Louis, MO, USA) was added to nuclear suspension to prevent staining of double-stranded RNA.
 - Incubate 5-10 min on ice.
-- Measure on the flow cytometer.
+- Measure on the flow cytometer (here the [BD Accuri™ C6 Flow Cytometer](Data/bd_accuri_optical_filter_guide.pdf)).
 
 ## Preparing buffer
 
