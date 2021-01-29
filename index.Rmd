@@ -7,6 +7,7 @@ output:
 link-citations: yes
 fontsize: 12pt
 bibliography: References.bib
+csl: AmJBot.csl
 ---
 
 # Aim
@@ -19,28 +20,9 @@ To be able to phase such complex genome, we aim at generating 50-100X raw data c
 
 Please see the following section of the website for more details on:
 
+- [BioProject & BioSample](Bioproject.html).
 - [Biomass production](Biomass_production.html).
 - [Sequencing & Bioinformatics](Sequencing.html).
-
-# Meet the team
-
-## At Boise State University
-
-- **Sven Buerki, Ph.D** (sven.buerki@boisestate.edu): Assistant Professor at Boise State University and PI of this project funded by [GEM3](funding.html).
-- **Peggy Martinez, M.S.** (peggymartinez@boisestate.edu): Laboratory Technician leading the sagebrush *in vitro*  culture program at Boise State University. 
-- **Rachael Barron, M.S.** (rachael.barron@simplot.com): Associate Scientist at Simplot who has contributed her expertise on *in vitro* culture to this project.
-- **Marcelo Serpe, Ph.D**: Professor at Boise State University.
-- **Anthony Melton, Ph.D.**:
-- **Stephen Novak, Ph.D.**:
-- **Jennifer Forbey, Ph.D.**:
-
-## At Dovetail Genomics
-
-- Current contact **Mark Daly** (mark@dovetail-genomics.com). The company will assign a project manager as soon as we have a signed contract.
-
-## At HudsonAlpha
-
-- **Jeremy Schmutz**
-- **Jane Grimwood, Ph.D.**
+- [Team](Team.html).
 
 # References

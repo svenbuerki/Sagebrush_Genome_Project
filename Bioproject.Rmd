@@ -1,0 +1,59 @@
+---
+title: "BioProject & BioSample"
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_float: TRUE
+link-citations: yes
+fontsize: 12pt
+bibliography: References.bib
+csl: AmJBot.csl
+---
+
+# Summary 
+
+Sequencing, phasing and annotating the diploid genome of basin big sagebrush (*Artemisia tridentata* subsp. *tridentata*). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp [see @Barron2020]. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both *in vitro* and *ex vitro* to support genotype-by-environment experiments. 
+
+
+# Organism
+
+*Artemisia tridentata* subsp. *tridentata* [Taxonomy ID: 525641](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=525641&lvl=3&lin=f&keep=1&srchmode=1&unlock)
+
+Eukaryota; Viridiplantae; Streptophyta; Streptophytina; Embryophyta; Tracheophyta; Euphyllophyta; Spermatophyta; Magnoliopsida; Mesangiospermae; eudicotyledons; Gunneridae; Pentapetalae; asterids; campanulids; Asterales; Asteraceae; Asteroideae; Anthemideae; Artemisiinae; Artemisia; [Artemisia tridentata](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Undef&id=55611&lvl=3&keep=1&srchmode=1&unlock)
+
+# Publications (by the project)
+
+1. @Barron2020 [PubMedID: 33291424](https://pubmed.ncbi.nlm.nih.gov/33291424/)
+
+# Project data
+
+## Sequence data
+
+Our sequencing and assembly strategy is described [here](Sequencing.html), but a summary of sequence data and their associated NGS platforms is provided below:
+
+- [**Whole Genome Shotgun**](https://www.ncbi.nlm.nih.gov/genbank/wgs/): 
+    - Illumina NovaSeq platform: To infer genome size and complexity.
+    - PacBio Sequel II (using 8M SMRT cells): To conduct *de novo* assembly.
+- **Proximity ligation**: 
+    - [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (sequenced on and Illumina platform): To conduct phasing.
+- **RNASeq**: 
+    - Illumina NovaSeq platform: To perform genome annotation.
+- [**SRA Experiments**](https://www.ncbi.nlm.nih.gov/sra/): Sequence Read Archive (SRA) data will be made available on NCBI upon submission of the genome.
+- **Protein Sequences**: Protein sequences will be made available.
+- **Assembly/Genome**: An assembly at pseudo-chromosome level will be made available on NCBI upon submission of the genome.
+
+## BioSample
+
+Descriptive information about the biological material used in this project are presented here.
+
+## Attributes
+
+- **Isolate/clonal line**: `G2_B24_1` maintained *in vitro* at Boise State University.
+- **Ploidy**: 2n=2x=18.
+- **Genotype**: G2 drought-sensitive [based on @Barron2020].
+- **Age**: This individual line was started from a seed on XXX and is propagated for 15 weeks prior to sampling leaves for sequencing.
+- **Geographic location**: [La Sal, San Juan County, Utah](https://www.google.com/maps/place/38°18'21.6%22N+109°23'16.8%22W/@38.3818797,-109.2896532,11z/data=!4m5!3m4!1s0x0:0x0!8m2!3d38.306!4d-109.388).
+- **Tissue**: Leaves.
+- **Biomaterial provider**: Bryce Richardson, US Forest Service.
+
+# References

@@ -11,7 +11,7 @@
 
 
 
-<title>Sagebrush Genome Project</title>
+<title>BioProject &amp; BioSample</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -413,25 +413,66 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sagebrush Genome Project</h1>
+<h1 class="title toc-ignore">BioProject &amp; BioSample</h1>
 
 </div>
 
 
-<div id="aim" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Aim</h1>
+<div id="summary" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Summary</h1>
 <p>Sequencing, phasing and annotating the diploid genome of basin big sagebrush (<em>Artemisia tridentata</em> subsp. <em>tridentata</em>). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp <span class="citation">(see <a href="#ref-Barron2020" role="doc-biblioref">Barron et al., 2020</a>)</span>. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both <em>in vitro</em> and <em>ex vitro</em> to support genotype-by-environment experiments.</p>
 </div>
-<div id="overall-approach-requirements" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Overall approach &amp; Requirements</h1>
-<p>To be able to phase such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. <strong>120 gr. of leaf biomass</strong>.</p>
-<p>Please see the following section of the website for more details on:</p>
+<div id="organism" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Organism</h1>
+<p><em>Artemisia tridentata</em> subsp. <em>tridentata</em> <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&amp;id=525641&amp;lvl=3&amp;lin=f&amp;keep=1&amp;srchmode=1&amp;unlock">Taxonomy ID: 525641</a></p>
+<p>Eukaryota; Viridiplantae; Streptophyta; Streptophytina; Embryophyta; Tracheophyta; Euphyllophyta; Spermatophyta; Magnoliopsida; Mesangiospermae; eudicotyledons; Gunneridae; Pentapetalae; asterids; campanulids; Asterales; Asteraceae; Asteroideae; Anthemideae; Artemisiinae; Artemisia; <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Undef&amp;id=55611&amp;lvl=3&amp;keep=1&amp;srchmode=1&amp;unlock">Artemisia tridentata</a></p>
+</div>
+<div id="publications-by-the-project" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Publications (by the project)</h1>
+<ol style="list-style-type: decimal">
+<li><span class="citation"><a href="#ref-Barron2020" role="doc-biblioref">Barron et al.</a> (<a href="#ref-Barron2020" role="doc-biblioref">2020</a>)</span> <a href="https://pubmed.ncbi.nlm.nih.gov/33291424/">PubMedID: 33291424</a></li>
+</ol>
+</div>
+<div id="project-data" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Project data</h1>
+<div id="sequence-data" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Sequence data</h2>
+<p>Our sequencing and assembly strategy is described <a href="Sequencing.html">here</a>, but a summary of sequence data and their associated NGS platforms is provided below:</p>
 <ul>
-<li><a href="Bioproject.html">BioProject &amp; BioSample</a>.</li>
-<li><a href="Biomass_production.html">Biomass production</a>.</li>
-<li><a href="Sequencing.html">Sequencing &amp; Bioinformatics</a>.</li>
-<li><a href="Team.html">Team</a>.</li>
+<li><a href="https://www.ncbi.nlm.nih.gov/genbank/wgs/"><strong>Whole Genome Shotgun</strong></a>:
+<ul>
+<li>Illumina NovaSeq platform: To infer genome size and complexity.</li>
+<li>PacBio Sequel II (using 8M SMRT cells): To conduct <em>de novo</em> assembly.</li>
+</ul></li>
+<li><strong>Proximity ligation</strong>:
+<ul>
+<li><a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (sequenced on and Illumina platform): To conduct phasing.</li>
+</ul></li>
+<li><strong>RNASeq</strong>:
+<ul>
+<li>Illumina NovaSeq platform: To perform genome annotation.</li>
+</ul></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/sra/"><strong>SRA Experiments</strong></a>: Sequence Read Archive (SRA) data will be made available on NCBI upon submission of the genome.</li>
+<li><strong>Protein Sequences</strong>: Protein sequences will be made available.</li>
+<li><strong>Assembly/Genome</strong>: An assembly at pseudo-chromosome level will be made available on NCBI upon submission of the genome.</li>
 </ul>
+</div>
+<div id="biosample" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> BioSample</h2>
+<p>Descriptive information about the biological material used in this project are presented here.</p>
+</div>
+<div id="attributes" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Attributes</h2>
+<ul>
+<li><strong>Isolate/clonal line</strong>: <code>G2_B24_1</code> maintained <em>in vitro</em> at Boise State University.</li>
+<li><strong>Ploidy</strong>: 2n=2x=18.</li>
+<li><strong>Genotype</strong>: G2 drought-sensitive <span class="citation">(based on <a href="#ref-Barron2020" role="doc-biblioref">Barron et al., 2020</a>)</span>.</li>
+<li><strong>Age</strong>: This individual line was started from a seed on XXX and is propagated for 15 weeks prior to sampling leaves for sequencing.</li>
+<li><strong>Geographic location</strong>: <a href="https://www.google.com/maps/place/38°18&#39;21.6%22N+109°23&#39;16.8%22W/@38.3818797,-109.2896532,11z/data=!4m5!3m4!1s0x0:0x0!8m2!3d38.306!4d-109.388">La Sal, San Juan County, Utah</a>.</li>
+<li><strong>Tissue</strong>: Leaves.</li>
+<li><strong>Biomaterial provider</strong>: Bryce Richardson, US Forest Service.</li>
+</ul>
+</div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>

@@ -8,6 +8,7 @@ output:
 link-citations: yes
 fontsize: 12pt
 bibliography: References.bib
+csl: AmJBot.csl
 ---
 
 ```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
