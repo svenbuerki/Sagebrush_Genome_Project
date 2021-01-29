@@ -9,31 +9,43 @@ fontsize: 12pt
 bibliography: References.bib
 ---
 
-# Meet the team
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(kfigr)
+library(dplyr)
+library(kableExtra)
+library(DT)
+```
 
-## At Boise State University
+People involved in this project are listed below:
 
-- **Sven Buerki, Ph.D** (sven.buerki@boisestate.edu): Assistant Professor at Boise State University and PI of this project funded by [GEM3](funding.html).
-- **Peggy Martinez, M.S.** (peggymartinez@boisestate.edu): Laboratory Technician leading the sagebrush *in vitro*  culture program at Boise State University. 
-- **Rachael Barron, M.S.** (rachael.barron@simplot.com): Associate Scientist at Simplot who has contributed her expertise on *in vitro* culture to this project.
-- **Marcelo Serpe, Ph.D**: Professor at Boise State University.
-- **Anthony Melton, Ph.D.**:
-- **Stephen Novak, Ph.D.**:
-- **Jennifer Forbey, Ph.D.**:
+```{r team, eval = T, echo=F, warning = FALSE, message=FALSE}
+###~~~
+#Read in csv
+###~~~
+team <- read.csv("Data/Team_Sagebrush_Genome_Project.csv") 
 
-## At US Foest Service
+###~~~
+#Produce final table
+###~~~
 
-- **Bryce Richardson, Ph.D ():**
+#Order table (alphabetically)
+#lex <- lex[order(lex$Term),]
+rownames(team) <- NULL
+###~~~
+#Plot timetable in doc
+###~~~
+#Plot table
+DT::datatable(team, extensions = 'Buttons', options = list(dom = 'Blfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print'), pageLength = 50), rownames= FALSE) %>%
+  DT::formatStyle('Person', fontWeight = 'bold')
 
-## At Dovetail Genomics
+#knitr::kable(as.data.frame(lex), caption = "Lexicon of terms used in this course.") %>%
+#  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 
-- Current contact **Mark Daly** (mark@dovetail-genomics.com). The company will assign a project manager as soon as we have a signed contract.
-
-## At HudsonAlpha
-
-- **Jeremy Schmutz**
-- **Jane Grimwood, Ph.D.**
-
-## At Kew Gardens
-
-- **Jaume Pellicer, Ph.D.**
+``` 

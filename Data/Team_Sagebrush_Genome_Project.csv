@@ -1,0 +1,14 @@
+﻿Person,Position,Institution,Role,Contact
+"Sven Buerki, Ph.D",Assistant Professor,BSU,PI,sven.buerki@boisestate.edu
+"Peggy Martinez, M.S.",Project manager,BSU,Biomass production and lab. analyses,peggymartinez@boisestate.edu
+"Rachael Barron, M.S.",Associate Scientist,Simplot,Biomass production,rachael.barron@simplot.com
+"Marcelo Serpe, Ph.D",Professor,BSU,Biomass production,
+"Anthony Melton, Ph.D.",Postdoc fellow,BSU,"RNA-Seq, WGS, bioinformatics",
+"Stephen Novak, Ph.D.",Professor,BSU,Supervision,
+"Jennifer Forbey, Ph.D.",Professor,BSU,GEM3 PI,
+"Bryce Richardson, Ph.D.",Research Geneticist Plant,US Forest Service,Supply biomaterial and supervision,
+Jeremy Schmutz,Faculty Investigator,HudsonAlpha,Genome assembly,
+"Jane Grimwood, Ph.D.",Faculty Investigator,HudsonAlpha,Genome assembly,
+"Jaume Pellicer, Ph.D.",Research,Kew,Flow cytometry,
+"Richard Beard, Ph.D.",Assistant Research Professor,BSU,Flow cytometry,
+Desiree Self,Graduate Research Assistant,BSU,Flow cytometry,
