@@ -11,7 +11,7 @@
 
 
 
-<title>Propagation</title>
+<title>Propagation program</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
@@ -426,7 +426,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Propagation</h1>
+<h1 class="title toc-ignore">Propagation program</h1>
 
 </div>
 
@@ -479,29 +479,6 @@ Longitude
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: blue !important;">
-UT2
-</td>
-<td style="text-align:left;">
-La Sal B18
-</td>
-<td style="text-align:left;">
-Utah
-</td>
-<td style="text-align:left;">
-San Juan
-</td>
-<td style="text-align:right;">
-1820
-</td>
-<td style="text-align:right;">
-38.306
-</td>
-<td style="text-align:right;">
--109.388
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: red !important;">
 ID3
 </td>
 <td style="text-align:left;">
@@ -523,11 +500,34 @@ Owyhee
 -116.964
 </td>
 </tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: red !important;">
+UT2
+</td>
+<td style="text-align:left;">
+La Sal B18
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:left;">
+San Juan
+</td>
+<td style="text-align:right;">
+1820
+</td>
+<td style="text-align:right;">
+38.306
+</td>
+<td style="text-align:right;">
+-109.388
+</td>
+</tr>
 </tbody>
 </table>
 <div class="figure"><span id="fig:mappop"></span>
-<div id="htmlwidget-388c302cb31c71bb48ec" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-388c302cb31c71bb48ec">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addAwesomeMarkers","args":[[38.306,43.337],[-109.388,-116.964],{"icon":"ios-close","markerColor":["blue","red"],"iconColor":"black","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"ion"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["UT2","ID3"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.306,43.337],"lng":[-116.964,-109.388]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2d5f0eb4fa7559f63d41" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2d5f0eb4fa7559f63d41">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addAwesomeMarkers","args":[[43.337,38.306],[-116.964,-109.388],{"icon":"ios-close","markerColor":["blue","red"],"iconColor":"black","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"ion"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["ID3","UT2"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[38.306,43.337],"lng":[-116.964,-109.388]}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 3.1: Map of locations of the source populations where seeds from mother plants were collected to establish sagebrush individual lines.
 </p>
@@ -821,7 +821,7 @@ Growing
 P5
 </td>
 <td style="text-align:left;">
-1609632000
+1,2,3
 </td>
 <td style="text-align:right;">
 87
@@ -859,7 +859,7 @@ Growing
 P5
 </td>
 <td style="text-align:left;">
-1614816000
+3,4
 </td>
 <td style="text-align:right;">
 49
@@ -887,13 +887,16 @@ NA
 <thead>
 <tr>
 <th style="text-align:left;">
-Chamber
+Type
 </th>
 <th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
 Carrying capacity
 </th>
-<th style="text-align:left;">
-Total
+<th style="text-align:right;">
+Current occupancy
 </th>
 <th style="text-align:left;">
 Percent
@@ -906,13 +909,16 @@ Percent
 P4
 </td>
 <td style="text-align:left;">
+Percival Culture Chamber CU41L4C8
+</td>
+<td style="text-align:right;">
 352
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 96
 </td>
 <td style="text-align:left;">
-<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: gray; width: 50.00%">27.27</span>
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: blue; width: 44.26%">0.27</span>
 </td>
 </tr>
 <tr>
@@ -920,13 +926,33 @@ P4
 P5
 </td>
 <td style="text-align:left;">
+Percival Culture Chamber CU41L5C8
+</td>
+<td style="text-align:right;">
 495
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;">
 303
 </td>
 <td style="text-align:left;">
-<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: gray; width: 100.00%">61.21</span>
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: red; width: 100.00%">0.61</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cart
+</td>
+<td style="text-align:left;">
+Seedling Cart GA3P4T8
+</td>
+<td style="text-align:right;">
+288
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+<span style="display: inline-block; direction: rtl; border-radius: 4px; padding-right: 2px; background-color: blue; width: 0.00%">0.00</span>
 </td>
 </tr>
 </tbody>

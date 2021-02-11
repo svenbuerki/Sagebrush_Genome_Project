@@ -1,5 +1,5 @@
 ---
-title: "Propagation"
+title: "Propagation program"
 output:
   bookdown::html_document2: 
     toc: TRUE
@@ -65,6 +65,7 @@ sheetsID <- metaDoc$sheets$name
 
 #5. Select population IDs
 PopDat <- read_sheet(url, sheet=which(sheetsID == "Pop_data"))
+PopDat <- PopDat[order(PopDat$PopID),]
 #Subset to only col of interest
 PopDatplot <- PopDat[,c(2:8)]
 colnames(PopDatplot) <- c("Population","Mother plant","State","County","Elevation (m)","Latitude","Longitude")
@@ -141,26 +142,22 @@ CarDat <- read_sheet(url, sheet=which(sheetsID == "Carrying_capacity"))
 
 #Subset CulDat to only include Growings
 Growth <- subset(CulDat, CulDat$Stage == "Growing")
+Growth <- aggregate(Growth$Total, by=list(Growth$Chamber), sum)
 
 #How many boxes per type?
-OUTChamber <- matrix(ncol=4, nrow=2)
-colnames(OUTChamber) <- c("Chamber", "Carrying capacity","Total", "Percent")
-OUTChamber[,1] <- unique(Growth$Chamber)
-
-for(i in 1:nrow(OUTChamber)){
-  #Subset to Chamber
-  tmp <- subset(Growth, Growth$Chamber == OUTChamber[i,1])
-  #Infer carrying capacity
-  OUTChamber[i,2] <- CarDat$Carrying_capacity[which(CarDat$Type == OUTChamber[i,1])]
-  #Infer #boxes
-  OUTChamber[i,3] <- sum(tmp$Total)
-  #Infer percent
-  OUTChamber[i,4] <- round(100*(as.numeric(OUTChamber[i,3])/ as.numeric(OUTChamber[i,2])),2)
-}
-
+OUTChamber <- matrix(ncol=5, nrow=nrow(CarDat))
+colnames(OUTChamber) <- c("Type", "Model","Carrying capacity","Current occupancy", "Percent")
 OUTChamber <- as.data.frame(OUTChamber)
+OUTChamber[,1] <- CarDat$Type
+OUTChamber[,2] <- CarDat$Model
+OUTChamber[,3] <- CarDat$Carrying_capacity
+OUTChamber[match(Growth$Group.1, OUTChamber[,1]),4] <- Growth$x
+OUTChamber[,5] <- round((as.numeric(OUTChamber[,4])/ as.numeric(OUTChamber[,3])),2)
 
-
+tmp <- which(is.na(OUTChamber$Percent) == TRUE)
+if(length(tmp) > 0){
+  OUTChamber[tmp,c(4,5)] <- 0
+}
 #ft_dt <- mtcars[1:5, 1:4]
 #ft_dt$car <- row.names(ft_dt)
 #row.names(ft_dt) <- NULL
@@ -173,7 +170,7 @@ OUTChamber <- as.data.frame(OUTChamber)
 #  cell_spec(OUTChamber$Percent, color = "green", italic = T)
 #)
 
-OUTChamber$Percent <- color_bar(color = "gray")(OUTChamber$Percent)
+OUTChamber$Percent <- color_bar(color = ifelse(OUTChamber$Percent > 0.5, "red", "blue"))(OUTChamber$Percent)
 
 kbl(OUTChamber, escape = F, caption = "Carrying capacity of culture chambers.") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
