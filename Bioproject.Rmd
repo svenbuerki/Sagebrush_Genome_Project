@@ -42,7 +42,7 @@ Our sequencing and assembly strategy is described [here](Sequencing.html), but a
 - **Protein Sequences**: Protein sequences will be made available.
 - **Assembly/Genome**: An assembly at pseudo-chromosome level will be made available on NCBI upon submission of the genome.
 
-## BioSample
+## BioSamples
 
 Descriptive information about the biological material used in this project are presented here.
 

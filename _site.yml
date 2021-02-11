@@ -5,8 +5,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Bioproject"
-      href: Bioproject.html
+    - text: "Propagation"
+      href: Individual_lines.html
     - text: "Biomass production"
       href: Biomass_production.html
     - text: "Sequencing & Bioinformatics"

@@ -26,3 +26,9 @@ forcats
 MASS
 lubridate
 scales
+kfigr
+dplyr
+kableExtra
+googlesheets4
+leaflet
+formattable

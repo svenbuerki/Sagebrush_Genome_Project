@@ -1,0 +1,196 @@
+---
+title: "Propagation"
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_float: TRUE
+link-citations: yes
+fontsize: 12pt
+bibliography: References.bib
+csl: AmJBot.csl
+---
+
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(kfigr)
+library(dplyr)
+library(kableExtra)
+library(googlesheets4)
+require(leaflet)
+library(formattable)
+
+#Generate BibTex citation file for all R packages used to produce report
+#knitr::write_bib(.packages(), file = 'packages.bib')
+```
+
+# Summary 
+
+Sequencing, phasing and annotating the diploid genome of basin big sagebrush (*Artemisia tridentata* subsp. *tridentata*). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp [see @Barron2020]. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain individual lines both *in vitro* and *ex vitro* to support genotype-by-environment experiments. 
+
+
+# Organism
+
+For this project, we are focusing on establishing *in vitro* individual lines for:
+
+- *Artemisia tridentata* subsp. *tridentata* [Taxonomy ID: 525641](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=525641&lvl=3&lin=f&keep=1&srchmode=1&unlock)
+
+More details on the classification of this organism is provided here:
+
+Eukaryota; Viridiplantae; Streptophyta; Streptophytina; Embryophyta; Tracheophyta; Euphyllophyta; Spermatophyta; Magnoliopsida; Mesangiospermae; eudicotyledons; Gunneridae; Pentapetalae; asterids; campanulids; Asterales; Asteraceae; Asteroideae; Anthemideae; Artemisiinae; Artemisia; [Artemisia tridentata](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Undef&id=55611&lvl=3&keep=1&srchmode=1&unlock)
+
+# Geographical origin of source populations
+
+Seeds of the mother plants used to establish the *in vitro* tissue culture propagation program of sagebrush individual lines were provided by Bryce Richardson (US Forest Service). Table \@ref(tab:googlesheet) and Figure \@ref(fig:mappop) provide details on the two source populations referred to as <span style="color: red;font-weight:bold">ID3</span> and <span style="color: blue;font-weight:bold">UT2</span>. All the seedlings generated from mother plants collected in these locations were identified as *Artemisia tridentata* subsp. *tridentata* by @Richardson2012 and these authors also demonstrated that these populations were diploids (2n=2x=18). 
+
+```{r googlesheet, eval=T, echo=F, warning=F, message=F}
+#1. Load library
+# It uses googlesheets4 see R packages code chunk above
+
+#2. Authenticate your Google account
+
+#Get url of Google spreadsheet
+url <- "https://docs.google.com/spreadsheets/d/1ZVrQ8ZiX6d5ghVKgoY6jI1lXTErAsddI15k_sGXDWJ4/edit?usp=sharing"
+
+#3. Obtain meta-data on document
+metaDoc <- gs4_get(url)
+
+#4. List names of sheets in url
+sheetsID <- metaDoc$sheets$name
+
+#5. Select population IDs
+PopDat <- read_sheet(url, sheet=which(sheetsID == "Pop_data"))
+#Subset to only col of interest
+PopDatplot <- PopDat[,c(2:8)]
+colnames(PopDatplot) <- c("Population","Mother plant","State","County","Elevation (m)","Latitude","Longitude")
+
+kbl(PopDatplot,  caption = "Meta-data information on source populations used to generate sagebrush individual lines.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+ column_spec(1, bold = TRUE, color = c("blue","red"))
+
+```
+
+```{r mappop, echo=F, eval=T, width="100%", fig.cap= "Map of locations of the source populations where seeds from mother plants were collected to establish sagebrush individual lines."}
+#Produce map of location of populations
+#Prepare icons
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = c("blue","red")
+)
+
+# Produce map
+m <- leaflet() %>%
+      addTiles() %>%
+  addAwesomeMarkers(lat = PopDatplot$Latitude, lng = PopDatplot$Longitude, icon=icons, label=PopDatplot$Population)
+
+m
+```
+
+# Individual lines
+
+Information on individual lines in culture at BSU is provided in Table \@ref(tab:indlines). The individual line used for biomass production underpinning the genome project is `G2_b24_1`. 
+
+```{r indlines, echo=F, eval=T, warning=F, message=F}
+# Select individual lines
+IndDat <- read_sheet(url, sheet=which(sheetsID == "Individual_lines"))
+
+#Sort data by popID
+IndDat <- IndDat[order(IndDat$PopID),]
+
+#Subset to only col of interest
+IndDat <- IndDat[,c(1,2,3,6,7,8,9:ncol(IndDat))]
+colnames(IndDat) <- gsub("_"," ", colnames(IndDat))
+
+kbl(IndDat,  caption = "Meta-data information on sagebrush individual lines.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+ column_spec(1, bold = TRUE, color = ifelse(IndDat$PopID == "ID3", "red", "blue"))
+
+```
+
+# Status on *in vitro* culture program
+
+The status of the propagation of sagebrush individual lines is in Table \@ref(tab:CulDat).
+
+```{r CulDat, echo=F, eval=T, warning=F, message=F}
+# Select culture data
+CulDat <- read_sheet(url, sheet=which(sheetsID == "Culture_data"))
+
+#Sort data by IndLines
+CulDat <- CulDat[order(CulDat$Individual_Line),]
+colnames(CulDat) <- gsub("_"," ", colnames(CulDat))
+
+kbl(CulDat,  caption = "Data on propagation for sagebrush individual lines.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) #%>%
+ #column_spec(1, bold = TRUE, color = ifelse(IndDat$PopID == "ID3", "red", "blue"))
+```
+
+# Carrying capacity
+
+The carrying capacity of culture chambers at BSU is displayed in Table \@ref(tab:carcap).
+
+```{r carcap, echo=F, eval=T, warning=F, message=F}
+# Select carrying capacity
+CarDat <- read_sheet(url, sheet=which(sheetsID == "Carrying_capacity"))
+
+#Subset CulDat to only include Growings
+Growth <- subset(CulDat, CulDat$Stage == "Growing")
+
+#How many boxes per type?
+OUTChamber <- matrix(ncol=4, nrow=2)
+colnames(OUTChamber) <- c("Chamber", "Carrying capacity","Total", "Percent")
+OUTChamber[,1] <- unique(Growth$Chamber)
+
+for(i in 1:nrow(OUTChamber)){
+  #Subset to Chamber
+  tmp <- subset(Growth, Growth$Chamber == OUTChamber[i,1])
+  #Infer carrying capacity
+  OUTChamber[i,2] <- CarDat$Carrying_capacity[which(CarDat$Type == OUTChamber[i,1])]
+  #Infer #boxes
+  OUTChamber[i,3] <- sum(tmp$Total)
+  #Infer percent
+  OUTChamber[i,4] <- round(100*(as.numeric(OUTChamber[i,3])/ as.numeric(OUTChamber[i,2])),2)
+}
+
+OUTChamber <- as.data.frame(OUTChamber)
+
+
+#ft_dt <- mtcars[1:5, 1:4]
+#ft_dt$car <- row.names(ft_dt)
+#row.names(ft_dt) <- NULL
+#ft_dt$mpg <- color_tile("white", "orange")(ft_dt$mpg)
+#ft_dt$cyl <- cell_spec(ft_dt$cyl, angle = (1:5)*60, 
+#                      background = "red", color = "white", align = "center")
+#OUTChamber$Percent <- ifelse(
+#  OUTChamber$Percent > 50,
+#  cell_spec(OUTChamber$Percent, color = "red", bold = T),
+#  cell_spec(OUTChamber$Percent, color = "green", italic = T)
+#)
+
+OUTChamber$Percent <- color_bar(color = "gray")(OUTChamber$Percent)
+
+kbl(OUTChamber, escape = F, caption = "Carrying capacity of culture chambers.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+  #kable_paper("hover", full_width = F) %>%
+  #column_spec(5, width = "3cm") %>%
+  #add_header_above(c(" ", "Hello" = 2, "World" = 2))
+
+
+#Sort data by IndLines
+#CulDat <- CulDat[order(CulDat$Individual_Line),]
+#colnames(CulDat) <- gsub("_"," ", colnames(CulDat))
+
+#kbl(CulDat,  caption = "Data on propagation for sagebrush individual lines.") %>%
+ # kable_styling(bootstrap_options = c("striped", "hover", "condensed")) #%>%
+ #column_spec(1, bold = TRUE, color = ifelse(IndDat$PopID == "ID3", "red", "blue"))
+```
+
+
+
+# References
