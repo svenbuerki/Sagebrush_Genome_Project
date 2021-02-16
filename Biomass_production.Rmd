@@ -58,11 +58,11 @@ We aim at applying the newly developed *in vitro* tissue culture technique [@Bar
 knitr::include_graphics("Figures/G2_b20_1_15wk_old_plantlet.jpg")
 ```
 
-## Adapting the approach to produce biomass
+## Adapting approach to biomass production
 
 Our propagation method (see [here](Individual_lines.html) for more details) to maintain individual line *in vitro* works very well, but after 8-10 weeks of growth a plantlet only generates ca. 0.15 gr of biomass for genome sequencing. This is only when allocating 1 plantlet per Magenta vessel. Indeed, sagebrush are competing using chemical compounds and putting several individuals per Magenta vessel decreases growth and increases mortality. Overall, if we were to apply to approach to generate the necessary 120 gr for the sagebrush genome project, we would need **`r 120/0.15` plantlets**. This large number of plantlet is logistically challenging and could prove difficult to handle for our small to middle size lab. This is even more challenging because although our methodology has a high (>90%) rooting response, the survival rate during the <span style="color: black;font-weight:bold">growth</span> step is highly variable between individual lines. For instance, the top performer as identified by @Barron2020, `G2_b27_1`, has only a 45% survival rate in the second round of propagation, whereas `G2_b24_1` has a 80% survival rate at the same stage. This evidence means that far more plantlets would have to be cultivated to reach the **`r 120/0.15` plantlets** mark (corresponding to 120 gr.). This latter estimate is without accounting for a cushion to maintain the individual line for genome to phenome research. In this context, we have favored i) selecting an individual with a high survival rate and ii) growing plantlets for a longer period to obtain more biomass. To differentiate this stage of the propagation to our regular steps, we will be referring to the allocation of plantlets to biomass production as <span style="color: orange;font-weight:bold">biobanking</span> (see below for more details).    
 
-### Using 15-week old G2_b24_1 plantlets to produce biomass
+### Using 15-week old `G2_b24_1` plantlets to produce biomass
 
 After 15 weeks of *in vitro* tissue culture, **a plantlet produces ca. 0.8 gr. of leaf biomass** that can be used for sequencing (Figure \@ref(fig:plantletweight)). Thus, **a minimum of `r 120/0.8` plantlets have to be produced** to sequence the genome (see Table \@ref(tab:tabproject)). This number is much more manageable and means that all the plantlets can be grown in individual Magenta vessels under optimum growth conditions in our Percival culture chamber. When ready, the biomass will be flash frozen (using liquid nitrogen) and stored at -80C before being shipped to the sequencing facility. However, the estimation of biomass provided here does not account for a DNA extraction trial required to optimize protocol (we need at least 15<span>&#181;</span>g of HMW DNA for PacBio sequencing). We will have to discuss this with the project manager at Dovetail Genomics.
 
@@ -104,7 +104,7 @@ The function outputs a `data.frame` with the following columns:
 
 The output can directly be used to plan *in vitro* propagation, but can also be easily used as input to produce a plot showing the different steps through time (see below).
 
-# Scheduling propagation of G2_b24_1
+# Scheduling propagation of `G2_b24_1`
 
 As mentioned above, we have selected the `G2_b24_1` individual line as candidate for the Sagebrush Genome Project. In this section, we are using *propagationPred* to:
 

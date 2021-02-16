@@ -38,7 +38,7 @@ Sequencing, phasing and annotating the diploid genome of basin big sagebrush (*A
 
 For this project, we are focusing on establishing *in vitro* individual lines for:
 
-- *Artemisia tridentata* subsp. *tridentata* [Taxonomy ID: 525641](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=525641&lvl=3&lin=f&keep=1&srchmode=1&unlock)
+- *Artemisia tridentata* subsp. *tridentata* [NCBI Taxonomy ID: 525641](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=525641&lvl=3&lin=f&keep=1&srchmode=1&unlock)
 
 More details on the classification of this organism is provided here:
 
@@ -104,7 +104,7 @@ The *in vitro* tissue culture propagation that we have recently published for *A
 
 The <span style="color: black;font-weight:bold">growth</span> and <span style="color: blue;font-weight:bold">rooting</span> steps are taking 8 to 10 and 3 weeks respectively, while <span style="color: green;font-weight:bold">cutting</span> is labor intensive and usually takes 1 hour to process 5 plantlets (per person). After 8-10 weeks of growth a plantlet produces ca. 9 shoot tips, which are transferred into 1 plate of rooting media to initiate rooting (after 3 weeks of rooting). 
 
-More details on the methodology (incl. protocols) and analyses associated to *in vitro* sagebrush propagation can be found on our companion website;
+More details on the methodology (incl. protocols) and analyses associated to *in vitro* sagebrush propagation can be found on our companion website:
 
 - https://svenbuerki.github.io/Sagebrush_rooting_in_vitro_prop/
 
