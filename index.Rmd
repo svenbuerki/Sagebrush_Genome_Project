@@ -2,7 +2,7 @@
 title: "Sagebrush Genome Project"
 output:
   bookdown::html_document2: 
-    toc: TRUE
+    toc: FALSE
     toc_float: TRUE
 link-citations: yes
 fontsize: 12pt
@@ -10,19 +10,27 @@ bibliography: References.bib
 csl: AmJBot.csl
 ---
 
+
+```{js logo-js, echo=FALSE}
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"Images/boisestate-primarylogo-2color-rgb.png\" style=\"position:absolute; top:25px; right:0; padding:10px; height:120px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+```
+
 # Aim
 
 Sequencing, phasing and annotating the diploid genome of basin big sagebrush (*Artemisia tridentata* subsp. *tridentata*). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp [see @Barron2020]. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both *in vitro* and *ex vitro* to support genotype-by-environment experiments. 
 
-# Overall approach & Requirements
+# Overall approach & requirements
 
 To be able to phase such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. **120 gr. of leaf biomass**.
 
 Please see the following section of the website for more details on:
 
-- [BioProject & BioSample](Bioproject.html).
+- [Propagation of individual lines](Individual_lines.html).
 - [Biomass production](Biomass_production.html).
-- [Sequencing & Bioinformatics](Sequencing.html).
+- [Genome production](Sequencing.html).
 - [Team](Team.html).
 
 # References

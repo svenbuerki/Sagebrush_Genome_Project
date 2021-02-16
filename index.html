@@ -20,9 +20,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -284,69 +281,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -354,16 +288,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -387,10 +311,10 @@ div.tocify {
   <a href="Individual_lines.html">Propagation</a>
 </li>
 <li>
-  <a href="Biomass_production.html">Biomass production</a>
+  <a href="Biomass_production.html">Biomass</a>
 </li>
 <li>
-  <a href="Sequencing.html">Sequencing &amp; Bioinformatics</a>
+  <a href="Sequencing.html">Genome</a>
 </li>
 <li>
   <a href="Protocols.html">Protocols</a>
@@ -399,7 +323,7 @@ div.tocify {
   <a href="Team.html">Team</a>
 </li>
 <li>
-  <a href="Funding.html">Funding</a>
+  <a href="funding.html">Acknowledgements</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -418,18 +342,24 @@ div.tocify {
 </div>
 
 
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#header').parent().prepend('<div id=\"logo\"><img src=\"Images/boisestate-primarylogo-2color-rgb.png\" style=\"position:absolute; top:25px; right:0; padding:10px; height:120px\"></div>');
+  $('#header').css('margin-right', '120px')
+});
+</script>
 <div id="aim" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Aim</h1>
 <p>Sequencing, phasing and annotating the diploid genome of basin big sagebrush (<em>Artemisia tridentata</em> subsp. <em>tridentata</em>). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp <span class="citation">(see <a href="#ref-Barron2020" role="doc-biblioref">Barron et al., 2020</a>)</span>. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both <em>in vitro</em> and <em>ex vitro</em> to support genotype-by-environment experiments.</p>
 </div>
 <div id="overall-approach-requirements" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Overall approach &amp; Requirements</h1>
+<h1><span class="header-section-number">2</span> Overall approach &amp; requirements</h1>
 <p>To be able to phase such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. <strong>120 gr. of leaf biomass</strong>.</p>
 <p>Please see the following section of the website for more details on:</p>
 <ul>
-<li><a href="Bioproject.html">BioProject &amp; BioSample</a>.</li>
+<li><a href="Individual_lines.html">Propagation of individual lines</a>.</li>
 <li><a href="Biomass_production.html">Biomass production</a>.</li>
-<li><a href="Sequencing.html">Sequencing &amp; Bioinformatics</a>.</li>
+<li><a href="Sequencing.html">Genome production</a>.</li>
 <li><a href="Team.html">Team</a>.</li>
 </ul>
 </div>
@@ -444,8 +374,6 @@ div.tocify {
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -478,32 +406,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -1,5 +1,5 @@
 --- 
-title: 'Details on genome sequencing, phasing and annotation'
+title: 'Genome sequencing, phasing and annotation'
 output:
   bookdown::html_document2: 
     toc: TRUE
@@ -47,42 +47,57 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 #opts_chunk$set(fig.pos = "H")
 ```
 
-# Ascertaining taxonomic identity, ploidy, genome size and complexity
+# Overview
 
-Before conducting the sequencing and bioinformatic analyses, we have to ascertain i) the species identity, ii) ploidy level, iii) genome size and iv) genome complexity of our candidate individual, `G2_b24_1`.
+Summaries of procedures applied in this project to sequence, phase and annotate the sagebrush genome based on the `G2_b24_1` individual line is presented here. Click [here](Individual_lines.html) to learn more about `G2_b24_1`. We are briefly presenting below our predicted sequence data and biomass requirements for each sequencing technology. 
 
-## Taxonomic identity
+## Sequence data
 
-The seed used to generate the `G2_b24_1` individual line originated from the UT2 population. The taxonomic identity of the seven mother plants collected by our colleagues at the US Forest Service [cite Richardson] from UT2 were confirmed by inferring ploidy level and UV fluorescence test. All mother plants were determined as diploid (2n=2x=18) *Artemisia tridentata* subsp. *tridentata*.
+Our sequencing and assembly strategy is described in section \@ref(wetlab), but a summary of sequence data and their associated NGS platforms is provided below (see also Table \@ref(tab:tabproject)):
 
+- [**Whole Genome Shotgun**](https://www.ncbi.nlm.nih.gov/genbank/wgs/): 
+    - Illumina NovaSeq platform: To infer genome size and complexity.
+    - PacBio Sequel II (using 8M SMRT cells): To conduct *de novo* assembly.
+- **Proximity ligation**: 
+    - [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (sequenced on and Illumina platform): To conduct phasing.
+- **RNASeq**: 
+    - Illumina NovaSeq platform: To perform genome annotation.
+- [**SRA Experiments**](https://www.ncbi.nlm.nih.gov/sra/): Sequence Read Archive (SRA) data will be made available on NCBI upon submission of the genome.
+- **Protein Sequences**: Protein sequences will be made available.
+- **Assembly/Genome**: An assembly at pseudo-chromosome level will be made available on NCBI upon submission of the genome.
 
-## Inferring ploidy level
+## Biomass requirements per sequencing technology
 
-2. Infer chromosome numbers (using squash technique; 2n=2x=18).
+We are estimating that ca. 120 gr of leaf biomass are necessary for genome sequencing, phasing and annotation. Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project, their purpose and biomass requirements. These data do not account for a preliminary DNA extraction trial (to conduct PacBio sequencing). 
 
-## Inferring genome size
+```{r tabproject, echo=FALSE, eval=TRUE}
+#Table with data on sequencing and number of plantlets requiered for project
+dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
+                    #Add purpose
+                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
+                    # add requirements 
+                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
+                    # add Total for project
+                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
+                    #Add Number of plantlets
+                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
+                  )
+colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
+#Plot table
+knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
+```
 
-1. Infer 2C genome size using flow cytometry (should be around 9 Gbp). 
+# Wet-lab procedures {#wetlab}
 
-## Inferring genome size and complexity
+Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass. To gain insights into the timetable for biomass production, please click [here](Biomass_production.html).
 
-3. Perform some shallow Illumina sequencing to assess genome complexity and confirm genome size estimates.
+1. Ascertain the ploidy level, genome size and genome complexity of `G2_b24_1`. This will be done by counting chromosomes (based on root squashes), inferring 2C genome size using flow cytometry (based on root and leaf tissues) and estimating genome size and complexity by applying a k-mer approach on illumina NovaSeq data. 
+2. Dovetail Genomics will extract HMW DNA with an average fragment size ca. 50-100kb based on biomass supplied by the team (see [Biomass production](Biomass_production.html)).
+3. Whole genome sequencing (WGS) will be conducted using PacBio technology. We aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp). To achieve this objective, 5 PacBio CLR (continuous long-read) libraries will be built and sequenced on the PacBio Sequel II using 8M SMRT cells. A SMRT cell should generate >50Gb of raw data. In our case, 250Gb (5x 50Gb) of raw data will be generated, which corresponds to 55X haploid genome coverage (we are on the low side, but it should be fine). These data will be used to assemble the haploid draft genome (used as input for phasing based on Omni-C libraries).
+4. Three [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (= proximity ligation libraries) will be constructed (one library per 3 Gbp of the organism’s genome) based on the HMW DNA extractions. These libraries will be sequenced on an Illumina HiSeq X instrument (ca. 100M PE150bp read pairs per Gbp of genome size). Before final sequencing, Dovetail will conduct some shallow sequencing (ca. 2M PE75 bp) to assess library quality.
+5. RNA will be extracted from leaf tissue (20mg) by Dovetail and a standard RNA library will be prepared with rRNA-depletion. 2x150bp read will be sequenced on an Illumina platform and raw data from ca. 20M read pairs per sample (1 in this project) will be used for genome annotation.  
 
-# Overview of wet-lab and bioinformatic procedures
-
-Please find below summaries of the procedures applied in this project to sequence, phase and annotate the sagebrush genome.
-
-
-## Wet-lab procedures
-
-Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass.
-
-1. Dovetail Genomics will extract HMW DNA with an average fragment size ca. 50-100kb based on biomass supplied by the team (see [Biomass production](Biomass_production.html)).
-2. Whole genome sequencing (WGS) will be conducted using PacBio technology. We aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp). To achieve this objective, 5 PacBio CLR (continuous long-read) libraries will be built and sequenced on the PacBio Sequel II using 8M SMRT cells. A SMRT cell should generate >50Gb of raw data. In our case, 250Gb (5x 50Gb) of raw data will be generated, which corresponds to 55X haploid genome coverage (we are on the low side, but it should be fine). These data will be used to assemble the haploid draft genome (used as input for phasing based on Omni-C libraries).
-3. Three [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (= proximity ligation libraries) will be constructed (one library per 3 Gbp of the organism’s genome) based on the HMW DNA extractions. These libraries will be sequenced on an Illumina HiSeq X instrument (ca. 100M PE150bp read pairs per Gbp of genome size). Before final sequencing, Dovetail will conduct some shallow sequencing (ca. 2M PE75 bp) to assess library quality.
-4. RNA will be extracted from leaf tissue (20mg) by Dovetail and a standard RNA library will be prepared with rRNA-depletion. 2x150bp read will be sequenced on an Illumina platform and raw data from ca. 20M read pairs per sample (1 in this project) will be used for genome annotation.  
-
-## Bioinformatic procedures
+# Bioinformatic procedures
 
 1. PacBio *de novo* assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb (needed for HiRise pipeline).
 2. The haploid daft assembly will be scaffolded (phased) through the HiRise software pipeline using the proximity ligation data (this software is owned by Dovetail). The Omni-C libraries can be used for genome assembly and haplotype phasing. We will also be able to use this data to call SNPs and look at structural variations.

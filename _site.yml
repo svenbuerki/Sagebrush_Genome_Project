@@ -7,14 +7,14 @@ navbar:
       href: index.html
     - text: "Propagation"
       href: Individual_lines.html
-    - text: "Biomass production"
+    - text: "Biomass"
       href: Biomass_production.html
-    - text: "Sequencing & Bioinformatics"
+    - text: "Genome"
       href: Sequencing.html
     - text: "Protocols"
       href: Protocols.html
     - text: "Team"
       href: Team.html  
-    - text: "Funding"
-      href: Funding.html
+    - text: "Acknowledgements"
+      href: funding.html
       

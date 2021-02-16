@@ -2,12 +2,8 @@
 title: " "
 ---
 
-# Funding
-
 This research was made possible by the NSF Idaho EPSCoR Program and by the NSF under award number OIA-1757324 and a Tree of Life Award from Dovetail Genomics.
 
 If you want to know more about the great research done by the GEM3 community visit this [website](https://www.idahogem3.org).
-
-# Acknowledgements
 
 The authors are grateful to the members of the GEM3 project, especially Stephanie Galla, Michael Wojahn and Denise Pfeifer at Boise State University, Andy Kliskey and Rick Schumaker at NSF Idaho EPSCoR for their support and comment on earlier versions of the manuscript.

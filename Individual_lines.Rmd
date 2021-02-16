@@ -94,6 +94,16 @@ m <- leaflet() %>%
 m
 ```
 
+# Overview of *in vitro* tissue culture
+
+The *in vitro* tissue culture propagation that we have recently published for *Artemisia tridentata* subsp. *tridentata* is composed of three steps [@Barron2020]:
+
+1. <span style="color: black;font-weight:bold">Growth</span>: During the first generation, we started from seeds, but later this step was based on rooted shoot tips cultured on MS growth media in Magenta vessels.
+2. <span style="color: green;font-weight:bold">Cutting</span>: Here, shoot tips are cut from the grown seedlings or plantlets and transferred into rooting media.
+3. <span style="color: blue;font-weight:bold">Rooting</span>: Shoot tips are cultivated on a rooting media containing IBA growth regulator (1 ml/l) in plates to initiate rooting. Rooted shoot tips are then transferred into growth media and we are back to step 1.
+
+The <span style="color: black;font-weight:bold">growth</span> and <span style="color: blue;font-weight:bold">rooting</span> steps are taking 8 to 10 and 3 weeks respectively, while <span style="color: green;font-weight:bold">cutting</span> is labor intensive and usually takes 1 hour to process 5 plantlets (per person). After 8-10 weeks of growth a plantlet produces ca. 9 shoot tips, which are transferred into 1 plate of rooting media to initiate rooting (after 3 weeks of rooting). 
+
 # Individual lines
 
 Information on individual lines in culture at BSU is provided in Table \@ref(tab:indlines). The individual line used for biomass production underpinning the genome project is `G2_b24_1`. 
@@ -187,7 +197,5 @@ kbl(OUTChamber, escape = F, caption = "Carrying capacity of culture chambers.") 
  # kable_styling(bootstrap_options = c("striped", "hover", "condensed")) #%>%
  #column_spec(1, bold = TRUE, color = ifelse(IndDat$PopID == "ID3", "red", "blue"))
 ```
-
-
 
 # References

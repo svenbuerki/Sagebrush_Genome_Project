@@ -1,5 +1,5 @@
 --- 
-title: 'Sagebrush Biomass Production'
+title: 'Biomass production'
 output:
   bookdown::html_document2: 
     toc: TRUE
@@ -52,25 +52,15 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 
 # Biomass requirements for genome project
 
-We aim at applying the newly developed *in vitro* tissue culture technique [@Barron2020] to the G2_b24_1 individual line (from UTT2, drought-sensitive genotype; see Figure \@ref(fig:plantlets)) to produce the ca. 120 gr of leaf biomass necessary for genome sequencing, phasing and annotation. As mentioned in our introduction, we also need to make sure that we are maintaining the individual line beyond biomass production to support genome to phenome research (based on GxE experiments). 
+We aim at applying the newly developed *in vitro* tissue culture technique [@Barron2020] to the `G2_b24_1` individual line (from UTT2, drought-sensitive genotype; see Figure \@ref(fig:plantlets)) to produce the ca. 120 gr of leaf biomass necessary for genome sequencing, phasing and annotation. As mentioned in our introduction, we also need to make sure that we are maintaining the individual line beyond biomass production to support genome to phenome research (based on GxE experiments). 
 
 ```{r plantlets, echo=F, eval=T, out.width="40%", fig.align='center', fig.cap= "Example of a 15-week old plantlet grown in vitro in Magenta vessel."}
 knitr::include_graphics("Figures/G2_b20_1_15wk_old_plantlet.jpg")
 ```
 
-# Overview of *in vitro* tissue culture
-
-The *in vitro* tissue culture propagation that we have recently published for *Artemisia tridentata* subsp. *tridentata* is composed of three steps [@Barron2020]:
-
-1. <span style="color: black;font-weight:bold">Growth</span>: During the first generation, we started from seeds, but later this step was based on rooted shoot tips cultured on MS growth media in Magenta vessels.
-2. <span style="color: green;font-weight:bold">Cutting</span>: Here, shoot tips are cut from the grown seedlings or plantlets and transferred into rooting media.
-3. <span style="color: blue;font-weight:bold">Rooting</span>: Shoot tips are cultivated on a rooting media containing IBA growth regulator (1 ml/l) in plates to initiate rooting. Rooted shoot tips are then transferred into growth media and we are back to step 1.
-
-The <span style="color: black;font-weight:bold">growth</span> and <span style="color: blue;font-weight:bold">rooting</span> steps are taking 8 to 10 and 3 weeks respectively, while <span style="color: green;font-weight:bold">cutting</span> is labor intensive and usually takes 1 hour to process 5 plantlets (per person). After 8-10 weeks of growth a plantlet produces ca. 9 shoot tips, which are transferred into 1 plate of rooting media to initiate rooting (after 3 weeks of rooting). 
-
 ## Adapting the approach to produce biomass
 
-The process described above works very well to keep the individual line *in vitro*, but after 8-10 weeks of growth a plantlet only generate ca. 0.15 gr of biomass for genome sequencing. This is only when allocating 1 plantlet per Magenta vessel. Indeed, sagebrush are competing using chemical compounds and putting several individuals per Magenta vessel decreases growth and increases mortality. Overall, if we were to apply to approach to generate the necessary 120 gr for the sagebrush genome project, we would need **`r 120/0.15` plantlets**. This large number of plantlet is logistically challenging and could prove difficult to handle for our small to middle size lab. This is even more challenging because although our methodology has a high (>90%) rooting response, the survival rate during the <span style="color: black;font-weight:bold">growth</span> step is highly variable between individual lines. For instance, the top performer as identified by @Barron2020, `G2_b27_1`, has only a 45% survival rate in the second round of propagation, whereas `G2_b24_1` has a 80% survival rate at the same stage. This evidence means that far more plantlets would have to be cultivated to reach the **`r 120/0.15` plantlets** mark (corresponding to 120 gr.). This latter estimate is without accounting for a cushion to maintain the individual line for genome to phenome research. In this context, we have favored i) selecting an individual with a high survival rate and ii) growing plantlets for a longer period to obtain more biomass. To differentiate this stage of the propagation to our regular steps, we will be referring to the allocation of plantlets to biomass production as <span style="color: orange;font-weight:bold">biobanking</span> (see below for more details).    
+Our propagation method (see [here](Individual_lines.html) for more details) to maintain individual line *in vitro* works very well, but after 8-10 weeks of growth a plantlet only generates ca. 0.15 gr of biomass for genome sequencing. This is only when allocating 1 plantlet per Magenta vessel. Indeed, sagebrush are competing using chemical compounds and putting several individuals per Magenta vessel decreases growth and increases mortality. Overall, if we were to apply to approach to generate the necessary 120 gr for the sagebrush genome project, we would need **`r 120/0.15` plantlets**. This large number of plantlet is logistically challenging and could prove difficult to handle for our small to middle size lab. This is even more challenging because although our methodology has a high (>90%) rooting response, the survival rate during the <span style="color: black;font-weight:bold">growth</span> step is highly variable between individual lines. For instance, the top performer as identified by @Barron2020, `G2_b27_1`, has only a 45% survival rate in the second round of propagation, whereas `G2_b24_1` has a 80% survival rate at the same stage. This evidence means that far more plantlets would have to be cultivated to reach the **`r 120/0.15` plantlets** mark (corresponding to 120 gr.). This latter estimate is without accounting for a cushion to maintain the individual line for genome to phenome research. In this context, we have favored i) selecting an individual with a high survival rate and ii) growing plantlets for a longer period to obtain more biomass. To differentiate this stage of the propagation to our regular steps, we will be referring to the allocation of plantlets to biomass production as <span style="color: orange;font-weight:bold">biobanking</span> (see below for more details).    
 
 ### Using 15-week old G2_b24_1 plantlets to produce biomass
 
@@ -79,28 +69,6 @@ After 15 weeks of *in vitro* tissue culture, **a plantlet produces ca. 0.8 gr. o
 ```{r plantletweight, echo=F, eval=T, out.width="50%", fig.align='center', fig.cap= "A 15-week old plantlet grown in vitro in Magenta vessel generates 0.8 gr of leaf biomass for sequencing."}
 knitr::include_graphics("Figures/G2_b20_1_Biomass_0.855g_after2min.jpg")
 ```
-
-### Biomass requirements per sequencing technology
-
-Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project (see [Sequencing & Bioinformatics](Sequencing.html) for more details), their purpose and biomass requirements. As mentioned above, these data do not account for a preliminary DNA extraction trial.
-
-```{r tabproject, echo=FALSE, eval=TRUE}
-#Table with data on sequencing and number of plantlets requiered for project
-dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
-                    #Add purpose
-                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
-                    # add requirements 
-                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
-                    # add Total for project
-                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
-                    #Add Number of plantlets
-                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
-                  )
-colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
-#Plot table
-knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
-```
-
 
 # Planning biomass production for sequencing
 
