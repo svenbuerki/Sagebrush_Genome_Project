@@ -72,15 +72,15 @@ We are estimating that ca. 120 gr of leaf biomass are necessary for genome seque
 
 ```{r tabproject, echo=FALSE, eval=TRUE}
 #Table with data on sequencing and number of plantlets requiered for project
-dat <- data.frame(Type = c("PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
+dat <- data.frame(Type = c("Illumina NovaSeq","PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
                     #Add purpose
-                    Purpose = c("De novo genome assembly", "Phasing", "Annotation"),
+                    Purpose = c("Genome size and complexity","De novo genome assembly", "Phasing", "Annotation"),
                     # add requirements 
-                    `Unit/Biomass` = c("1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
+                    `Unit/Biomass` = c("1 Illumina library = 20 mg","1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
                     # add Total for project
-                    `Total units / biomass` = c("5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
+                    `Total units / biomass` = c("1 library = 20 mg", "5 cells = 100 gr", "3 libraries = 18 gr", "1 library = 20 mg"),
                     #Add Number of plantlets
-                    `Number plantlets` = c(ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
+                    `Number plantlets` = c(ceiling(0.2/0.8),ceiling(100/0.8), ceiling(18/0.8), ceiling(0.2/0.8))
                   )
 colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
 #Plot table
@@ -109,9 +109,6 @@ Completion of the wet-lab work by Dovetail Genomics detailed here is predicted t
     e. Assignment of functional tags to genes.
 4. Results files will be delivered electronically via secure FTP.
 
-
-
-# References
 
 <div id="refs"></div>
 
