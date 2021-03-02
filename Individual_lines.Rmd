@@ -24,6 +24,7 @@ library(kableExtra)
 library(googlesheets4)
 require(leaflet)
 library(formattable)
+library(gargle)
 
 #Generate BibTex citation file for all R packages used to produce report
 #knitr::write_bib(.packages(), file = 'packages.bib')
@@ -165,7 +166,7 @@ OUTChamber <- as.data.frame(OUTChamber)
 OUTChamber[,1] <- CarDat$Type
 OUTChamber[,2] <- CarDat$Model
 OUTChamber[,3] <- CarDat$Carrying_capacity
-OUTChamber[match(Growth$Group.1, OUTChamber[,1]),4] <- Growth$x
+#OUTChamber[match(Growth$Group.1, OUTChamber[,1]),4] <- Growth$x
 OUTChamber[,5] <- round((as.numeric(OUTChamber[,4])/ as.numeric(OUTChamber[,3])),2)
 
 tmp <- which(is.na(OUTChamber$Percent) == TRUE)
