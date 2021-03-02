@@ -53,7 +53,7 @@ Summaries of procedures applied in this project to sequence, phase and annotate 
 
 ## Sequence data
 
-Our sequencing and assembly strategy is described in section \@ref(wetlab), but a summary of sequence data and their associated NGS platforms is provided below (see also Table \@ref(tab:tabproject) for biomass requierment and Table \@ref(tab:dataseq) for sequecning data per technology):
+Our sequencing and assembly strategy is described in section \@ref(wetlab), but a summary of sequence data and their associated NGS platforms is provided below (see also Table \@ref(tab:tabproject) for biomass requirement and Table \@ref(tab:dataseq) for sequencing data per technology):
 
 - [**Whole Genome Shotgun**](https://www.ncbi.nlm.nih.gov/genbank/wgs/): 
     - Illumina HiSeq platform: 5 runs (each 2x150bp yielding 350M raw paired-end reads). These data will be used to infer genome size and complexity and produce a haploid draft genome.
