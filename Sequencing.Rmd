@@ -56,7 +56,7 @@ Summaries of procedures applied in this project to sequence, phase and annotate 
 Our sequencing and assembly strategy is described in section \@ref(wetlab), but a summary of sequence data and their associated NGS platforms is provided below (see also Table \@ref(tab:tabproject)):
 
 - [**Whole Genome Shotgun**](https://www.ncbi.nlm.nih.gov/genbank/wgs/): 
-    - Illumina NovaSeq platform: To infer genome size and complexity.
+    - Illumina HiSeq platform: To infer genome size and complexity (and produce a haploid draft genome).
     - PacBio Sequel II (using 8M SMRT cells): To conduct *de novo* assembly.
 - **Proximity ligation**: 
     - [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (sequenced on and Illumina platform): To conduct phasing.
@@ -71,10 +71,10 @@ Our sequencing and assembly strategy is described in section \@ref(wetlab), but 
 We are estimating that ca. 120 gr of leaf biomass are necessary for genome sequencing, phasing and annotation. Table \@ref(tab:tabproject) provides a summary of sequencing technologies applied in this project, their purpose and biomass requirements. These data do not account for a preliminary DNA extraction trial (to conduct PacBio sequencing). 
 
 ```{r tabproject, echo=FALSE, eval=TRUE}
-#Table with data on sequencing and number of plantlets requiered for project
-dat <- data.frame(Type = c("Illumina NovaSeq","PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
+#Table with data on sequencing and number of plantlets required for project
+dat <- data.frame(Type = c("Illumina HiSeq","PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)", "RNA-seq"),
                     #Add purpose
-                    Purpose = c("Genome size and complexity","De novo genome assembly", "Phasing", "Annotation"),
+                    Purpose = c("Genome size and complexity (incl. haploid draft genome)","*De novo* genome assembly", "Phasing", "Annotation"),
                     # add requirements 
                     `Unit/Biomass` = c("1 Illumina library = 20 mg","1 cell = 20 gr", "1 Illumina library = 6 gr", "1 library = 20 mg"),
                     # add Total for project
@@ -84,14 +84,44 @@ dat <- data.frame(Type = c("Illumina NovaSeq","PacBio sequencing", "Proximity li
                   )
 colnames(dat) <- c("Type","Purpose","Unit/Biomass","Total units / biomass","Number of plantlets")
 #Plot table
-knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.")
+knitr::kable(dat, caption = "Summary of sequencing technologies, their purpose and requirements to complete the sagebrush genome project.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
+
+In the case of the Illumina HiSeq, although we will only produce 1 library, it will be dispatched on five HiSeq runs.  
+
+## Sequencing data by technology
+
+The amount of data (bp) produced per sequencing technology is provided in Table \@ref(tab:dataseq) together with estimates of haploid genome coverage (x). 
+
+```{r dataseq, echo=FALSE, eval=TRUE}
+#Table with data on sequencing and number of plantlets required for project
+dat <- data.frame(Type = c("Illumina HiSeq","PacBio sequencing", "Proximity ligation (Hi-C for phasing genome)"),
+                    #Add purpose
+                    Purpose = c("Genome size and complexity (incl. haploid draft genome)","*De novo* genome assembly", "Phasing"),
+                    # add requirements 
+                    `Data/run` = c(350e6*300, 50e9, 100e6*300),
+                    #N runs
+                    `N runs` = c(5,5,3)
+                  )
+#Add column with total data generated
+dat$Total <- dat$Data.run * dat$N.runs
+
+#Add column with haploid genome coverage
+dat$Coverage <- round(dat$Total/4.5e9,2)
+
+colnames(dat) <- c("Type","Purpose","Data (bp)/Run","N. runs","Total data (bp)", "Haploid genome coverage (x)")
+#Plot table
+knitr::kable(dat, caption = "Summary of sequencing data produced by technology for the sagebrush genome project. Haploid genome size = 4.5Gbp") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
 
 # Wet-lab procedures {#wetlab}
 
 Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass. To gain insights into the timetable for biomass production, please click [here](Biomass_production.html).
 
-1. Ascertain the ploidy level, genome size and genome complexity of `G2_b24_1`. This will be done by counting chromosomes (based on root squashes), inferring 2C genome size using flow cytometry (based on root and leaf tissues) and estimating genome size and complexity by applying a k-mer approach on illumina NovaSeq data. 
+1. Ascertain the ploidy level, genome size and genome complexity of `G2_b24_1`. This will be done by counting chromosomes (based on root squashes), inferring 2C genome size using flow cytometry (based on root and leaf tissues) and estimating genome size and complexity by applying a k-mer approach on Illumina HiSeq data. 
 2. Dovetail Genomics will extract HMW DNA with an average fragment size ca. 50-100kb based on biomass supplied by the team (see [Biomass production](Biomass_production.html)).
 3. Whole genome sequencing (WGS) will be conducted using PacBio technology. We aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp). To achieve this objective, 5 PacBio CLR (continuous long-read) libraries will be built and sequenced on the PacBio Sequel II using 8M SMRT cells. A SMRT cell should generate >50Gb of raw data. In our case, 250Gb (5x 50Gb) of raw data will be generated, which corresponds to 55X haploid genome coverage (we are on the low side, but it should be fine). These data will be used to assemble the haploid draft genome (used as input for phasing based on Omni-C libraries).
 4. Three [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (= proximity ligation libraries) will be constructed (one library per 3 Gbp of the organism’s genome) based on the HMW DNA extractions. These libraries will be sequenced on an Illumina HiSeq X instrument (ca. 100M PE150bp read pairs per Gbp of genome size). Before final sequencing, Dovetail will conduct some shallow sequencing (ca. 2M PE75 bp) to assess library quality.
