@@ -425,16 +425,16 @@ div.tocify {
 <p>Summaries of procedures applied in this project to sequence, phase and annotate the sagebrush genome based on the <code>G2_b24_1</code> individual line is presented here. Click <a href="Individual_lines.html">here</a> to learn more about <code>G2_b24_1</code>. We are briefly presenting below our predicted sequence data and biomass requirements for each sequencing technology.</p>
 <div id="sequence-data" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Sequence data</h2>
-<p>Our sequencing and assembly strategy is described in section <a href="#wetlab">2</a>, but a summary of sequence data and their associated NGS platforms is provided below (see also Table <a href="#tab:tabproject">1.1</a>):</p>
+<p>Our sequencing and assembly strategy is described in section <a href="#wetlab">2</a>, but a summary of sequence data and their associated NGS platforms is provided below (see also Table <a href="#tab:tabproject">1.1</a> for biomass requierment and Table <a href="#tab:dataseq">1.2</a> for sequecning data per technology):</p>
 <ul>
 <li><a href="https://www.ncbi.nlm.nih.gov/genbank/wgs/"><strong>Whole Genome Shotgun</strong></a>:
 <ul>
-<li>Illumina HiSeq platform: To infer genome size and complexity (and produce a haploid draft genome).</li>
-<li>PacBio Sequel II (using 8M SMRT cells): To conduct <em>de novo</em> assembly.</li>
+<li>Illumina HiSeq platform: 5 runs (each 2x150bp yielding 350M raw paired-end reads). These data will be used to infer genome size and complexity and produce a haploid draft genome.</li>
+<li>PacBio Sequel II (using 8M SMRT cells): 5 cells (each yielding 50Gbp). These data will be used to conduct <em>de novo</em> genome assembly.</li>
 </ul></li>
 <li><strong>Proximity ligation</strong>:
 <ul>
-<li><a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (sequenced on and Illumina platform): To conduct phasing.</li>
+<li><a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (sequenced on an Illumina platform): 3 runs (each 2x150bp yielding 100M raw paired-end reads). These data will be used to conduct phasing of the genome.</li>
 </ul></li>
 <li><strong>RNASeq</strong>:
 <ul>
@@ -642,7 +642,7 @@ Phasing
 <h1><span class="header-section-number">2</span> Wet-lab procedures</h1>
 <p>Completion of the wet-lab work by Dovetail Genomics detailed here is predicted to take 28 weeks (7 months) upon receipt of the biomass. To gain insights into the timetable for biomass production, please click <a href="Biomass_production.html">here</a>.</p>
 <ol style="list-style-type: decimal">
-<li>Ascertain the ploidy level, genome size and genome complexity of <code>G2_b24_1</code>. This will be done by counting chromosomes (based on root squashes), inferring 2C genome size using flow cytometry (based on root and leaf tissues) and estimating genome size and complexity by applying a k-mer approach on Illumina HiSeq data.</li>
+<li>Ascertain the ploidy level, genome size and genome complexity of <code>G2_b24_1</code>. This will be done by counting chromosomes (based on root squashes), inferring 2C genome size using flow cytometry (based on root and leaf tissues) and estimating genome size and complexity by applying a k-mer approach on Illumina HiSeq data (5 runs, each 2x150bp; see Table <a href="#tab:dataseq">1.2</a> for more details). In addition, the Illumina data will be used to assemble a haploid draft genome (which should have a coverage of ca. 100x). The sequencing will be outsourced to GENEWIZ.</li>
 <li>Dovetail Genomics will extract HMW DNA with an average fragment size ca. 50-100kb based on biomass supplied by the team (see <a href="Biomass_production.html">Biomass production</a>).</li>
 <li>Whole genome sequencing (WGS) will be conducted using PacBio technology. We aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp). To achieve this objective, 5 PacBio CLR (continuous long-read) libraries will be built and sequenced on the PacBio Sequel II using 8M SMRT cells. A SMRT cell should generate &gt;50Gb of raw data. In our case, 250Gb (5x 50Gb) of raw data will be generated, which corresponds to 55X haploid genome coverage (we are on the low side, but it should be fine). These data will be used to assemble the haploid draft genome (used as input for phasing based on Omni-C libraries).</li>
 <li>Three <a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (= proximity ligation libraries) will be constructed (one library per 3 Gbp of the organism’s genome) based on the HMW DNA extractions. These libraries will be sequenced on an Illumina HiSeq X instrument (ca. 100M PE150bp read pairs per Gbp of genome size). Before final sequencing, Dovetail will conduct some shallow sequencing (ca. 2M PE75 bp) to assess library quality.</li>
