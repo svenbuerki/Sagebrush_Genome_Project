@@ -59,9 +59,9 @@ Our sequencing and assembly strategy is described in section \@ref(wetlab), but 
     - Illumina HiSeq platform: 5 runs (each 2x150bp yielding 350M raw paired-end reads). These data will be used to infer genome size and complexity and produce a haploid draft genome.
     - PacBio Sequel II (using 8M SMRT cells): 5 cells (each yielding 50Gbp). These data will be used to conduct *de novo* genome assembly.
 - **Proximity ligation**: 
-    - [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (sequenced on an Illumina platform): 3 runs (each 2x150bp yielding 100M raw paired-end reads). These data will be used to conduct phasing of the genome.
+    - [Omni-C libraries](https://dovetailgenomics.com/intro-omni-c-tech/) (sequenced on an Illumina HiSeq X instrument): 3 runs (each 2x150bp yielding 100M raw paired-end reads). These data will be used to conduct phasing of the genome.
 - **RNASeq**: 
-    - Illumina NovaSeq platform: To perform genome annotation.
+    - Illumina NovaSeq platform: A fraction of a run (2x150bp yielding 20M raw paired-end reads). Used to perform genome annotation. These data will be complemented by Illumina RNA-Seq data produced at HudsonAlpha (representing 150 leaf and root tissue samples from diploid *A. tridentata* subsp. *tridentata* involved in a drought GxE experiment).
 - [**SRA Experiments**](https://www.ncbi.nlm.nih.gov/sra/): Sequence Read Archive (SRA) data will be made available on NCBI upon submission of the genome.
 - **Protein Sequences**: Protein sequences will be made available.
 - **Assembly/Genome**: An assembly at pseudo-chromosome level will be made available on NCBI upon submission of the genome.
@@ -92,7 +92,7 @@ In the case of the Illumina HiSeq, although we will only produce 1 library, it w
 
 ## Sequencing data by technology
 
-The amount of data (bp) produced per sequencing technology is provided in Table \@ref(tab:dataseq) together with estimates of haploid genome coverage (x). 
+The amount of data (in Gbp) produced per sequencing technology for *de novo* genome assembly is provided in Table \@ref(tab:dataseq) together with estimates of haploid genome coverage (x). We aim at sequencing the sagebrush genome between 50-100x. Please see [Wet-lab procedures](#wetlab) for more details on these data. 
 
 ```{r dataseq, echo=FALSE, eval=TRUE}
 #Table with data on sequencing and number of plantlets required for project
@@ -100,7 +100,7 @@ dat <- data.frame(Type = c("Illumina HiSeq","PacBio sequencing", "Proximity liga
                     #Add purpose
                     Purpose = c("Genome size and complexity (incl. haploid draft genome)","*De novo* genome assembly", "Phasing"),
                     # add requirements 
-                    `Data/run` = c(350e6*300, 50e9, 100e6*300),
+                    `Data/run` = c(0.350*300, 50, 0.100*300),
                     #N runs
                     `N runs` = c(5,5,3)
                   )
@@ -108,9 +108,9 @@ dat <- data.frame(Type = c("Illumina HiSeq","PacBio sequencing", "Proximity liga
 dat$Total <- dat$Data.run * dat$N.runs
 
 #Add column with haploid genome coverage
-dat$Coverage <- round(dat$Total/4.5e9,2)
+dat$Coverage <- round(dat$Total/4.5,1)
 
-colnames(dat) <- c("Type","Purpose","Data (bp)/Run","N. runs","Total data (bp)", "Haploid genome coverage (x)")
+colnames(dat) <- c("Type","Purpose","Data (Gbp)/Run","N. runs","Total data (Gbp)", "Haploid genome coverage (x)")
 #Plot table
 knitr::kable(dat, caption = "Summary of sequencing data produced by technology for the sagebrush genome project. Haploid genome size = 4.5Gbp") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
@@ -129,7 +129,7 @@ Completion of the wet-lab work by Dovetail Genomics detailed here is predicted t
 
 # Bioinformatic procedures
 
-1. PacBio *de novo* assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb (needed for HiRise pipeline).
+1. PacBio *de novo* assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb [needed for [HiRise pipeline](https://github.com/DovetailGenomics/HiRise_July2015_GR), @putnam2016chromosome].
 2. The haploid daft assembly will be scaffolded (phased) through the HiRise software pipeline using the proximity ligation data (this software is owned by Dovetail). The Omni-C libraries can be used for genome assembly and haplotype phasing. We will also be able to use this data to call SNPs and look at structural variations.
 3. Whole genome annotation will be conducted using RNA-seq data. The basic services will be included:
     a. Repeat masking.
@@ -139,6 +139,7 @@ Completion of the wet-lab work by Dovetail Genomics detailed here is predicted t
     e. Assignment of functional tags to genes.
 4. Results files will be delivered electronically via secure FTP.
 
+# References
 
 <div id="refs"></div>
 

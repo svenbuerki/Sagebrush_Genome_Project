@@ -434,11 +434,11 @@ div.tocify {
 </ul></li>
 <li><strong>Proximity ligation</strong>:
 <ul>
-<li><a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (sequenced on an Illumina platform): 3 runs (each 2x150bp yielding 100M raw paired-end reads). These data will be used to conduct phasing of the genome.</li>
+<li><a href="https://dovetailgenomics.com/intro-omni-c-tech/">Omni-C libraries</a> (sequenced on an Illumina HiSeq X instrument): 3 runs (each 2x150bp yielding 100M raw paired-end reads). These data will be used to conduct phasing of the genome.</li>
 </ul></li>
 <li><strong>RNASeq</strong>:
 <ul>
-<li>Illumina NovaSeq platform: To perform genome annotation.</li>
+<li>Illumina NovaSeq platform: A fraction of a run (2x150bp yielding 20M raw paired-end reads). Used to perform genome annotation. These data will be complemented by Illumina RNA-Seq data produced at HudsonAlpha (representing 150 leaf and root tissue samples from diploid <em>A. tridentata</em> subsp. <em>tridentata</em> involved in a drought GxE experiment).</li>
 </ul></li>
 <li><a href="https://www.ncbi.nlm.nih.gov/sra/"><strong>SRA Experiments</strong></a>: Sequence Read Archive (SRA) data will be made available on NCBI upon submission of the genome.</li>
 <li><strong>Protein Sequences</strong>: Protein sequences will be made available.</li>
@@ -546,7 +546,7 @@ Annotation
 </div>
 <div id="sequencing-data-by-technology" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Sequencing data by technology</h2>
-<p>The amount of data (bp) produced per sequencing technology is provided in Table <a href="#tab:dataseq">1.2</a> together with estimates of haploid genome coverage (x).</p>
+<p>The amount of data (in Gbp) produced per sequencing technology for <em>de novo</em> genome assembly is provided in Table <a href="#tab:dataseq">1.2</a> together with estimates of haploid genome coverage (x). We aim at sequencing the sagebrush genome between 50-100x. Please see <a href="#wetlab">Wet-lab procedures</a> for more details on these data.</p>
 <table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:dataseq">Table 1.2: </span>Summary of sequencing data produced by technology for the sagebrush genome project. Haploid genome size = 4.5Gbp
@@ -560,13 +560,13 @@ Type
 Purpose
 </th>
 <th style="text-align:right;">
-Data (bp)/Run
+Data (Gbp)/Run
 </th>
 <th style="text-align:right;">
 N. runs
 </th>
 <th style="text-align:right;">
-Total data (bp)
+Total data (Gbp)
 </th>
 <th style="text-align:right;">
 Haploid genome coverage (x)
@@ -582,16 +582,16 @@ Illumina HiSeq
 Genome size and complexity (incl. haploid draft genome)
 </td>
 <td style="text-align:right;">
-1.05e+11
+105
 </td>
 <td style="text-align:right;">
 5
 </td>
 <td style="text-align:right;">
-5.25e+11
+525
 </td>
 <td style="text-align:right;">
-116.67
+116.7
 </td>
 </tr>
 <tr>
@@ -602,16 +602,16 @@ PacBio sequencing
 <em>De novo</em> genome assembly
 </td>
 <td style="text-align:right;">
-5.00e+10
+50
 </td>
 <td style="text-align:right;">
 5
 </td>
 <td style="text-align:right;">
-2.50e+11
+250
 </td>
 <td style="text-align:right;">
-55.56
+55.6
 </td>
 </tr>
 <tr>
@@ -622,16 +622,16 @@ Proximity ligation (Hi-C for phasing genome)
 Phasing
 </td>
 <td style="text-align:right;">
-3.00e+10
+30
 </td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:right;">
-9.00e+10
+90
 </td>
 <td style="text-align:right;">
-20.00
+20.0
 </td>
 </tr>
 </tbody>
@@ -652,7 +652,7 @@ Phasing
 <div id="bioinformatic-procedures" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Bioinformatic procedures</h1>
 <ol style="list-style-type: decimal">
-<li>PacBio <em>de novo</em> assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb (needed for HiRise pipeline).</li>
+<li>PacBio <em>de novo</em> assembly (= produce haploid draft assembly). We aim at a minimum N50 of 100kb <span class="citation">(needed for <a href="https://github.com/DovetailGenomics/HiRise_July2015_GR" role="doc-biblioref">HiRise pipeline</a>, <a href="#ref-putnam2016chromosome" role="doc-biblioref">Putnam et al. 2016</a>)</span>.</li>
 <li>The haploid daft assembly will be scaffolded (phased) through the HiRise software pipeline using the proximity ligation data (this software is owned by Dovetail). The Omni-C libraries can be used for genome assembly and haplotype phasing. We will also be able to use this data to call SNPs and look at structural variations.</li>
 <li>Whole genome annotation will be conducted using RNA-seq data. The basic services will be included:
 <ol style="list-style-type: lower-alpha">
@@ -664,12 +664,17 @@ Phasing
 </ol></li>
 <li>Results files will be delivered electronically via secure FTP.</li>
 </ol>
-<div id="refs">
-
+</div>
+<div id="references" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-putnam2016chromosome" class="csl-entry">
+Putnam, Nicholas H, Brendan L O’Connell, Jonathan C Stites, Brandon J Rice, Marco Blanchette, Robert Calef, Christopher J Troll, et al. 2016. <span>“Chromosome-Scale Shotgun Assembly Using an in Vitro Method for Long-Range Linkage.”</span> <em>Genome Research</em> 26 (3): 342–50.
 </div>
 </div>
-<div id="appendix-1" class="section level1 appendix" number="4">
-<h1><span class="header-section-number">4</span> Appendix 1</h1>
+</div>
+<div id="appendix-1" class="section level1 appendix" number="5">
+<h1><span class="header-section-number">5</span> Appendix 1</h1>
 <p>Citations of all R packages used to generate this report.</p>
 <p>[1] J. Allaire, Y. Xie, J. McPherson, et al. <em>rmarkdown: Dynamic
 Documents for R</em>. R package version 2.6. 2020. &lt;URL:
@@ -712,8 +717,8 @@ Guide</em>. ISBN 9781138359338. Boca Raton, Florida: Chapman and Hall/CRC,
 9780367563837. Boca Raton, Florida: Chapman and Hall/CRC, 2020. &lt;URL:
 <a href="https://bookdown.org/yihui/rmarkdown-cookbook" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook</a>&gt;.</p>
 </div>
-<div id="appendix-2" class="section level1 appendix" number="5">
-<h1><span class="header-section-number">5</span> Appendix 2</h1>
+<div id="appendix-2" class="section level1 appendix" number="6">
+<h1><span class="header-section-number">6</span> Appendix 2</h1>
 <p>Version information about R, the operating system (OS) and attached or R loaded packages. This appendix was generated using <code>sessionInfo()</code>.</p>
 <pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
