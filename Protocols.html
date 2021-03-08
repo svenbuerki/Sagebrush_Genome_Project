@@ -564,6 +564,73 @@ div.tocify {
 </div>
 </div>
 </div>
+<div id="managing-accounts-and-sharing-folder-on-linux-computers" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Managing accounts and sharing folder on Linux computers</h1>
+<p>To more efficiently benefit from our Linux computer, we will provide overview of protocols to:</p>
+<ul>
+<li>Create users.</li>
+<li>Create groups.</li>
+<li>Add users to groups.</li>
+<li>Create shared folders.</li>
+<li>Assign shared folders to a group.</li>
+<li>Switch user to check changes.</li>
+</ul>
+<div id="create-users" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Create users</h2>
+<p>For this purpose, we will be using the <code>useradd</code> command:</p>
+<pre class="bash"><code>#Create user, add password and create home directory
+sudo useradd userID</code></pre>
+<p>You will be asked to answer multiple questions, only the password is mandatory.</p>
+<p>To view the list of users on the Linux computer type this command:</p>
+<pre class="bash"><code>cut -d : -f 1 /etc/passwd</code></pre>
+<p>To view the list of logged in users do:</p>
+<pre class="bash"><code>w</code></pre>
+</div>
+<div id="create-groups" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Create groups</h2>
+<p>To create a group, here <code>genomics</code> type the following command:</p>
+<pre class="bash"><code>#Create a group entitled `genomics`
+sudo groupadd genomics</code></pre>
+</div>
+<div id="add-users-to-groups" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Add users to groups</h2>
+<p>To add users to the groups (here <code>genomics</code>) type the following command:</p>
+<pre class="bash"><code>#Add users to the group, here `genomics`
+sudo usermod -a -G genomics userID
+
+# Examples
+sudo usermod -a -G genomics svenbuerki
+sudo usermod -a -G genomics bio_11
+sudo usermod -a -G genomics anthonymelton</code></pre>
+<p>To know which users are already members of a group type the following command:</p>
+<pre class="bash"><code>grep genomics /etc/group</code></pre>
+</div>
+<div id="create-shared-folders" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Create shared folders</h2>
+<p>When multiple users need accessing to the same data, it is best practice to create shared folders and assign them to a group (made of multiple users, here the <code>genomics</code> group).</p>
+<p>To create the folder to be shared (here <code>Genomics_shared</code>) type the following command:</p>
+<pre class="bash"><code>#General syntax
+sudo mkdir -p /path/Shared_Folder_ID
+
+#Example (saved in home/)
+sudo mkdir -p /home/Genomics_shared</code></pre>
+</div>
+<div id="assign-shared-folders-to-a-group" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Assign shared folders to a group</h2>
+<p>Here, we assign a group (here <code>genomics</code>) to become owner of the shared folder (here <code>/home/Genomics_shared</code>) and give them appropriate permissions, which are also inherited by the subdirectories. This is done as follows:</p>
+<pre class="bash"><code>sudo chgrp -R genomics /home/Genomics_shared
+sudo chmod -R 2775 /home/Genomics_shared</code></pre>
+</div>
+<div id="switch-user-to-check-changes" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Switch user to check changes</h2>
+<p>To switch user on Ubuntu you need to type the following command:</p>
+<pre class="bash"><code>#General syntax
+su USER_name
+
+#Example (you will have to provide password for bio_11)
+su bio_11</code></pre>
+</div>
+</div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
