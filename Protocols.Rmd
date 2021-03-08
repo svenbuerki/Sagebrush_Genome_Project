@@ -185,11 +185,14 @@ The buffer is now ready to use. If you notice that the sample becomes dark when 
 To more efficiently benefit from our Linux computers, we will provide overview of protocols to:
 
 - Create users.
+- Delete users.
 - Create groups.
 - Add users to groups.
 - Create shared folders.
 - Assign shared folders to a group.
 - Switch user to check changes.
+
+In RStudio, you can send commands directly into the Terminal (instead of the Console) by using this combination of keys: `Ctrl + Alt + Enter`. The Terminal has to be selected before using this approach.
 
 ## Create users
 
@@ -203,17 +206,6 @@ sudo adduser username
 sudo adduser anthonymelton
 ```
 
-To provide admin (`sudo`) rights to a user that you created do the following:
-
-```{bash, eval=F}
-#Create a new used with admin/sudo rights
-sudo usermod -aG sudo username
-
-#For example
-sudo usermod -aG sudo anthonymelton
-```
-
-
 You will be asked to answer multiple questions, only the password is mandatory.
 
 To view the list of users on the Linux computer type this command:
@@ -226,6 +218,34 @@ To view the list of logged in users do:
 
 ```{bash, eval=F}
 w
+```
+
+To **provide admin (`sudo`) rights to a user** that you created do the following:
+
+```{bash, eval=F}
+#Create a new used with admin/sudo rights
+sudo usermod -aG sudo username
+
+#For example
+sudo usermod -aG sudo anthonymelton
+```
+
+On the other hand, **if you want to reverse a user from `sudo` to `standard` rights**, do the following:
+
+```{bash, eval=F}
+#General syntax
+sudo deluser username sudo
+```
+
+This command will only remove user 'username' from the sudo group, but it will not delete the user permanently from the system.  Now, they become regular user and cannot do any administrative tasks as sudo user.
+
+## Delete users
+
+After someone leaves the lab, you might have to delete their user account. You can do that by using the following command, but please make sure that you have archived all their data and code prior to proceeding.
+
+```{bash, eval=F}
+#If you want to delete a user and its home directory and mail spool
+sudo deluser --remove-home username
 ```
 
 ## Create groups

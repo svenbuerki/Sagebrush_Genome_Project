@@ -569,12 +569,14 @@ div.tocify {
 <p>To more efficiently benefit from our Linux computers, we will provide overview of protocols to:</p>
 <ul>
 <li>Create users.</li>
+<li>Delete users.</li>
 <li>Create groups.</li>
 <li>Add users to groups.</li>
 <li>Create shared folders.</li>
 <li>Assign shared folders to a group.</li>
 <li>Switch user to check changes.</li>
 </ul>
+<p>In RStudio, you can send commands directly into the Terminal (instead of the Console) by using this combination of keys: <code>Ctrl + Alt + Enter</code>. The Terminal has to be selected before using this approach.</p>
 <div id="create-users" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Create users</h2>
 <p>For this purpose, we will be using the <code>adduser</code> command:</p>
@@ -583,26 +585,36 @@ sudo adduser username
 
 #For example
 sudo adduser anthonymelton</code></pre>
-<p>To provide admin (<code>sudo</code>) rights to a user that you created do the following:</p>
-<pre class="bash"><code>#Create a new used with admin/sudo rights
-sudo usermod -aG sudo username
-
-#For example
-sudo usermod -aG sudo anthonymelton</code></pre>
 <p>You will be asked to answer multiple questions, only the password is mandatory.</p>
 <p>To view the list of users on the Linux computer type this command:</p>
 <pre class="bash"><code>cut -d : -f 1 /etc/passwd</code></pre>
 <p>To view the list of logged in users do:</p>
 <pre class="bash"><code>w</code></pre>
+<p>To <strong>provide admin (<code>sudo</code>) rights to a user</strong> that you created do the following:</p>
+<pre class="bash"><code>#Create a new used with admin/sudo rights
+sudo usermod -aG sudo username
+
+#For example
+sudo usermod -aG sudo anthonymelton</code></pre>
+<p>On the other hand, <strong>if you want to reverse a user from <code>sudo</code> to <code>standard</code> rights</strong>, do the following:</p>
+<pre class="bash"><code>#General syntax
+sudo deluser username sudo</code></pre>
+<p>This command will only remove user ‘username’ from the sudo group, but it will not delete the user permanently from the system. Now, they become regular user and cannot do any administrative tasks as sudo user.</p>
 </div>
-<div id="create-groups" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Create groups</h2>
+<div id="delete-users" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Delete users</h2>
+<p>After someone leaves the lab, you might have to delete their user account. You can do that by using the following command, but please make sure that you have archived all their data and code prior to proceeding.</p>
+<pre class="bash"><code>#If you want to delete a user and its home directory and mail spool
+sudo deluser --remove-home username</code></pre>
+</div>
+<div id="create-groups" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Create groups</h2>
 <p>To create a group, here <code>genomics</code> type the following command:</p>
 <pre class="bash"><code>#Create a group entitled `genomics`
 sudo groupadd genomics</code></pre>
 </div>
-<div id="add-users-to-groups" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Add users to groups</h2>
+<div id="add-users-to-groups" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Add users to groups</h2>
 <p>To add users to the groups (here <code>genomics</code>) type the following command:</p>
 <pre class="bash"><code>#Add users to the group, here `genomics`
 sudo usermod -a -G genomics userID
@@ -614,8 +626,8 @@ sudo usermod -a -G genomics anthonymelton</code></pre>
 <p>To know which users are already members of a group type the following command:</p>
 <pre class="bash"><code>grep genomics /etc/group</code></pre>
 </div>
-<div id="create-shared-folders" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Create shared folders</h2>
+<div id="create-shared-folders" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Create shared folders</h2>
 <p>When multiple users need accessing to the same data, it is best practice to create shared folders and assign them to a group (made of multiple users, here the <code>genomics</code> group).</p>
 <p>To create the folder to be shared (here <code>Genomics_shared</code>) type the following command:</p>
 <pre class="bash"><code>#General syntax
@@ -624,14 +636,14 @@ sudo mkdir -p /path/Shared_Folder_ID
 #Example (saved in home/)
 sudo mkdir -p /home/Genomics_shared</code></pre>
 </div>
-<div id="assign-shared-folders-to-a-group" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Assign shared folders to a group</h2>
+<div id="assign-shared-folders-to-a-group" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Assign shared folders to a group</h2>
 <p>Here, we assign a group (here <code>genomics</code>) to become owner of the shared folder (here <code>/home/Genomics_shared</code>) and give them appropriate permissions, which are also inherited by the subdirectories. This is done as follows:</p>
 <pre class="bash"><code>sudo chgrp -R genomics /home/Genomics_shared
 sudo chmod -R 2775 /home/Genomics_shared</code></pre>
 </div>
-<div id="switch-user-to-check-changes" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Switch user to check changes</h2>
+<div id="switch-user-to-check-changes" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Switch user to check changes</h2>
 <p>To switch user on Ubuntu you need to type the following command:</p>
 <pre class="bash"><code>#General syntax
 su USER_name
