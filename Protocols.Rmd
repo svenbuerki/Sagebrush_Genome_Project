@@ -180,9 +180,9 @@ The recipe of the buffer and the steps are described in the paper, but briefly:
 
 The buffer is now ready to use. If you notice that the sample becomes dark when prepared, add 200 ul of B-mercaptoethanol to the buffer and mix (or equivalent if aliquots have been prepared).
 
-# Managing accounts and sharing folder on Linux computers
+# Managing Linux accounts and sharing folders
 
-To more efficiently benefit from our Linux computer, we will provide overview of protocols to:
+To more efficiently benefit from our Linux computers, we will provide overview of protocols to:
 
 - Create users.
 - Create groups.
@@ -193,12 +193,26 @@ To more efficiently benefit from our Linux computer, we will provide overview of
 
 ## Create users
 
-For this purpose, we will be using the `useradd` command:
+For this purpose, we will be using the `adduser` command:
 
 ```{bash, eval=F}
-#Create user, add password and create home directory
-sudo useradd userID
+#Create user, add password and create home directory (without admin rights)
+sudo adduser username
+
+#For example
+sudo adduser anthonymelton
 ```
+
+To provide admin (`sudo`) rights to a user that you created do the following:
+
+```{bash, eval=F}
+#Create a new used with admin/sudo rights
+sudo usermod -aG sudo username
+
+#For example
+sudo usermod -aG sudo anthonymelton
+```
+
 
 You will be asked to answer multiple questions, only the password is mandatory.
 

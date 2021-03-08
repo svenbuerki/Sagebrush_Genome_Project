@@ -564,9 +564,9 @@ div.tocify {
 </div>
 </div>
 </div>
-<div id="managing-accounts-and-sharing-folder-on-linux-computers" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Managing accounts and sharing folder on Linux computers</h1>
-<p>To more efficiently benefit from our Linux computer, we will provide overview of protocols to:</p>
+<div id="managing-linux-accounts-and-sharing-folders" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Managing Linux accounts and sharing folders</h1>
+<p>To more efficiently benefit from our Linux computers, we will provide overview of protocols to:</p>
 <ul>
 <li>Create users.</li>
 <li>Create groups.</li>
@@ -577,9 +577,18 @@ div.tocify {
 </ul>
 <div id="create-users" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Create users</h2>
-<p>For this purpose, we will be using the <code>useradd</code> command:</p>
-<pre class="bash"><code>#Create user, add password and create home directory
-sudo useradd userID</code></pre>
+<p>For this purpose, we will be using the <code>adduser</code> command:</p>
+<pre class="bash"><code>#Create user, add password and create home directory (without admin rights)
+sudo adduser username
+
+#For example
+sudo adduser anthonymelton</code></pre>
+<p>To provide admin (<code>sudo</code>) rights to a user that you created do the following:</p>
+<pre class="bash"><code>#Create a new used with admin/sudo rights
+sudo usermod -aG sudo username
+
+#For example
+sudo usermod -aG sudo anthonymelton</code></pre>
 <p>You will be asked to answer multiple questions, only the password is mandatory.</p>
 <p>To view the list of users on the Linux computer type this command:</p>
 <pre class="bash"><code>cut -d : -f 1 /etc/passwd</code></pre>
