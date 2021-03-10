@@ -155,9 +155,9 @@ The carrying capacity of culture chambers at BSU is displayed in Table \@ref(tab
 # Select carrying capacity
 CarDat <- read_sheet(url, sheet=which(sheetsID == "Carrying_capacity"))
 
-#Subset CulDat to only include Growings
-Growth <- subset(CulDat, CulDat$Stage == "Growing")
-Growth <- aggregate(Growth$Total, by=list(Growth$Chamber), sum)
+#Subset CulDat to only include Growing plantlets
+GrowthExplant <- subset(CulDat, CulDat$Stage %in% c("Growing","Explant"))
+GrowthExplant <- aggregate(GrowthExplant$Total, by=list(GrowthExplant$Chamber), sum)
 
 #How many boxes per type?
 OUTChamber <- matrix(ncol=5, nrow=nrow(CarDat))
@@ -166,7 +166,7 @@ OUTChamber <- as.data.frame(OUTChamber)
 OUTChamber[,1] <- CarDat$Type
 OUTChamber[,2] <- CarDat$Model
 OUTChamber[,3] <- CarDat$Carrying_capacity
-#OUTChamber[match(Growth$Group.1, OUTChamber[,1]),4] <- Growth$x
+OUTChamber[match(GrowthExplant$Group.1, OUTChamber[,1]),4] <- GrowthExplant$x
 OUTChamber[,5] <- round((as.numeric(OUTChamber[,4])/ as.numeric(OUTChamber[,3])),2)
 
 tmp <- which(is.na(OUTChamber$Percent) == TRUE)
