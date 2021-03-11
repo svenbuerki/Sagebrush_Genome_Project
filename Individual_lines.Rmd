@@ -132,6 +132,8 @@ kbl(Explant,  caption = "*Ex planting* protocol for *Artemisia tridentata* subsp
 
 ```
 
+For the <span style="color: black;font-weight:bold">Ex5</span> phase, the light intensity of the P4 culture chamber will be set identical to the one at the Cart.
+
 # Individual lines
 
 Information on individual lines in culture at BSU is provided in Table \@ref(tab:indlines). The individual line used for biomass production underpinning the genome project is `G2_b24_1`. 
@@ -170,9 +172,9 @@ kbl(CulDat,  caption = "Data on propagation for sagebrush individual lines.") %>
  #column_spec(1, bold = TRUE, color = ifelse(IndDat$PopID == "ID3", "red", "blue"))
 ```
 
-# Carrying capacity
+# Culture chamber
 
-The carrying capacity of culture chambers at BSU is displayed in Table \@ref(tab:carcap).
+The culture chambers used in this experiment taking place at BSU are described in Table \@ref(tab:carcap).
 
 ```{r carcap, echo=F, eval=T, warning=F, message=F}
 # Select carrying capacity
@@ -183,14 +185,16 @@ GrowthExplant <- subset(CulDat, CulDat$Stage %in% c("Growing","Explant"))
 GrowthExplant <- aggregate(GrowthExplant$Total, by=list(GrowthExplant$Chamber), sum)
 
 #How many boxes per type?
-OUTChamber <- matrix(ncol=5, nrow=nrow(CarDat))
-colnames(OUTChamber) <- c("Type", "Model","Carrying capacity","Current occupancy", "Percent")
+OUTChamber <- matrix(ncol=7, nrow=nrow(CarDat))
+colnames(OUTChamber) <- c("Type", "Model", "Light intensity", "Temperature (Celsius)", "Carrying capacity", "Current occupancy", "Percent")
 OUTChamber <- as.data.frame(OUTChamber)
 OUTChamber[,1] <- CarDat$Type
 OUTChamber[,2] <- CarDat$Model
-OUTChamber[,3] <- CarDat$Carrying_capacity
-OUTChamber[match(GrowthExplant$Group.1, OUTChamber[,1]),4] <- GrowthExplant$x
-OUTChamber[,5] <- round((as.numeric(OUTChamber[,4])/ as.numeric(OUTChamber[,3])),2)
+OUTChamber[,3] <- CarDat$Light_Intensity
+OUTChamber[,4] <- CarDat$Temperature_celsius
+OUTChamber[,5] <- CarDat$Carrying_capacity
+OUTChamber[match(GrowthExplant$Group.1, OUTChamber[,1]),6] <- GrowthExplant$x
+OUTChamber[,7] <- round((as.numeric(OUTChamber[,6])/ as.numeric(OUTChamber[,5])),2)
 
 tmp <- which(is.na(OUTChamber$Percent) == TRUE)
 if(length(tmp) > 0){
