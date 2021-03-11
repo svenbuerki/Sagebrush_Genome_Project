@@ -95,19 +95,42 @@ m <- leaflet() %>%
 m
 ```
 
-# Overview of *in vitro* tissue culture
+# Overview of tissue culture program
 
-The *in vitro* tissue culture propagation that we have recently published for *Artemisia tridentata* subsp. *tridentata* is composed of three steps [@Barron2020]:
+## *In vitro* 
 
-1. <span style="color: black;font-weight:bold">Growth</span>: During the first generation, we started from seeds, but later this step was based on rooted shoot tips cultured on MS growth media in Magenta vessels.
-2. <span style="color: green;font-weight:bold">Cutting</span>: Here, shoot tips are cut from the grown seedlings or plantlets and transferred into rooting media.
-3. <span style="color: blue;font-weight:bold">Rooting</span>: Shoot tips are cultivated on a rooting media containing IBA growth regulator (1 ml/l) in plates to initiate rooting. Rooted shoot tips are then transferred into growth media and we are back to step 1.
+The *in vitro* tissue culture propagation that we have recently published for *Artemisia tridentata* subsp. *tridentata* [@Barron2020] is composed of three phases described in Table \@ref(tab:invitro).
 
-The <span style="color: black;font-weight:bold">growth</span> and <span style="color: blue;font-weight:bold">rooting</span> steps are taking 8 to 10 and 3 weeks respectively, while <span style="color: green;font-weight:bold">cutting</span> is labor intensive and usually takes 1 hour to process 5 plantlets (per person). After 8-10 weeks of growth a plantlet produces ca. 9 shoot tips, which are transferred into 1 plate of rooting media to initiate rooting (after 3 weeks of rooting). 
+
+```{r invitro, echo=F, eval=T, warning=F, message=F}
+# Select individual lines
+Invitro <- read_sheet(url, sheet=which(sheetsID == "In_vitro_protocol"))
+
+kbl(Invitro,  caption = "*In vitro* tissue culture protocol for *Artemisia tridentata* subsp. *tridentata* to maintain clonal lines.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+ column_spec(1, bold = TRUE, color = c("black", "green","blue"))
+
+```
+
+The <span style="color: green;font-weight:bold">Cutting</span> phase is labor intensive and usually takes 1 hour to process 5 plantlets (per person). 
 
 More details on the methodology (incl. protocols) and analyses associated to *in vitro* sagebrush propagation can be found on our companion website:
 
 - https://svenbuerki.github.io/Sagebrush_rooting_in_vitro_prop/
+
+## *Ex planting*
+
+The *ex planting* protocol to produce plantlets of *Artemisia tridentata* subsp. *tridentata* for GxE experiments is composed of five phases described in Table \@ref(tab:explant). Plantlets used for this protocol are sourced from the *in vitro* tissue program after the <span style="color: black;font-weight:bold">Growth</span> phase (see Table \@ref(tab:invitro). 
+
+```{r explant, echo=F, eval=T, warning=F, message=F}
+# Select individual lines
+Explant <- read_sheet(url, sheet=which(sheetsID == "Ex_planting_protocol"))
+
+kbl(Explant,  caption = "*Ex planting* protocol for *Artemisia tridentata* subsp. *tridentata* to produce plantlets for GxE experiments.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+ column_spec(1, bold = TRUE)
+
+```
 
 # Individual lines
 
