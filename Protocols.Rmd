@@ -208,6 +208,16 @@ sudo adduser anthonymelton
 
 You will be asked to answer multiple questions, only the password is mandatory.
 
+Complete creation of sub-directories for new user by typing these commands:
+
+```{bash, eval=F}
+#Switch to the new user account (see below for more details)
+su username
+
+#Create sub-directories (e.g. Documents/, Downloads/, etc.)
+xdg-user-dirs-update --force
+```
+
 To view the list of users on the Linux computer type this command:
 
 ```{bash, eval=F}
