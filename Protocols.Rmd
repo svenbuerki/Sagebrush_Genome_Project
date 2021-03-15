@@ -322,5 +322,30 @@ su USER_name
 su bio_11
 ```
 
+# Add symbolic links to programs
+
+Here we use the `ln` command to make a symbolic link (or a kind of alias) to a program in the `bin/`. This means that the program will be accessible to anybody by typing a shortcut (or alias). 
+
+Since the symbolic link will reside in the `bin/` folder, first you will be navigating to this location as follows:
+
+```{bash, eval=F}
+#Navigate where the symbolic link should reside
+cd /usr/local/bin/
+```
+
+Then we will establish the symbolic link as follows:
+
+```{bash, eval=F}
+#Use ln protocol to establish symbolic link
+# pathtoprogram = path to executable program 
+# alias = the name you give to the symbolic link or alias
+sudo ln -s pathtoprogram alias
+
+#Example with R
+sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4
+```
+
+In this example, everybody will be able to access `R` version 4.0.4 by typing `R-4` in the Terminal.
+
 # References
 

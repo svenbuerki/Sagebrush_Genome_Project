@@ -658,6 +658,22 @@ su USER_name
 su bio_11</code></pre>
 </div>
 </div>
+<div id="add-symbolic-links-to-programs" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Add symbolic links to programs</h1>
+<p>Here we use the <code>ln</code> command to make a symbolic link (or a kind of alias) to a program in the <code>bin/</code>. This means that the program will be accessible to anybody by typing a shortcut (or alias).</p>
+<p>Since the symbolic link will reside in the <code>bin/</code> folder, first you will be navigating to this location as follows:</p>
+<pre class="bash"><code>#Navigate where the symbolic link should reside
+cd /usr/local/bin/</code></pre>
+<p>Then we will establish the symbolic link as follows:</p>
+<pre class="bash"><code>#Use ln protocol to establish symbolic link
+# pathtoprogram = path to executable program 
+# alias = the name you give to the symbolic link or alias
+sudo ln -s pathtoprogram alias
+
+#Example with R
+sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4</code></pre>
+<p>In this example, everybody will be able to access <code>R</code> version 4.0.4 by typing <code>R-4</code> in the Terminal.</p>
+</div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
