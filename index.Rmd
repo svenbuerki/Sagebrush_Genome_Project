@@ -30,7 +30,8 @@ Please see the following section of the website for more details on:
 
 - [Propagation of individual lines](Individual_lines.html).
 - [Biomass production](Biomass_production.html).
-- [Genome production](Sequencing.html).
+- [Genome sequencing](Sequencing.html).
+- [Genome annotation](Annotation.html).
 - [Team](Team.html).
 
 # References

@@ -9,8 +9,10 @@ navbar:
       href: Individual_lines.html
     - text: "Biomass"
       href: Biomass_production.html
-    - text: "Genome"
+    - text: "Sequencing"
       href: Sequencing.html
+    - text: "Annotation"
+      href: Annotation.html
     - text: "Protocols"
       href: Protocols.html
     - text: "Team"

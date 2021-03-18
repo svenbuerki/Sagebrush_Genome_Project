@@ -1,0 +1,177 @@
+--- 
+title: 'Genome annotation'
+output:
+  bookdown::html_document2: 
+    toc: TRUE
+    toc_depth: 4
+    toc_float: TRUE
+link-citations: yes
+fontsize: 12pt
+bibliography: References.bib
+---
+
+```{r packages, echo=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(rmarkdown)
+library(bookdown)
+#library(distill)
+library(knitcitations)
+library(formatR)
+library(devtools)
+library(usethis)
+
+#Generate BibTex citation file for all R packages used to produce report
+knitr::write_bib(.packages(), file = 'packages.bib')
+```
+
+
+```{r setup, include=FALSE, cache=FALSE, message = FALSE}
+#Load packages
+library(knitr)
+library(rmarkdown)
+# Chunk options: see http://yihui.name/knitr/options/ ###
+
+## Text results
+opts_chunk$set(echo = TRUE, warning = TRUE, message = TRUE, include = TRUE)
+
+## Code decoration
+#opts_chunk$set(tidy = TRUE, R.options = list(width = 60), highlight = TRUE)
+
+## Caching code
+opts_chunk$set(cache = 2, cache.path = "cache/")
+
+## Plots
+#opts_chunk$set(fig.path = "Figures_MS/", dev=c('pdf', 'png'), dpi = 300)
+
+## Locate figures as close as possible to requested position (=code)
+#opts_chunk$set(fig.pos = "H")
+```
+
+# Overview
+
+To annotate our sagebrush genome, we will be conducting a suite of GxE experiments, which are described in this document. These experiments will be associated to drought and heat phenotypes. Leaf and root tissues will be sequenced using RNA-seq technology (on Illumina NovaSeq platform). 
+ 
+## GxE experiments
+
+### Overview
+
+- 3 GxE experiments: Heat (~H~), drought (~D~) and heat + drought (~HD~) stresses.
+- 5 treatments (=T).
+- 25 individuals/treatment (=n). 
+- 2 individual lines (G): G1 and G2.
+- 2 tissue types for RNA-seq: leaf and root.
+- Record wilting and chlorosis responses at individual level (= phentotypes used for sampling, but also to assess phenotypic plasticity).
+- Measure hydraulic conductivity (to further estimate drought stress, a proxy of embolism).
+- The total number of plantlets (T*n*G): `r (25*5)*2`
+- Number of RNA extractions = N. libraries (L) (T*L*Tiss*G): `r ((5*1)*2)*2`
+
+### Sampling
+
+[Individual lines](Individual_lines.html) that have been acclimatized to natural environmental conditions are used for these experiments. Every plantlet within an individual line will have a specific barcode to monitor its progress.
+
+### Experimental design
+
+2 individual lines representing G1 and G2.
+
+#### Heat experiment
+
+**Growing conditions:** at constant 40<span>&deg;</span>C. Based on data from UT2.
+
+Plantlets will be well-watered before conducting the experiment.
+
+**Treatments:**
+
+One treatment will be conducted to assess the effect of heat on gene expression patterns:
+
+  - T~H~: heat treatment. 
+
+**Sampling**
+
+Each T~H~ plantlet will be sampled at the onset of heat (upon chlorosis). A response curve will be drawn to estimate phenotypic plasticity within each individual line. Hydraulic conductivity upon sampling will be measured for each individual.
+
+
+#### Drought experiment
+
+**Growing conditions:** at constant 24<span>&deg;</span>C. 
+
+
+**Treatments:**
+
+Two treatments will be conducted to assess the effect of drought on gene expression patterns:
+
+  - T~C~: well-watered (control). 
+  - T~D~: drought. 
+
+**Sampling**
+
+Each T~D~ plantlet will be sampled at the onset of drought (upon wilting), whereas T~C~ plantlets will only be sampled at the end of the experiment (when all the T~D~ plantlets are wilted). A response curve will be drawn to estimate phenotypic plasticity within each individual line. Hydraulic conductivity upon sampling will be measured for each plantlet.
+
+#### Heat and drought experiment
+
+**Growing conditions:** Start at 24<span>&deg;</span>C and gradually increase to 40<span>&deg;</span>C. Every day, we will increase the temperature by 4 <span>&deg;</span>C and it will take 5 days to reach 40 <span>&deg;</span>C (temperatures: `r seq(from=24, to=40, by=4)`). 
+
+Based on data from UT2.
+
+**Treatments:**
+
+Two treatments will be conducted to assess the effect of drought on gene expression patterns:
+
+  - T~CH~: well-watered (control), but experiencing gradual increase of heat. 
+  - T~D+H~: Drought and heat stress. 
+
+**Sampling**
+
+The onset of drought for each plantlet will be recorded (when they start wilting), but tissue will be sampled at chlorosis (= heat stress). We hypothesize that these two phenotypes might co-occur due to the growing conditions. T~D+H~ individuals will be sampled when these show sign of chlorosis (= heat stress). Response curves (associated to drought and heat phenotypes) will be drawn to estimate phenotypic plasticity within each individual line. Hydraulic conductivity upon sampling will be measured for each individual.
+
+## Transcriptomic analyses
+
+## RNA extraction
+
+1. Randomly select 5 plantlet per treatment per individual line to obtain representation of transcriptomic response at individual line.
+2. Weigh 10 mg of both leaf and root tissues per randomly selected plantlet. 
+3. Pool leaf tissues per treatment per individual line in a tube (= ready for RNA extraction).
+4. Pool root tissues per treatment per individual line in a tube (= ready for RNA extraction).
+5. Conduct RNA extractions.
+6. RNA-seq 
+
+
+## Budget
+
+Table \@ref(tab:budget) shows the tentative budget for this project.
+
+```{r budget, echo=F}
+activity <- c("Ex planting","RNA extraction", "Library preparation", "Sequencing", "Lab. reagents")
+budget <- data.frame("Activity" = activity, "QTY" = numeric(length(activity)), "Rate" = character(length(activity)), "Amount" = numeric(length(activity)))
+budget$QTY <- c(250,1,20,2, 1)
+budget$Rate <- c(2.5, 420, 200, 4803, 400)
+budget$Amount <- budget$QTY*budget$Rate
+
+kbl(budget,  caption = "Budget for GxE experiment.") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+ column_spec(1, bold = TRUE)
+```
+
+The total budget for this experiment is: `r sum(budget$Amount)`
+
+# References
+
+<div id="refs"></div>
+
+# Appendix 1 {.appendix}
+
+Citations of all R packages used to generate this report. 
+
+```{r generateBibliography, eval = T, results="asis", cache = F, echo=F, warning = FALSE, message=FALSE}
+library("knitcitations")
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "packages.bib")
+``` 
+
+# Appendix 2 {.appendix}
+
+Version information about R, the operating system (OS) and attached or R loaded packages. This appendix was generated using `sessionInfo()`.
+
+```{r eval=T, echo=F, warning = FALSE, message=FALSE}
+sessionInfo()
+```
