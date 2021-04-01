@@ -49,29 +49,154 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 
 # Overview
 
-To annotate our sagebrush genome, we will be conducting a suite of GxE experiments, which are described in this document. These experiments will be associated to drought and heat phenotypes. Leaf and root tissues will be sequenced using RNA-seq technology (on Illumina NovaSeq platform). 
+To annotate the sagebrush genome (and identify adaptive loci related to drought and heat stress) a suite of GxE experiments are conducted followed by RNA sequencing and transcriptome assemblies (later referred to as bioinformatic analyses). This document is dedicated to describing our experimental design, which is associated to comparing drought and heat performance between sagebrush individual lines and identifying adaptive loci associated to these phenotypes. Leaf and root tissues will be sequenced using RNA-seq technology (on Illumina NovaSeq platform). 
  
 ## GxE experiments
 
 ### Overview
 
-- 3 GxE experiments: Heat (~H~), drought (~D~) and heat + drought (~HD~) stresses.
-- 5 treatments (=T).
-- 25 individuals/treatment (=n). 
-- 2 individual lines (G): G1 and G2.
+- 3 GxE experiments: Heat (H), drought (D) and heat + drought (HD) stresses.
+- 5 treatments (T).
+- 25 individuals/treatment (n). 
+- 2 individual lines (Ind): `G1_b2` (representing drought tolerant genotype) and `G2_b24` (representing drought sensitive genotype). We will be conducting trial experiments using `G2_b27`. Please see Figure \@ref(fig:timetab) for more details.
 - 2 tissue types for RNA-seq: leaf and root.
-- Record wilting and chlorosis responses at individual level (= phentotypes used for sampling, but also to assess phenotypic plasticity).
-- Measure hydraulic conductivity (to further estimate drought stress, a proxy of embolism).
-- The total number of plantlets (T*n*G): `r (25*5)*2`
-- Number of RNA extractions = N. libraries (L) (T*L*Tiss*G): `r ((5*1)*2)*2`
+- Recording **wilting** and **chlorosis** responses at individual level (= phenotypes used for sampling, but also to assess phenotypic plasticity).
+- Measuring hydraulic conductivity of plantlets upon signs of stress (see above). This will allow to further estimate drought and/or heat stress and serve as proxy of embolism.
+- The total number of plantlets (T*n*Ind): `r (25*5)*2`
+- Number of RNA extractions = N. libraries (L) (T*Tiss*Ind): `r ((5*1)*2)*2`
+- Number of Illumina NovaSeq runs: 2.
 
 ### Sampling
 
-[Individual lines](Individual_lines.html) that have been acclimatized to natural environmental conditions are used for these experiments. Every plantlet within an individual line will have a specific barcode to monitor its progress.
+[Individual lines](Individual_lines.html) that have been acclimatized to natural environmental conditions are used for these experiments. Every plantlet within an individual line will have a specific barcode to monitor its progress. Two individual lines will be used: `G1_b2` (representing drought tolerant genotype) and `G2_b24` (representing drought sensitive genotype). We will be conducting trial GxE experiments using `G2_b27` to make sure that all the settings are correct. Please see Figure \@ref(fig:timetab) for more details.
+
+### Timetable
+
+The timetable associated to the GxE experiments and subsequent RNA sequencing (RNA-seq) and bioinformatic analyses (= transcriptome assemblies) required to annotate the sagebrush genome is presented in Figure \@ref(fig:timetab).
+
+The time allocated for each phase of the workflow (and representing the time associated to process an individual line) is as follows:
+
+- <span style="color: black;font-weight:bold">Ex planting</span>: 11 weeks. Note that the first two weeks and the final week of this phase are taking place in the culture chamber (P4). Please see the [Propagation](Individual_lines.html) for more details.
+- <span style="color: grey;font-weight:bold">GxE experiments</span>: 4 weeks. This time should allow for conducting the three GxE experiments (T~H~, T~D~, T~DH~) back to back on one individual line. This will take place in the culture chamber (P4).
+- <span style="color: green;font-weight:bold">RNA-seq</span>: 10 weeks. Two weeks are dedicated to conduct RNA extractions at BSU and shipping samples to sequencing facility. We estimate that eight weeks will be required to conduct the sequencing.
+- <span style="color: blue;font-weight:bold">Bioinformatics</span>: 20 weeks. Assembling transcriptomes, conducting comparative analyses to isolate adaptive loci and starting genome annotation will take 20 weeks.  
+
+
+```{r timetab, echo=F, warning=F, fig.cap= "Timetable associated to GxE experiments and subsequent RNA sequencing and biorinformatic analyses used for annotate the sagebrush genome. Please see text for more details on individual lines."}
+#Timetable
+
+timetab <- data.frame("Individual_line" = c("G2_b27", "G2_b24", "G1_b2"), "Start_ExPlanting" = lubridate::mdy(c("NA", "NA", "NA")), "End_ExPlanting" = lubridate::mdy(c("NA", "NA", "NA")), "GxE_End" = lubridate::mdy(c("NA", "NA", "NA")), "RNA-seqEnd" = lubridate::mdy(c("NA", "NA", "NA")), "Bioinfo_End" = lubridate::mdy(c("NA", "NA", "NA")))
+
+
+###
+#Trial
+# G2_b27
+###
+
+#When ready for ex planting?
+timetab$Start_ExPlanting[1] <- as.Date("04-01-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(2)
+
+#When ready for GxE
+timetab$End_ExPlanting[1] <- timetab$Start_ExPlanting[1] + lubridate::weeks(10)
+
+#When GxE end?
+timetab$GxE_End[1] <- timetab$End_ExPlanting[1] + lubridate::weeks(4)
+
+###
+# G2_b24
+###
+
+#When ready for ex planting?
+timetab$Start_ExPlanting[2] <- as.Date("04-01-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(5)
+
+#When ready for GxE
+timetab$End_ExPlanting[2] <- timetab$Start_ExPlanting[2] + lubridate::weeks(11)
+
+#When GxE end?
+timetab$GxE_End[2] <- timetab$End_ExPlanting[2] + lubridate::weeks(4)
+
+#When RNA-seq end?
+timetab$RNA.seqEnd[2] <-  timetab$GxE_End[2] + lubridate::weeks(10)
+
+#When Bioinfo end?
+timetab$Bioinfo_End[2] <-  timetab$RNA.seqEnd[2] + lubridate::weeks(20)
+
+
+###
+# G1_b2
+###
+
+#When ready for ex planting?
+timetab$Start_ExPlanting[3] <- as.Date("04-09-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(13)
+
+#When ready for GxE
+timetab$End_ExPlanting[3] <- timetab$Start_ExPlanting[3] + lubridate::weeks(11)
+
+#When GxE end?
+timetab$GxE_End[3] <- timetab$End_ExPlanting[3] + lubridate::weeks(4)
+
+#When RNA-seq end?
+timetab$RNA.seqEnd[3] <-  timetab$GxE_End[3] + lubridate::weeks(10)
+
+#When Bioinfo end?
+timetab$Bioinfo_End[3] <-  timetab$RNA.seqEnd[3] + lubridate::weeks(20)
+
+
+
+###
+#PLOT
+###
+
+#Plot timetable
+plot(x=c(lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), lubridate::round_date(max(timetab$Bioinfo_End, na.rm = T), "month")), y= c(0,3), type="n", axes = F, ylab = "", xlab = "")
+
+#Add customed axes
+#Y axis = Individual lines
+axis(side = 2, at = c(0.5, 1.5, 2.5), labels = timetab$Individual_line)
+
+#X axis = time
+datespan <- seq(from = lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), to = lubridate::round_date(max(timetab$Bioinfo_End, na.rm = T), "month"), "month")
+
+axis(side = 1, at = datespan, labels = as.vector(lubridate::month(datespan, label = TRUE, abbr = T)))
+
+#Add titles to axes
+title(main="", xlab="Time (2021-2022)", ylab="Sagebrush individual lines")
+
+for(i in 1:nrow(timetab)){
+  #Ex planting
+  segments(x0 = as.Date(timetab$Start_ExPlanting[i]), x1 = as.Date(timetab$End_ExPlanting[i]), y0 = i-0.5, y1 = i-0.5, col= "black", lwd = 2)
+  #GxE
+  segments(x0 = as.Date(timetab$End_ExPlanting[i]), x1 = as.Date(timetab$GxE_End[i]), y0 = i-0.5, y1 = i-0.5, col= "grey", lwd = 2)
+  #RNAseq
+  segments(x0 = as.Date(timetab$GxE_End[i]), x1 = as.Date(timetab$RNA.seqEnd[i]), y0 = i-0.5, y1 = i-0.5, col= "green", lwd = 2)
+  #Bioinfo
+  segments(x0 = as.Date(timetab$RNA.seqEnd[i]), x1 = as.Date(timetab$Bioinfo_End[i]), y0 = i-0.5, y1 = i-0.5, col= "blue", lwd = 2)
+
+  
+  #Dates
+  text(x = c(timetab$Start_ExPlanting[i], timetab$End_ExPlanting[i], timetab$GxE_End[i], timetab$RNA.seqEnd[i], timetab$Bioinfo_End[i]), y = rep(i-0.2, 3), c(timetab$Start_ExPlanting[i], timetab$End_ExPlanting[i], timetab$GxE_End[i], timetab$RNA.seqEnd[i], timetab$Bioinfo_End[i]), srt=90, cex=.5)
+}
+
+#Arrows with fiscal years
+#Y3
+arrows(x0 = lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), x1 = as.Date("10-01-21", tryFormats = c("%m-%d-%y")), y0 = 0.1, y1 = 0.1, length = 0.1, angle = 10)
+text(x = as.Date("06-01-21", tryFormats = c("%m-%d-%y")), y = 0.2, "Year 3", cex = 0.8)
+
+#Y4
+arrows(x0 = as.Date("10-01-21", tryFormats = c("%m-%d-%y")), x1 = as.Date("06-01-22", tryFormats = c("%m-%d-%y")), y0 = 0.1, y1 = 0.1, length = 0.1, angle = 10, code = 1)
+text(x = as.Date("02-01-22", tryFormats = c("%m-%d-%y")), y = 0.2, "Year 4", cex= 0.8)
+
+# Add a legend
+legend("bottomright", 
+  legend = c("Ex planting (11 w.)", "GxE exp. (4 w.)", "RNA-seq (10 w.)", "Bioinformatics (20 w.)"), 
+  col = c("black","grey", "green", "blue"), 
+  lwd = rep(2, 4),
+  horiz = F , 
+  inset = c(0, 0.1),
+  cex = 0.6)
+```
 
 ### Experimental design
-
-2 individual lines representing G1 and G2.
 
 #### Heat experiment
 
@@ -134,24 +259,6 @@ The onset of drought for each plantlet will be recorded (when they start wilting
 5. Conduct RNA extractions.
 6. RNA-seq 
 
-
-## Budget
-
-Table \@ref(tab:budget) shows the tentative budget for this project.
-
-```{r budget, echo=F}
-activity <- c("Ex planting","RNA extraction", "Library preparation", "Sequencing", "Lab. reagents")
-budget <- data.frame("Activity" = activity, "QTY" = numeric(length(activity)), "Rate" = character(length(activity)), "Amount" = numeric(length(activity)))
-budget$QTY <- c(250,1,20,2, 1)
-budget$Rate <- c(2.5, 420, 200, 4803, 400)
-budget$Amount <- budget$QTY*budget$Rate
-
-kbl(budget,  caption = "Budget for GxE experiment.") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
- column_spec(1, bold = TRUE)
-```
-
-The total budget for this experiment is: `r sum(budget$Amount)`
 
 # References
 
