@@ -38,7 +38,7 @@ Please see the following section of the website for more details on:
 
 The predicted timetable for completion of the sagebrush genome project to support objectives of the GEM3 project is provided in Figure \@ref(fig:timetab). Assembling and annotating the sagebrush genome will serve to assess adaptive capacity of sagebrush populations to cope with drought and heat driven by climate change. This will be done by conducting common garden experiments on [individual lines](Individual_lines.html) of known genomes (serving establishing reference genome and whole genome re-sequencing therefore comparing genomes using a pan-genomics approach) and then at landscape level using adaptive loci (sequenced using a baiting approach) on plants from across the climatic and geographic range of the species.  
 
-```{r timetab, warning = F, echo=F, fig.cap= "Timetable associated to production of data for the sagebrush genome project. Please see text for more details.", out.width = '100%'}
+```{r timetab, warning = F, echo=F, message = F, results="asis", fig.cap= "Timetable associated to production of data for the sagebrush genome project. Please see text for more details.", out.width = '100%', cache = F}
 #Timetable
 
 timetab <- data.frame("Objective" = c(rep("Ref. genome", 2), rep("Comparative genomics",2), rep("Common gardens", 3), rep("Landscape genomics",3)), "Task" = c("Seq., phasing & assembly", "Annotation", "Re-sequencing","Pan-genomics","GxE exp.", "RNA-seq", "Transcriptomics", "Identify adaptive loci", "Baiting", "Modeling"), "Start_Date" = lubridate::mdy(rep("NA", 10)), "End_Date" = lubridate::mdy(rep("NA", 10)))
@@ -114,6 +114,7 @@ timetab$col <- c("brown", "orange", "blue", "orange", "blue", "blue", "orange", 
 #PLOT
 ###
 
+pdf(file = "Figures/timetable_whole_project.pdf")
 #Plot timetable
 plot(x=c(lubridate::floor_date(min(timetab$Start_Date), "month")-10, lubridate::round_date(max(timetab$End_Date), "month")), y= c(0,3), type="n", axes = F, ylab = "", xlab = "")
 
@@ -175,7 +176,9 @@ legend("topright",
   horiz = F , 
   inset = c(0, 0.1),
   cex = 0.6)
+invisible(dev.off())
 
+knitr::include_graphics("Figures/timetable_whole_project.jpg")
 ```
 
 
