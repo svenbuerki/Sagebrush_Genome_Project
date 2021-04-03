@@ -36,7 +36,7 @@ Please see the following section of the website for more details on:
 
 # Timetable
 
-The predicted timetable for completion of the sagebrush genome project to support objectives of the GEM3 project is provided in Figure \@ref(fig:timetab). Assembling and annotating the sagebrush genome will serve to assess adaptive capacity of sagebrush populations to cope with drought and heat driven by climate change. This will be done by conducting common garden experiments on [individual lines](Individual_lines.html) of known genomes (serving establishing reference genome and whole genome re-sequencing) and then at landscape level using adaptive loci (sequenced using a baiting approach) on plants from across the climatic and geographic range of the species.  
+The predicted timetable for completion of the sagebrush genome project to support objectives of the GEM3 project is provided in Figure \@ref(fig:timetab). Assembling and annotating the sagebrush genome will serve to assess adaptive capacity of sagebrush populations to cope with drought and heat driven by climate change. This will be done by conducting common garden experiments on [individual lines](Individual_lines.html) of known genomes (serving establishing reference genome and whole genome re-sequencing therefore comparing genomes using a pan-genomics approach) and then at landscape level using adaptive loci (sequenced using a baiting approach) on plants from across the climatic and geographic range of the species.  
 
 ```{r timetab, warning = F, echo=F, fig.cap= "Timetable associated to production of data for the sagebrush genome project. Please see text for more details.", out.width = '100%'}
 #Timetable
