@@ -41,7 +41,7 @@ The predicted timetable for completion of the sagebrush genome project to suppor
 ```{r timetab, warning = F, echo=F, message = F, results="asis", fig.cap= "Timetable associated to production of data for the sagebrush genome project. Please see text for more details.", out.width = '100%', cache = F}
 #Timetable
 
-timetab <- data.frame("Objective" = c(rep("Ref. genome", 2), rep("Comparative genomics",2), rep("Common gardens", 3), rep("Landscape genomics",3)), "Task" = c("Seq., phasing & assembly", "Annotation", "Re-sequencing","Pan-genomics","GxE exp.", "RNA-seq", "Transcriptomics", "Identify adaptive loci", "Baiting", "Modeling"), "Start_Date" = lubridate::mdy(rep("NA", 10)), "End_Date" = lubridate::mdy(rep("NA", 10)))
+timetab <- data.frame("Objective" = c(rep("Ref. genome", 2), rep("Comparative genomics",2), rep("Common gardens", 3), rep("Landscape genomics",3), rep("Individual lines", 2)), "Task" = c("Seq., phasing & assembly", "Annotation", "Re-sequencing","Pan-genomics","GxE exp.", "RNA-seq", "Transcriptomics", "Id. adaptive loci", "Baiting", "Modeling", "Propagation", "Maintaining lines"), "Start_Date" = lubridate::mdy(rep("NA", 12)), "End_Date" = lubridate::mdy(rep("NA", 12)))
 
 ###
 #Ref. genome
@@ -102,30 +102,48 @@ timetab$End_Date[9] <- timetab$Start_Date[9] + lubridate::weeks(8)
 timetab$Start_Date[10] <- timetab$End_Date[9]
 timetab$End_Date[10] <- timetab$Start_Date[10] + lubridate::weeks(16)
 
+###
+#Individual lines
+###
+#Propagation
+timetab$Start_Date[11] <- as.Date("02-13-20", tryFormats = c("%m-%d-%y"))
+timetab$End_Date[11] <- as.Date("04-07-21", tryFormats = c("%m-%d-%y"))
+#Maintaining lines
+timetab$Start_Date[12] <- timetab$End_Date[11] + lubridate::weeks(1)
+timetab$End_Date[12] <- timetab$End_Date[10]
+
 #Add col with y height
-timetab$Y <- c(rep(2.5, 2), 2, 2, 1.5, 1.3, 1, rep(0.5, 3))
+timetab$Y <- c(rep(2.5, 2), 2, 2, 1.5, 1.3, 1, rep(0.5, 3), rep(3,2))
 #Add color
 # Blue = wet-lab
 # orange = bioinformatics
 # brown = wet/bioinfo
-timetab$col <- c("brown", "orange", "blue", "orange", "blue", "blue", "orange", "orange", "blue", "orange")
+timetab$col <- c("brown", "orange", "blue", "orange", "blue", "blue", "orange", "orange", "blue", "orange", "blue", "blue")
+
+#Add duration (in months)
+timetab$duration <- round(lubridate::time_length(x = lubridate::interval(timetab$Start_Date, timetab$End_Date), "month"),1)
 
 ###
 #PLOT
 ###
 
-pdf(file = "Figures/timetable_whole_project.pdf")
+#pdf(file = "Figures/timetable_whole_project.pdf")
 #Plot timetable
-plot(x=c(lubridate::floor_date(min(timetab$Start_Date), "month")-10, lubridate::round_date(max(timetab$End_Date), "month")), y= c(0,3), type="n", axes = F, ylab = "", xlab = "")
+plot(x=c(lubridate::floor_date(min(timetab$Start_Date), "month")-10, lubridate::round_date(max(timetab$End_Date), "month")), y= c(0,3.5), type="n", axes = F, ylab = "", xlab = "")
 
 #Abline to separate years
+abline(v =  as.Date("12-31-20", tryFormats = c("%m-%d-%y")))
 abline(v =  as.Date("12-31-21", tryFormats = c("%m-%d-%y")))
-text(x = as.Date(timetab$Start_Date[1]) + abs(floor((as.Date(timetab$Start_Date[1])-as.Date("12-31-21", tryFormats = c("%m-%d-%y")))/2)), y = 0.01, cex = 0.8, "2021")
+#2020
+text(x = as.Date(timetab$Start_Date[11]) + abs(floor((as.Date(timetab$Start_Date[11])-as.Date("12-31-20", tryFormats = c("%m-%d-%y")))/2)), y = 0.01, cex = 0.8, "2020")
+#2021
+text(x = as.Date("01-01-21", tryFormats = c("%m-%d-%y")) + abs(floor((as.Date("01-01-21", tryFormats = c("%m-%d-%y"))-as.Date("12-31-21", tryFormats = c("%m-%d-%y")))/2)), y = 0.01, cex = 0.8, "2021")
+#2022
 text(x = as.Date("01-01-22", tryFormats = c("%m-%d-%y")) + abs(floor(as.Date("01-01-22", tryFormats = c("%m-%d-%y")) - as.Date(max(timetab$End_Date)))/2), y = 0.01, cex = 0.8, "2022")
 
 #Add customed axes
 #Y axis = Individual lines
-axis(side = 2, at = c(0.5, 1.5, 2, 2.5), las = 2, labels = rev(gsub(" ", "\n", unique(timetab$Objective))), cex= .5, pos=lubridate::floor_date(min(timetab$Start_Date), "month"))
+axis(side = 2, at = c(0.5, 1.5, 2, 2.5, 3), las = 2, labels = rev(gsub(" ", "\n", unique(timetab$Objective))[c(5,1,2,3,4)]), cex.axis= .7, pos=lubridate::floor_date(min(timetab$Start_Date), "month"), adj=0)
 
 #X axis = time
 datespan <- seq(from = lubridate::floor_date(min(timetab$Start_Date), "month"), to = lubridate::round_date(max(timetab$End_Date), "month"), "month")
@@ -139,12 +157,16 @@ title(main="", xlab="Time", ylab="")
 segments(x0 = as.Date(timetab$Start_Date), x1 = as.Date(timetab$End_Date), y0 = as.numeric(timetab$Y), y1 = as.numeric(timetab$Y), lwd = 2, col = timetab$col)
 
 #Print tasks next to arrows
-text(x = as.Date(timetab$Start_Date) + floor((as.Date(timetab$End_Date)-as.Date(timetab$Start_Date))/2)  , y = timetab$Y+0.15, as.vector(timetab$Task), srt=12, cex=.7)
+text(x = as.Date(timetab$Start_Date) + floor((as.Date(timetab$End_Date)-as.Date(timetab$Start_Date))/2)  , y = timetab$Y+0.15, paste(as.vector(timetab$Task), "\n", "(", timetab$duration, "m.)", sep=""), srt=10, cex=.7)
 
 #Arrows with fiscal years
+#Y2
+arrows(x0 = lubridate::floor_date(min(timetab$Start_Date), "month"), x1 = as.Date("09-30-20", tryFormats = c("%m-%d-%y")), y0 = 0.2, y1 = 0.2, length = 0.1, angle = 10)
+text(x = lubridate::floor_date(min(timetab$Start_Date), "month") + floor((as.Date("09-30-20", tryFormats = c("%m-%d-%y"))-lubridate::floor_date(min(timetab$Start_Date), "month"))/2), y = 0.3, "Year 2", cex = 0.8)
+
 #Y3
-arrows(x0 = lubridate::floor_date(min(timetab$Start_Date), "month"), x1 = as.Date("09-30-21", tryFormats = c("%m-%d-%y")), y0 = 0.2, y1 = 0.2, length = 0.1, angle = 10)
-text(x = lubridate::floor_date(min(timetab$Start_Date), "month") + floor((as.Date("09-30-21", tryFormats = c("%m-%d-%y"))-lubridate::floor_date(min(timetab$Start_Date), "month"))/2), y = 0.3, "Year 3", cex = 0.8)
+arrows(x0 = as.Date("10-01-20", tryFormats = c("%m-%d-%y")), x1 = as.Date("09-30-21", tryFormats = c("%m-%d-%y")), y0 = 0.2, y1 = 0.2, length = 0.1, angle = 10, code = 3)
+text(x = as.Date("10-01-20", tryFormats = c("%m-%d-%y")) + floor((as.Date("09-30-21", tryFormats = c("%m-%d-%y"))-as.Date("10-01-20", tryFormats = c("%m-%d-%y")))/2), y = 0.3, "Year 3", cex = 0.8)
 
 #Y4
 arrows(x0 = as.Date("10-01-21", tryFormats = c("%m-%d-%y")), x1 = lubridate::floor_date(max(timetab$End_Date), "month"), y0 = 0.2, y1 = 0.2, length = 0.1, angle = 10, code = 1)
@@ -167,18 +189,28 @@ arrows(x0 = timetab$End_Date[2]-20, x1 = timetab$End_Date[2]-20, y0 = timetab$Y[
 #Transcriptomics to adaptive loci
 arrows(x0 = timetab$Start_Date[7]+5, x1 = timetab$Start_Date[7]+5, y0 = timetab$Y[7], y1 = timetab$Y[8], score = 1, length = 0.1, lwd = 1.5, lty = 6, angle = 20, col = "black")
 
+
+#Propagation to sequencing
+arrows(x0 = timetab$End_Date[11]-40, x1 = timetab$Start_Date[1]-2, y0 = timetab$Y[11], y1 = timetab$Y[1], score = 1, length = 0.1, lwd = 1.5, lty = 6, angle = 20, col = "black")
+
+#Propagation to Re-sequencing
+arrows(x0 = timetab$End_Date[11]-50, x1 = timetab$Start_Date[3]-2, y0 = timetab$Y[11], y1 = timetab$Y[3], score = 1, length = 0.1, lwd = 1.5, lty = 6, angle = 20, col = "black")
+
+#Propagation to GxE
+arrows(x0 = timetab$End_Date[11]-60, x1 = timetab$Start_Date[5]-2, y0 = timetab$Y[11], y1 = timetab$Y[5], score = 1, length = 0.1, lwd = 1.5, lty = 6, angle = 20, col = "black")
+
 # Add a legend
-legend("topright", 
+legend("bottomleft", 
   legend = c("Wet-lab", "Bioinformatics", "Wet-lab/Bioinfo.", "Data connectivity"), 
   col = c("blue","orange", "brown", "black"), 
   lwd = rep(2, 4),
   lty = c(rep(1, 3), 6),
   horiz = F , 
-  inset = c(0, 0.1),
+  inset = c(0.1, 0.2),
   cex = 0.6)
-invisible(dev.off())
+#invisible(dev.off())
 
-knitr::include_graphics("Figures/timetable_whole_project.jpg")
+#knitr::include_graphics("Figures/timetable_whole_project.jpg")
 ```
 
 
