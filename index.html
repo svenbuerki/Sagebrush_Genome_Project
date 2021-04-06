@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -281,6 +284,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -288,6 +354,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -353,23 +429,22 @@ $(document).ready(function() {
 </script>
 <div id="aim" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Aim</h1>
-<p>Sequencing, phasing and annotating the diploid genome of basin big sagebrush (<em>Artemisia tridentata</em> subsp. <em>tridentata</em>). This taxon as 2n=2x=18 chromosomes and a 2C genome size of 9.5Gbp <span class="citation">(see <a href="#ref-Barron2020" role="doc-biblioref">Barron et al., 2020</a>)</span>. In addition, preliminary analyses demonstrated that the genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the genome, but also maintain the individual line both <em>in vitro</em> and <em>ex vitro</em> to support genotype-by-environment experiments.</p>
+<p>The Sagebrush Genome Project supports the overarching aim of the GEM3 project, which is to <strong>understand genome to phenome (G2P) mechanisms that translate to adaptive capacity of sagebrush (<em>Artemisia tridentata</em>) populations.</strong> More specifically, in this project, we will be focusing on assessing sagebrush adaptive capacity to respond to drought and heat stress caused by climate change.</p>
 </div>
-<div id="overall-approach-requirements" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Overall approach &amp; requirements</h1>
-<p>To be able to phase such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. <strong>120 gr. of leaf biomass</strong>.</p>
-<p>Please see the following section of the website for more details on:</p>
-<ul>
-<li><a href="Individual_lines.html">Propagation of individual lines</a>.</li>
-<li><a href="Biomass_production.html">Biomass production</a>.</li>
-<li><a href="Sequencing.html">Genome sequencing</a>.</li>
-<li><a href="Annotation.html">Genome annotation</a>.</li>
-<li><a href="Team.html">Team</a>.</li>
-</ul>
+<div id="objectives" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Objectives</h1>
+<p>This project is subdivided into 5 objectives as follows:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Individual lines:</strong> Developing and applying an <em>in vitro</em> tissue culture approach to propagate sagebrush individual lines supporting objectives 2-4. This objective is key since preliminary analyses demonstrated that the sagebrush genome is highly out-bred. For these reasons, we are aiming at not only produce enough biomass of the same individual line to produce the reference genome, but also maintain individual lines to support genotype-by-environment (GxE) experiments (objective 4).</li>
+<li><strong>Reference genome:</strong> Sequencing, phasing and annotating the diploid genome of basin big sagebrush (<em>Artemisia tridentata</em> subsp. <em>tridentata</em>). This taxon as 2n=2x=18 chromosomes and a 2C genome size of ca. 9.5Gbp <span class="citation">(see <a href="#ref-Barron2020" role="doc-biblioref">Barron et al., 2020</a>)</span>. To deliver such complex genome, we aim at generating 50-100X raw data coverage (haploid sagebrush genome size: 4.5 Gbp) using PacBio technology and phase it using proximity ligation data. Such wet-lab procedures are requiring the production of ca. <strong>120 gr. of leaf biomass</strong>. Annotation of the reference genome will be conducted based on RNA-seq data generated during objective 4 (through GxE experiments). This will allow focusing on annotating genes involved in responding to drought and heat stresses and therefore assess G2P mechanisms.</li>
+<li><strong>Comparative genomics:</strong> To further investigate genomic differences between sagebrush populations, a re-sequencing approach coupled with pan-genomic analyses will be applied to compare genomes from individual lines growing in contrasting climates (in terms of drought and heat stresses).</li>
+<li><strong>Common gardens:</strong> GxE experiments focusing on measuring the phenotypic and transcriptomic responses of sagebrush individual lines to drought, heat and drought+heat stresses will be conducted. Using clones will allow to disentangle respective contributions of genomic vs. phenotypic plasticty processes on the adaptive capacity of sagebrush genotypes. An overarching objective here is to identify adaptive loci key in drought, heat and drought+heat responses. These adaptive loci will then be used to model sagebrush adaptive capacity at population level in objective 5.</li>
+<li><strong>Landscape genomics:</strong> Apply adaptive loci (sequenced using a baiting approach) on sagebrush individuals collected from populations representing climatic and geographic range of the species. First, field collections will be biobanked (= conducting DNA extractions and establishing a seed bank) and herbarium specimens digitized. The age of each collected individual will be estimated and compared to onset of megadrought in the US <span class="citation">(<a href="#ref-williams2020Science" role="doc-biblioref">Williams et al., 2020</a>)</span>. This preliminary data will provide hypotheses on the establishment of individuals and populations in the landscape and the potential effects of drought on the gene pool. We hypothesize that the effect of megadrought on established individuals will be less dramatic than on those establishing post megadrought. This means that if sagebrush megadrought (and associated heat) response is genetically driven then more genetic diversity (based on adaptive loci inferred in objective 4) will be observed for individuals established prior to megadrought, whereas those established post megadrought will show a strong genetic bottleneck effect corresponding to natural selection processes acting upon sageberush populations.</li>
+</ol>
 </div>
 <div id="timetable" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Timetable</h1>
-<p>The predicted timetable for completion of the sagebrush genome project to support objectives of the GEM3 project is provided in Figure <a href="#fig:timetab">3.1</a>. Assembling and annotating the sagebrush genome will serve to assess adaptive capacity of sagebrush populations to cope with drought and heat driven by climate change. This will be done by conducting common garden experiments on <a href="Individual_lines.html">individual lines</a> of known genomes (serving establishing reference genome and whole genome re-sequencing therefore comparing genomes using a pan-genomics approach) and then at landscape level using adaptive loci (sequenced using a baiting approach) on plants from across the climatic and geographic range of the species.</p>
+<p>The timetable associated to our objectives is displayed in Figure <a href="#fig:timetab">3.1</a>.</p>
 <div class="figure"><span id="fig:timetab"></span>
 <img src="index_files/figure-html/timetab-1.png" alt="Timetable associated to production of data for the sagebrush genome project. Please see text for more details." width="100%" />
 <p class="caption">
@@ -377,17 +452,31 @@ Figure 3.1: Timetable associated to production of data for the sagebrush genome 
 </p>
 </div>
 </div>
+<div id="project-structure" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Project structure</h1>
+<p>Each of the objective described above and in Figure <a href="#fig:timetab">3.1</a> are further detailed in the following webpage:</p>
+<ul>
+<li><strong><a href="Individual_lines.html">Propagation program</a></strong>: This webpage covers the tissue culture methods applied in this project together with data on individual lines maintained at BSU.</li>
+<li><strong><a href="Sequencing.html">Sequencing</a>:</strong> This webpage describes the approach used to sequence, phase and annotate sagebrush genome.</li>
+<li><strong><a href="Annotation.html">Annotation</a>:</strong> This webpage provides insights into the GxE experiments used to estimate the effect of drought, heat and drought+heat on sagebrush individual lines. RNA-seq data produced by these experiments will be used to annotate sagebrush genome and identify adaptive loci.</li>
+</ul>
+</div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Barron2020" class="csl-entry">
 <span class="smallcaps">Barron, R.</span>, <span class="smallcaps">P. Martinez</span>, <span class="smallcaps">M. Serpe</span>, and <span class="smallcaps">S. Buerki</span>. 2020. Development of an in vitro method of propagation for artemisia tridentata subsp. Tridentata to support genome sequencing and genotype-by-environment research. <em>Plants</em> 9: Available at: <a href="https://www.mdpi.com/2223-7747/9/12/1717">https://www.mdpi.com/2223-7747/9/12/1717</a>.
 </div>
+<div id="ref-williams2020Science" class="csl-entry">
+<span class="smallcaps">Williams, A.P.</span>, <span class="smallcaps">E.R. Cook</span>, <span class="smallcaps">J.E. Smerdon</span>, <span class="smallcaps">B.I. Cook</span>, <span class="smallcaps">J.T. Abatzoglou</span>, <span class="smallcaps">K. Bolles</span>, <span class="smallcaps">S.H. Baek</span>, et al. 2020. Large contribution from anthropogenic warming to an emerging north american megadrought. <em>Science</em> 368: 314–318.
 </div>
 </div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -420,6 +509,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
