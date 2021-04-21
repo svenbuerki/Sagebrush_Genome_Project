@@ -661,8 +661,13 @@ su USER_name
 su bio_11</code></pre>
 </div>
 </div>
-<div id="add-symbolic-links-to-programs" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Add symbolic links to programs</h1>
+<div id="estimate-file-space-usage" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Estimate file space usage</h1>
+<p>Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space used by their files in a folder. To do that, please use the following command relying on <code>du</code> protocol:</p>
+<pre class="bash"><code>du -h -s *</code></pre>
+</div>
+<div id="add-symbolic-links-to-programs" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Add symbolic links to programs</h1>
 <p>Here we use the <code>ln</code> command to make a symbolic link (or a kind of alias) to a program in the <code>bin/</code>. This means that the program will be accessible to anybody by typing a shortcut (or alias).</p>
 <p>Since the symbolic link will reside in the <code>bin/</code> folder, first you will be navigating to this location as follows:</p>
 <pre class="bash"><code>#Navigate where the symbolic link should reside
@@ -676,6 +681,30 @@ sudo ln -s pathtoprogram alias
 #Example with R
 sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4</code></pre>
 <p>In this example, everybody will be able to access <code>R</code> version 4.0.4 by typing <code>R-4</code> in the Terminal.</p>
+</div>
+<div id="mount-a-smb-server-on-ubuntu" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Mount a smb server on Ubuntu</h1>
+<ol style="list-style-type: decimal">
+<li>Create (<code>mkdir</code>) or identify a folder on your Ubuntu computer where the smb server will be connected to. In this example, we use our shared folder in <code>/home/Genomics_shared</code> and created a folder for smb protocols (<code>smbshare</code>).</li>
+</ol>
+<pre class="bash"><code>#Location where smb server will be mounted
+/home/Genomics_shared/sambashare</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Mount the smb server using this command:</li>
+</ol>
+<pre class="bash"><code>#1. Mount smb server
+# adjust: 
+# - username
+# - smb IP address
+# - Location for mounting smb server on your computer
+sudo mount -t cifs -o username=svenbuerki //cifs-prd-01/research/SvenBuerki /home/Genomics_shared/sambashare</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>You can copy or move files and folders freely from your local computer to smb server by using <code>sudo</code> protocol. Here is an example where we copy a folder from computer to mounted smb server:</li>
+</ol>
+<pre class="bash"><code>#2. Copy folder from Linux box to smb server
+sudo cp -r IDT2-2_NovaSeq_Illumina_April2019/ /home/Genomics_shared/sambashare/</code></pre>
+<p>If you are interested in setting-up a samba (smb) served from your Linux computer to be shared with Windows users follow this approach:</p>
+<p><a href="https://ubuntu.com/tutorials/install-and-configure-samba#1-overview" class="uri">https://ubuntu.com/tutorials/install-and-configure-samba#1-overview</a></p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>

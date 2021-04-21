@@ -322,6 +322,14 @@ su USER_name
 su bio_11
 ```
 
+# Estimate file space usage
+
+Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space used by their files in a folder. To do that, please use the following command relying on `du` protocol:
+
+```{bash, eval=F}
+du -h -s *
+```
+
 # Add symbolic links to programs
 
 Here we use the `ln` command to make a symbolic link (or a kind of alias) to a program in the `bin/`. This means that the program will be accessible to anybody by typing a shortcut (or alias). 
@@ -346,6 +354,34 @@ sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4
 ```
 
 In this example, everybody will be able to access `R` version 4.0.4 by typing `R-4` in the Terminal.
+
+# Mount a smb server on Ubuntu
+
+1. Create (`mkdir`) or identify a folder on your Ubuntu computer where the smb server will be connected to. In this example, we use our shared folder in `/home/Genomics_shared` and created a folder for smb protocols (`smbshare`).
+```{bash, eval=F}
+#Location where smb server will be mounted
+/home/Genomics_shared/sambashare
+```
+
+2. Mount the smb server using this command:
+```{bash, eval=F}
+#1. Mount smb server
+# adjust: 
+# - username
+# - smb IP address
+# - Location for mounting smb server on your computer
+sudo mount -t cifs -o username=svenbuerki //cifs-prd-01/research/SvenBuerki /home/Genomics_shared/sambashare
+```
+3. You can copy or move files and folders freely from your local computer to smb server by using `sudo` protocol. Here is an example where we copy a folder from computer to mounted smb server:
+```{bash, eval=F}
+#2. Copy folder from Linux box to smb server
+sudo cp -r IDT2-2_NovaSeq_Illumina_April2019/ /home/Genomics_shared/sambashare/
+```
+
+If you are interested in setting-up a samba (smb) served from your Linux computer to be shared with Windows users follow this approach:
+
+https://ubuntu.com/tutorials/install-and-configure-samba#1-overview
+
 
 # References
 
