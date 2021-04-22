@@ -661,10 +661,22 @@ su USER_name
 su bio_11</code></pre>
 </div>
 </div>
-<div id="estimate-file-space-usage" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Estimate file space usage</h1>
-<p>Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space used by their files in a folder. To do that, please use the following command relying on <code>du</code> protocol:</p>
-<pre class="bash"><code>du -h -s *</code></pre>
+<div id="disk-usage" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Disk usage</h1>
+<p>Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space left on their hard drive (using <code>df</code>) or space taken by files (using <code>du</code>). To do that, please use the following commands:</p>
+<div id="disk-space" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Disk space</h2>
+<p>The <code>df</code> protocol gives you insights into disk free space. To know about the free space on all disks do:</p>
+<pre class="bash"><code>df -H</code></pre>
+<p>To get the same information, but for the disk specific to a folder (here <code>/home</code>), do:</p>
+<pre class="bash"><code>df -H /home</code></pre>
+</div>
+<div id="disk-usage-1" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Disk usage</h2>
+<p>The <code>du</code> protocol gives you insights into disk usage. here we propose a command that gives you specifically the disk usage taken by files:</p>
+<pre class="bash"><code>#Disk usage taken by files in a folder
+du -h -s *</code></pre>
+</div>
 </div>
 <div id="add-symbolic-links-to-programs" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Add symbolic links to programs</h1>
@@ -705,6 +717,43 @@ sudo mount -t cifs -o username=svenbuerki //cifs-prd-01/research/SvenBuerki /hom
 sudo cp -r IDT2-2_NovaSeq_Illumina_April2019/ /home/Genomics_shared/sambashare/</code></pre>
 <p>If you are interested in setting-up a samba (smb) served from your Linux computer to be shared with Windows users follow this approach:</p>
 <p><a href="https://ubuntu.com/tutorials/install-and-configure-samba#1-overview" class="uri">https://ubuntu.com/tutorials/install-and-configure-samba#1-overview</a></p>
+</div>
+<div id="sftp-protocol" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> SFTP protocol</h1>
+<p>You might have to download NGS data from different providers (e.g. GeneWIZ) and they will set-up an <code>sftp</code> server for you. Here is a short tutorial on the procedure used to download data:</p>
+<div id="start-a-tmux-session" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Start a tmux session</h2>
+<p>Open a Terminal and start a tmux session as follows:</p>
+<pre class="bash"><code>tmux</code></pre>
+<p>This will open a safe working environment that can be accessed very easily. Please read protocol on <code>tmux</code> sessions <a href="https://svenbuerki.github.io/Genomics-Bioinformatics/Tutorials.html#3_Running_bioinformatic_analyses_-_tmux">here</a>.</p>
+</div>
+<div id="connect-to-sftp-server" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Connect to sftp server</h2>
+<p>To connect to an sftp server you need:</p>
+<ul>
+<li>username (here anthonymelton_boisestate).</li>
+<li>sftp IP server address (here sftp.genewiz.com)</li>
+</ul>
+<pre class="r"><code>#General syntax
+sftp username@sftp.IP
+
+#Example with GeneWIZ
+sftp anthonymelton_boisestate@sftp.genewiz.com</code></pre>
+</div>
+<div id="set-destination-path" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Set destination path</h2>
+<p>The <code>get</code> or <code>mget</code> protocols used to copy files over don’t allow to set the destinations path (where the files will be saved on your local computer), but you can easily set this by using the <code>lcd</code> command. Here is an example based on our project structure.</p>
+<pre class="bash"><code>#Copy files from sftp server to /home/Genomics_shared/G1_b2_1/
+lcd /home/Genomics_shared/G1_b2_1/</code></pre>
+</div>
+<div id="copy-whole-project-folder" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Copy whole project folder</h2>
+<p>The best practice is to copy the whole project folder over onto your local computer. This can be done by using <code>get -r</code> command. Here is an example with some GeneWIZ data.</p>
+<pre class="bash"><code>#Copy whole project over
+get -r 30-470086959</code></pre>
+<p>Depending on the sive of the files (usually several Gb)
+it might take hours for the transfer to be completed. be patient!</p>
+</div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>

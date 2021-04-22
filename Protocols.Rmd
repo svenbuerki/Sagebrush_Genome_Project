@@ -322,11 +322,30 @@ su USER_name
 su bio_11
 ```
 
-# Estimate file space usage
+# Disk usage
 
-Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space used by their files in a folder. To do that, please use the following command relying on `du` protocol:
+Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space left on their hard drive (using `df`) or space taken by files (using `du`). To do that, please use the following commands: 
+
+## Disk space
+
+The `df` protocol gives you insights into disk free space. To know about the free space on all disks do:
 
 ```{bash, eval=F}
+df -H
+```
+
+To get the same information, but for the disk specific to a folder (here `/home`), do:
+
+```{bash, eval=F}
+df -H /home
+```
+
+## Disk usage
+
+The `du` protocol gives you insights into disk usage. here we propose a command that gives you specifically the disk usage taken by files:
+
+```{bash, eval=F}
+#Disk usage taken by files in a folder
 du -h -s *
 ```
 
@@ -382,6 +401,55 @@ If you are interested in setting-up a samba (smb) served from your Linux compute
 
 https://ubuntu.com/tutorials/install-and-configure-samba#1-overview
 
+# SFTP protocol
+
+You might have to download NGS data from different providers (e.g. GeneWIZ) and they will set-up an `sftp` server for you. Here is a short tutorial on the procedure used to download data:
+
+## Start a tmux session
+
+Open a Terminal and start a tmux session as follows:
+
+```{bash, eval=F}
+tmux
+```
+
+This will open a safe working environment that can be accessed very easily. Please read protocol on `tmux` sessions [here](https://svenbuerki.github.io/Genomics-Bioinformatics/Tutorials.html#3_Running_bioinformatic_analyses_-_tmux).
+
+## Connect to sftp server
+
+To connect to an sftp server you need:
+
+- username (here anthonymelton_boisestate).
+- sftp IP server address (here sftp.genewiz.com)
+
+```{r, eval=F}
+#General syntax
+sftp username@sftp.IP
+
+#Example with GeneWIZ
+sftp anthonymelton_boisestate@sftp.genewiz.com
+```
+
+## Set destination path
+
+The `get` or `mget` protocols used to copy files over don't allow to set the destinations path (where the files will be saved on your local computer), but you can easily set this by using the `lcd` command. Here is an example based on our project structure.
+
+```{bash, eval=F}
+#Copy files from sftp server to /home/Genomics_shared/G1_b2_1/
+lcd /home/Genomics_shared/G1_b2_1/
+```
+
+## Copy whole project folder
+
+The best practice is to copy the whole project folder over onto your local computer. This can be done by using `get -r` command. Here is an example with some GeneWIZ data.
+
+```{bash, eval=F}
+#Copy whole project over
+get -r 30-470086959
+```
+
+Depending on the sive of the files (usually several Gb)
+it might take hours for the transfer to be completed. be patient!
 
 # References
 
