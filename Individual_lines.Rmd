@@ -134,6 +134,8 @@ kbl(Explant,  caption = "*Ex planting* protocol for *Artemisia tridentata* subsp
 
 For the <span style="color: black;font-weight:bold">Ex5</span> phase, the light intensity of the P4 culture chamber will be set identical to the one at the Cart.
 
+
+The P4 can hold 164 of the larger vessels.
 # Individual lines
 
 Information on individual lines in culture at BSU is provided in Table \@ref(tab:indlines). The individual line used for biomass production underpinning the genome project is `G2_b24_1`. 

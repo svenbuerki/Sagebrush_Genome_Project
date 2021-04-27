@@ -198,9 +198,24 @@ legend("bottomright",
 
 ### Experimental design
 
+#### Climatic growing conditions
+
+During the ex planting protocol, plantlets are exposed to the following climatic conditions in:
+
+- On the cart in the laboratory: 24<span>&deg and average of 20.3% RH.
+- In the culture chamber (P4): 24<span>&deg and average of 22% RH.
+
 #### Heat experiment
 
 **Growing conditions:** at constant 40<span>&deg;</span>C. Based on data from UT2.
+
+42<span>&deg;</span>C for most herbaceous plants:
+
+Tissue collected at 0 h (= control) and 5 h (=heat treatment) for *Brachypodium distachyon*. [See] here(https://www.frontiersin.org/articles/10.3389/fpls.2016.02067/full)
+
+Tissue collected after 2 days for *Brassica alboglabra*. See [here] (https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-019-5652-y)
+
+45<span>&deg;</span>C for a shrub (Ziziphus) for 5 days with tissue sampling on 0d (control), 1d, 3d, 5d. 
 
 Plantlets will be well-watered before conducting the experiment.
 

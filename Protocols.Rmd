@@ -322,7 +322,32 @@ su USER_name
 su bio_11
 ```
 
-# Disk usage
+# Add symbolic links to programs
+
+Here we use the `ln` command to make a symbolic link (or a kind of alias) to a program in the `bin/`. This means that the program will be accessible to anybody by typing a shortcut (or alias). 
+
+Since the symbolic link will reside in the `bin/` folder, first you will be navigating to this location as follows:
+
+```{bash, eval=F}
+#Navigate where the symbolic link should reside
+cd /usr/local/bin/
+```
+
+Then we will establish the symbolic link as follows:
+
+```{bash, eval=F}
+#Use ln protocol to establish symbolic link
+# pathtoprogram = path to executable program 
+# alias = the name you give to the symbolic link or alias
+sudo ln -s pathtoprogram alias
+
+#Example with R
+sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4
+```
+
+In this example, everybody will be able to access `R` version 4.0.4 by typing `R-4` in the Terminal.
+
+# Disk status
 
 Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space left on their hard drive (using `df`) or space taken by files (using `du`). To do that, please use the following commands: 
 
@@ -349,30 +374,111 @@ The `du` protocol gives you insights into disk usage. here we propose a command 
 du -h -s *
 ```
 
-# Add symbolic links to programs
+# Share external hard drive with all users
 
-Here we use the `ln` command to make a symbolic link (or a kind of alias) to a program in the `bin/`. This means that the program will be accessible to anybody by typing a shortcut (or alias). 
+If you want to share an external hard drive across all users of a Ubuntu computer you will need to add an entry in the `fstab` file. However, before adding this entry, you will need to:
+- Identify the `UUID` of the external hard drive (using `sudo blkid`).
+- Create a folder owned by root (and give writing permissions  to all users) to mount the external hard drive.
 
-Since the symbolic link will reside in the `bin/` folder, first you will be navigating to this location as follows:
+To share external hard drive with all users follow the following procedure:
 
+1. Identify the `UUID` of the external hard drive:
 ```{bash, eval=F}
-#Navigate where the symbolic link should reside
-cd /usr/local/bin/
+#Find UUID of your device (make sure that it is plugged in before running this command)
+sudo blkid
 ```
 
-Then we will establish the symbolic link as follows:
-
+2. Create a folder owned by root in `/media`:
 ```{bash, eval=F}
-#Use ln protocol to establish symbolic link
-# pathtoprogram = path to executable program 
-# alias = the name you give to the symbolic link or alias
-sudo ln -s pathtoprogram alias
-
-#Example with R
-sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4
+#Create a folder in media (adjust name, here SeaGate)
+sudo mkdir /media/SeaGate
 ```
 
-In this example, everybody will be able to access `R` version 4.0.4 by typing `R-4` in the Terminal.
+3. Give all users permissions to read and write (in `/media/SeaGate`):
+```{bash, eval=F}
+sudo chmod -R 777 /media/SeaGate
+```
+
+4. Edit and save the `fstab` file:
+```{bash, eval=F}
+#Open file
+sudo vim /etc/fstab
+
+#Add entry (adjust UUID to your UUID) at bottom of file
+# Separate bblocks with tab
+UUID=00148BDE148BD4D6 /media/SeaGate/    ntfs-3g        auto,user,rw 0 0
+```
+
+5. Reboot system and you should be good to go.
+
+# Install and configure samba
+
+A Samba file server enables file sharing across different operating systems over a network. It lets you access your desktop files from a laptop and share files with Windows and macOS users. Here, we will be using this protocol to share our external hard drive remotely via  smb protocol.
+
+## Installing Samba
+
+If it is not done yet, please install Samba on Ubuntu computer as follows:
+
+```{bash, eval=F}
+sudo apt update
+sudo apt install samba
+```
+
+We can check if the installation was successful by running:
+```{bash, eval=F}
+whereis samba
+```
+
+## Sharing folder with Samba protocol
+
+Now that Samba is installed, we can share a folder, here `/media/SeaGate`.
+
+To share the folder, you have to edit the configuration file for Samba located at `/etc/samba/smb.conf`. To add the new directory as a share, we edit the file by running:
+```{bash, eval=F}
+sudo vim /etc/samba/smb.conf
+```
+
+Then add the following text at the bottom of the file:
+```{bash, eval=F}
+[SeaGate]
+    comment = Samba on Ubuntu
+    path = /media/SeaGate
+    read only = no
+    browsable = yes
+```
+
+Now that we have our new share configured, save it and restart Samba for it to take effect:
+```{bash, eval=F}
+sudo service smbd restart
+```
+
+Update the firewall rules to allow Samba traffic:
+```{bash, eval=F}
+sudo ufw allow samba
+```
+
+## Setting up User Accounts and Connecting to Share
+
+Since Samba doesn’t use the system account password, we need to set up a Samba password for our user account:
+```{bash, eval=F}
+#General syntax
+sudo smbpasswd -a username
+#Example  for us
+sudo smbpasswd -a anthonymelton
+```
+
+## Connecting to Share
+
+You can now access this folder remotely by using `smb` protocol. 
+
+On macOS: In the Finder menu, click Go > Connect to Server then enter:
+```{bash, eval=F}
+#General syntax (where share =  the name of the share)
+smb://ip-address/share
+
+#Example
+smb://132.178.142.223/SeaGate
+```
 
 # Mount a smb server on Ubuntu
 

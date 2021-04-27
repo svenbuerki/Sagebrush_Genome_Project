@@ -661,25 +661,8 @@ su USER_name
 su bio_11</code></pre>
 </div>
 </div>
-<div id="disk-usage" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Disk usage</h1>
-<p>Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space left on their hard drive (using <code>df</code>) or space taken by files (using <code>du</code>). To do that, please use the following commands:</p>
-<div id="disk-space" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Disk space</h2>
-<p>The <code>df</code> protocol gives you insights into disk free space. To know about the free space on all disks do:</p>
-<pre class="bash"><code>df -H</code></pre>
-<p>To get the same information, but for the disk specific to a folder (here <code>/home</code>), do:</p>
-<pre class="bash"><code>df -H /home</code></pre>
-</div>
-<div id="disk-usage-1" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Disk usage</h2>
-<p>The <code>du</code> protocol gives you insights into disk usage. here we propose a command that gives you specifically the disk usage taken by files:</p>
-<pre class="bash"><code>#Disk usage taken by files in a folder
-du -h -s *</code></pre>
-</div>
-</div>
-<div id="add-symbolic-links-to-programs" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Add symbolic links to programs</h1>
+<div id="add-symbolic-links-to-programs" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Add symbolic links to programs</h1>
 <p>Here we use the <code>ln</code> command to make a symbolic link (or a kind of alias) to a program in the <code>bin/</code>. This means that the program will be accessible to anybody by typing a shortcut (or alias).</p>
 <p>Since the symbolic link will reside in the <code>bin/</code> folder, first you will be navigating to this location as follows:</p>
 <pre class="bash"><code>#Navigate where the symbolic link should reside
@@ -694,8 +677,104 @@ sudo ln -s pathtoprogram alias
 sudo ln -s /home/bioinformatics/R-4.0.4/bin/R R-4</code></pre>
 <p>In this example, everybody will be able to access <code>R</code> version 4.0.4 by typing <code>R-4</code> in the Terminal.</p>
 </div>
-<div id="mount-a-smb-server-on-ubuntu" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Mount a smb server on Ubuntu</h1>
+<div id="disk-status" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Disk status</h1>
+<p>Since NGS data are taking a lot of space on the hard drive, users might would like to quickly estimate the amount of space left on their hard drive (using <code>df</code>) or space taken by files (using <code>du</code>). To do that, please use the following commands:</p>
+<div id="disk-space" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Disk space</h2>
+<p>The <code>df</code> protocol gives you insights into disk free space. To know about the free space on all disks do:</p>
+<pre class="bash"><code>df -H</code></pre>
+<p>To get the same information, but for the disk specific to a folder (here <code>/home</code>), do:</p>
+<pre class="bash"><code>df -H /home</code></pre>
+</div>
+<div id="disk-usage" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Disk usage</h2>
+<p>The <code>du</code> protocol gives you insights into disk usage. here we propose a command that gives you specifically the disk usage taken by files:</p>
+<pre class="bash"><code>#Disk usage taken by files in a folder
+du -h -s *</code></pre>
+</div>
+</div>
+<div id="share-external-hard-drive-with-all-users" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Share external hard drive with all users</h1>
+<p>If you want to share an external hard drive across all users of a Ubuntu computer you will need to add an entry in the <code>fstab</code> file. However, before adding this entry, you will need to:
+- Identify the <code>UUID</code> of the external hard drive (using <code>sudo blkid</code>).
+- Create a folder owned by root (and give writing permissions to all users) to mount the external hard drive.</p>
+<p>To share external hard drive with all users follow the following procedure:</p>
+<ol style="list-style-type: decimal">
+<li>Identify the <code>UUID</code> of the external hard drive:</li>
+</ol>
+<pre class="bash"><code>#Find UUID of your device (make sure that it is plugged in before running this command)
+sudo blkid</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Create a folder owned by root in <code>/media</code>:</li>
+</ol>
+<pre class="bash"><code>#Create a folder in media (adjust name, here SeaGate)
+sudo mkdir /media/SeaGate</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Give all users permissions to read and write (in <code>/media/SeaGate</code>):</li>
+</ol>
+<pre class="bash"><code>sudo chmod -R 777 /media/SeaGate</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Edit and save the <code>fstab</code> file:</li>
+</ol>
+<pre class="bash"><code>#Open file
+sudo vim /etc/fstab
+
+#Add entry (adjust UUID to your UUID) at bottom of file
+# Separate bblocks with tab
+UUID=00148BDE148BD4D6 /media/SeaGate/    ntfs-3g        auto,user,rw 0 0</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Reboot system and you should be good to go.</li>
+</ol>
+</div>
+<div id="install-and-configure-samba" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Install and configure samba</h1>
+<p>A Samba file server enables file sharing across different operating systems over a network. It lets you access your desktop files from a laptop and share files with Windows and macOS users. Here, we will be using this protocol to share our external hard drive remotely via smb protocol.</p>
+<div id="installing-samba" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Installing Samba</h2>
+<p>If it is not done yet, please install Samba on Ubuntu computer as follows:</p>
+<pre class="bash"><code>sudo apt update
+sudo apt install samba</code></pre>
+<p>We can check if the installation was successful by running:</p>
+<pre class="bash"><code>whereis samba</code></pre>
+</div>
+<div id="sharing-folder-with-samba-protocol" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Sharing folder with Samba protocol</h2>
+<p>Now that Samba is installed, we can share a folder, here <code>/media/SeaGate</code>.</p>
+<p>To share the folder, you have to edit the configuration file for Samba located at <code>/etc/samba/smb.conf</code>. To add the new directory as a share, we edit the file by running:</p>
+<pre class="bash"><code>sudo vim /etc/samba/smb.conf</code></pre>
+<p>Then add the following text at the bottom of the file:</p>
+<pre class="bash"><code>[SeaGate]
+    comment = Samba on Ubuntu
+    path = /media/SeaGate
+    read only = no
+    browsable = yes</code></pre>
+<p>Now that we have our new share configured, save it and restart Samba for it to take effect:</p>
+<pre class="bash"><code>sudo service smbd restart</code></pre>
+<p>Update the firewall rules to allow Samba traffic:</p>
+<pre class="bash"><code>sudo ufw allow samba</code></pre>
+</div>
+<div id="setting-up-user-accounts-and-connecting-to-share" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Setting up User Accounts and Connecting to Share</h2>
+<p>Since Samba doesn’t use the system account password, we need to set up a Samba password for our user account:</p>
+<pre class="bash"><code>#General syntax
+sudo smbpasswd -a username
+#Example  for us
+sudo smbpasswd -a anthonymelton</code></pre>
+</div>
+<div id="connecting-to-share" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Connecting to Share</h2>
+<p>You can now access this folder remotely by using <code>smb</code> protocol.</p>
+<p>On macOS: In the Finder menu, click Go &gt; Connect to Server then enter:</p>
+<pre class="bash"><code>#General syntax (where share =  the name of the share)
+smb://ip-address/share
+
+#Example
+smb://132.178.142.223/SeaGate</code></pre>
+</div>
+</div>
+<div id="mount-a-smb-server-on-ubuntu" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Mount a smb server on Ubuntu</h1>
 <ol style="list-style-type: decimal">
 <li>Create (<code>mkdir</code>) or identify a folder on your Ubuntu computer where the smb server will be connected to. In this example, we use our shared folder in <code>/home/Genomics_shared</code> and created a folder for smb protocols (<code>smbshare</code>).</li>
 </ol>
@@ -718,17 +797,17 @@ sudo cp -r IDT2-2_NovaSeq_Illumina_April2019/ /home/Genomics_shared/sambashare/<
 <p>If you are interested in setting-up a samba (smb) served from your Linux computer to be shared with Windows users follow this approach:</p>
 <p><a href="https://ubuntu.com/tutorials/install-and-configure-samba#1-overview" class="uri">https://ubuntu.com/tutorials/install-and-configure-samba#1-overview</a></p>
 </div>
-<div id="sftp-protocol" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> SFTP protocol</h1>
+<div id="sftp-protocol" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> SFTP protocol</h1>
 <p>You might have to download NGS data from different providers (e.g. GeneWIZ) and they will set-up an <code>sftp</code> server for you. Here is a short tutorial on the procedure used to download data:</p>
-<div id="start-a-tmux-session" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Start a tmux session</h2>
+<div id="start-a-tmux-session" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Start a tmux session</h2>
 <p>Open a Terminal and start a tmux session as follows:</p>
 <pre class="bash"><code>tmux</code></pre>
 <p>This will open a safe working environment that can be accessed very easily. Please read protocol on <code>tmux</code> sessions <a href="https://svenbuerki.github.io/Genomics-Bioinformatics/Tutorials.html#3_Running_bioinformatic_analyses_-_tmux">here</a>.</p>
 </div>
-<div id="connect-to-sftp-server" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Connect to sftp server</h2>
+<div id="connect-to-sftp-server" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Connect to sftp server</h2>
 <p>To connect to an sftp server you need:</p>
 <ul>
 <li>username (here anthonymelton_boisestate).</li>
@@ -740,14 +819,14 @@ sftp username@sftp.IP
 #Example with GeneWIZ
 sftp anthonymelton_boisestate@sftp.genewiz.com</code></pre>
 </div>
-<div id="set-destination-path" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Set destination path</h2>
+<div id="set-destination-path" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Set destination path</h2>
 <p>The <code>get</code> or <code>mget</code> protocols used to copy files over don’t allow to set the destinations path (where the files will be saved on your local computer), but you can easily set this by using the <code>lcd</code> command. Here is an example based on our project structure.</p>
 <pre class="bash"><code>#Copy files from sftp server to /home/Genomics_shared/G1_b2_1/
 lcd /home/Genomics_shared/G1_b2_1/</code></pre>
 </div>
-<div id="copy-whole-project-folder" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Copy whole project folder</h2>
+<div id="copy-whole-project-folder" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Copy whole project folder</h2>
 <p>The best practice is to copy the whole project folder over onto your local computer. This can be done by using <code>get -r</code> command. Here is an example with some GeneWIZ data.</p>
 <pre class="bash"><code>#Copy whole project over
 get -r 30-470086959</code></pre>
