@@ -377,7 +377,8 @@ du -h -s *
 # Share external hard drive with all users
 
 If you want to share an external hard drive across all users of a Ubuntu computer you will need to add an entry in the `fstab` file. However, before adding this entry, you will need to:
-- Identify the `UUID` of the external hard drive (using `sudo blkid`).
+
+- Identify the `UUID` of the external hard drive (using `sudo blkid`). If your hard drive uses a exFAT file system you will have to install additional packages to mount it on Linux (see below).
 - Create a folder owned by root (and give writing permissions  to all users) to mount the external hard drive.
 
 To share external hard drive with all users follow the following procedure:
@@ -387,6 +388,13 @@ To share external hard drive with all users follow the following procedure:
 #Find UUID of your device (make sure that it is plugged in before running this command)
 sudo blkid
 ```
+
+**WARNING:** Certain hard drives (e.g. WD) have a different data encryption mode (or file system), which are not directly compatible with Linux and you won't be able to mount them (even if you see their `UUID`. For instance, the exFAT file system is ideal for flash drives and SD cards, but you will need to install a few packages to be able to mount it. Open the Terminal and run this command:
+```{bash, eval=F}
+sudo apt-get install exfat-fuse exfat-utils
+```
+
+You should now be able to see the hard drive and mount it. To share the hard drive with all users you will have to edit the `fstab` file in a different manner (see below).
 
 2. Create a folder owned by root in `/media`:
 ```{bash, eval=F}
@@ -405,8 +413,11 @@ sudo chmod -R 777 /media/SeaGate
 sudo vim /etc/fstab
 
 #Add entry (adjust UUID to your UUID) at bottom of file
-# Separate bblocks with tab
+# Separate blocks with tab
 UUID=00148BDE148BD4D6 /media/SeaGate/    ntfs-3g        auto,user,rw 0 0
+
+#For exFAT file system do
+UUID=00148BDE148BD4D6 /media/WD/    exfat-fuse        auto,user,rw 0 0
 ```
 
 5. Reboot system and you should be good to go.

@@ -696,15 +696,20 @@ du -h -s *</code></pre>
 </div>
 <div id="share-external-hard-drive-with-all-users" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> Share external hard drive with all users</h1>
-<p>If you want to share an external hard drive across all users of a Ubuntu computer you will need to add an entry in the <code>fstab</code> file. However, before adding this entry, you will need to:
-- Identify the <code>UUID</code> of the external hard drive (using <code>sudo blkid</code>).
-- Create a folder owned by root (and give writing permissions to all users) to mount the external hard drive.</p>
+<p>If you want to share an external hard drive across all users of a Ubuntu computer you will need to add an entry in the <code>fstab</code> file. However, before adding this entry, you will need to:</p>
+<ul>
+<li>Identify the <code>UUID</code> of the external hard drive (using <code>sudo blkid</code>). If your hard drive uses a exFAT file system you will have to install additional packages to mount it on Linux (see below).</li>
+<li>Create a folder owned by root (and give writing permissions to all users) to mount the external hard drive.</li>
+</ul>
 <p>To share external hard drive with all users follow the following procedure:</p>
 <ol style="list-style-type: decimal">
 <li>Identify the <code>UUID</code> of the external hard drive:</li>
 </ol>
 <pre class="bash"><code>#Find UUID of your device (make sure that it is plugged in before running this command)
 sudo blkid</code></pre>
+<p><strong>WARNING:</strong> Certain hard drives (e.g. WD) have a different data encryption mode (or file system), which are not directly compatible with Linux and you won’t be able to mount them (even if you see their <code>UUID</code>. For instance, the exFAT file system is ideal for flash drives and SD cards, but you will need to install a few packages to be able to mount it. Open the Terminal and run this command:</p>
+<pre class="bash"><code>sudo apt-get install exfat-fuse exfat-utils</code></pre>
+<p>You should now be able to see the hard drive and mount it. To share the hard drive with all users you will have to edit the <code>fstab</code> file in a different manner (see below).</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Create a folder owned by root in <code>/media</code>:</li>
 </ol>
@@ -721,8 +726,11 @@ sudo mkdir /media/SeaGate</code></pre>
 sudo vim /etc/fstab
 
 #Add entry (adjust UUID to your UUID) at bottom of file
-# Separate bblocks with tab
-UUID=00148BDE148BD4D6 /media/SeaGate/    ntfs-3g        auto,user,rw 0 0</code></pre>
+# Separate blocks with tab
+UUID=00148BDE148BD4D6 /media/SeaGate/    ntfs-3g        auto,user,rw 0 0
+
+#For exFAT file system do
+UUID=00148BDE148BD4D6 /media/WD/    exfat-fuse        auto,user,rw 0 0</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>Reboot system and you should be good to go.</li>
 </ol>
