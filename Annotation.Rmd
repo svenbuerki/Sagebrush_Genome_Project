@@ -50,27 +50,40 @@ opts_chunk$set(cache = 2, cache.path = "cache/")
 # Overview
 
 To annotate the sagebrush genome (and identify adaptive loci related to drought and heat stress) a suite of GxE experiments are conducted followed by RNA sequencing and transcriptome assemblies (later referred to as bioinformatic analyses). This document is dedicated to describing our experimental design, which is associated to comparing drought and heat performance between sagebrush individual lines and identifying adaptive loci associated to these phenotypes. Leaf and root tissues will be sequenced using RNA-seq technology (on Illumina NovaSeq platform). 
- 
-## GxE experiments
 
-### Overview
+# Methodological approach
 
-- 3 GxE experiments: Heat (H), drought (D) and heat + drought (HD) stresses.
-- 5 treatments (T).
-- 25 individuals/treatment (n). 
-- 2 individual lines (Ind): `G1_b2` (representing drought tolerant genotype) and `G2_b24` (representing drought sensitive genotype). We will be conducting trial experiments using `G2_b27`. Please see Figure \@ref(fig:timetab) for more details.
-- 2 tissue types for RNA-seq: leaf and root.
-- Recording **wilting** and **chlorosis** responses at individual level (= phenotypes used for sampling, but also to assess phenotypic plasticity).
-- Measuring hydraulic conductivity of plantlets upon signs of stress (see above). This will allow to further estimate drought and/or heat stress and serve as proxy of embolism.
-- The total number of plantlets (T*n*Ind): `r (25*5)*2`
-- Number of RNA extractions = N. libraries (L) (T*Tiss*Ind): `r ((5*1)*2)*2`
-- Number of Illumina NovaSeq runs: 2.
+Our project aims at assessing genome to phenome mechanisms involved in drought (D), heat (H) and combined drought + heat (DH) tolerance in two sagebrush individual lines originating from contrasting climates (and corresponding to different genotypes). In addition, this approach will allow quantifying and comparing genotype responses to acute abiotic stress therefore supporting forecasting efforts to evaluate the adaptive potential of sagebrush populations to climate change. To reach these goals, we are applying a 3-tier approach:
 
-### Sampling
+1. Conduct GxE experiments on individual lines (= genotypes) and monitor vitals associated to mechanisms leading to stomatal closure. This phenotype is key to avoid seedlings' mortality by cavitation or embolism during acute abiotic stress.
+2. Assess treatments effect by targeting transcripts associated to the ABA pathway resulting into stomatal closure. These data will allow quantifying and comparing responses of individual lines to treatments.
+3. Discover adaptive loci critical to D, H, DH tolerance by comparing control and treatment transcriptomes between and within individual lines. A custom RNA baiting kit will be developed to survey adaptive loci across populations to estimate their adaptive potential to cope with climate change.
+
+Descriptions of the three stages of this approach is provided below.
+
+# Conduct GxE experiments
+
+## Individual lines
+
+GxE experiments were conducted on `G1_b2` (from ID representing drought tolerant genotype, but undergoing low summer heat stress) and `G2_b24` (from UT representing drought sensitive genotype, but undergoing high summer heat stress) individual lines. 30 plantlets were generated per individual line per treatment (n=30) with 5 plantlets for associated control treatments (n=5). Please see Figure \@ref(fig:timetab) for more details (see below for more details). Plantlets were grown in PhytoCon 946 ml vessels with XX gr of soil (4 sand: 1 vermiculite ratio) and acclimitized to condtions in the P4 Percival culture chamber. One week prior to imposing treatment a sealed plastic lid covering the soil was applied to prevent evaporation and only support water movement via transpiration. This setting was key to infer timing of stomatal closure as a response to applied treatments (see below for more details). 
+
+## Vital measurements
+
+Soil moisture, water potential ($\Psi~soil~$) and air relative humidity were monitored during treatments to assess plantlets transpiration rates and evaluate stomatal closure using XXX devices. In the case of D and DH treatments, plantlets were harvested when stomata were fully closed 9meaning that they are entering into starvation to avoid death by cavitation; see below for more details). Leaf sizes were inadequate to measure stomatal conductance and we therefore had to apply a different approach to measure this process. This was estimated by comparing night vs. day soil moisture data using a t-test (here we were after H0 = no significant difference between the two datasets). Upon stomatal closure, transpiration would stop therefore soil moisture should remain identical between night and day. This assumption is only correct when evaporation is null and that variation in soil moisture is only driven by transpiration.  
+
+Estimating this process will be facilitated by the lid preventing evaporation (see above). To further estimate cavitation upon stomatal closure stem xylem pressure ($\Psi~x~$) was measured when plantlets were harvested using the XXX device. This trait corresponds to the plant's ability to undergo high xylem pressure caused by drought resulting in air bubbles entering the xylem and disrupting the water flow therefore causing cavitation. To avoid death by cavitation, plants evolved mechanisms to close their stomata, which are mostly regulated by ABA. The ability of a plant to sustain high xylem pressure and therefore minimize cavitation can be predicted by its vessels' pore diameters. In this context, stem and root xylem anatomies of our individual lines were quantified and compared using SEM and light microscopy. Finally, transpiration rates have been shown to be associated to stomata density. Stomata density on both side of the blade were quantified and compared between individual lines using SEM.
+
+
+**GxE experiments:** Drought (D), Heat (H) and drought + heat (DH) treatments were conducted on 30 plantlets per individual line per treatment. Treatments were conducted in the P4 Percival culture chamber were all plantlets were distributed on one shelf to avoid any light or temperature effects. Five control (C) plantlets associated to each treatment were harvested at 0 d (just before applying the treatment) to enable assessing treatment efficacy and identifying differentially expressed genes (DEGs) in leaves and roots using RNA-seq technique.  
+
+
+**Transcriptomics:** Transcriptomic analyses were conducted on leaf and root tissues. Since all individuals are clones, RNA extractions were conducted on 5 randomly selected plantlets and pooled (by tissue and treatment) to conduct Illumina NovaSeq RNA-seq. Controls associated to each treatment (D, H, DH) were kept distinct (= distinct libraries) to allow for accurate comparisons and identifications of DEGs. In this context, a total of 12 Illumina libraries were built and sequenced on 2 Illumina NovaSeq runs (= 6 libraries per run).
+
+## Sampling
 
 [Individual lines](Individual_lines.html) that have been acclimatized to natural environmental conditions are used for these experiments. Every plantlet within an individual line will have a specific barcode to monitor its progress. Two individual lines will be used: `G1_b2` (representing drought tolerant genotype) and `G2_b24` (representing drought sensitive genotype). We will be conducting trial GxE experiments using `G2_b27` to make sure that all the settings are correct. Please see Figure \@ref(fig:timetab) for more details.
 
-### Timetable
+## Timetable
 
 The timetable associated to the GxE experiments and subsequent RNA sequencing (RNA-seq) and bioinformatic analyses (= transcriptome assemblies) required to annotate the sagebrush genome is presented in Figure \@ref(fig:timetab).
 
@@ -196,14 +209,127 @@ legend("bottomright",
   cex = 0.6)
 ```
 
-### Experimental design
-
-#### Climatic growing conditions
+### Climatic growing conditions
 
 During the ex planting protocol, plantlets are exposed to the following climatic conditions in:
 
 - On the cart in the laboratory: 24<span>&deg and average of 20.3% RH.
 - In the culture chamber (P4): 24<span>&deg and average of 22% RH.
+
+## Drought treatment
+
+```{r, droughtplot, echo = FALSE, warning = FALSE, message = FALSE, results = "hide"}
+###
+#Load R packages
+###
+require(png)
+
+###
+#Load user-defined functions (UDFs)
+###
+#Create list of R UDFs
+files.sources <- list.files("Functions", pattern = ".R", full.names=T)
+#Source R UDFS
+sapply(files.sources[1], source)
+
+###
+#Load stomata logos (PNG)
+###
+#Located in Images
+stopen <- png::readPNG("Images/Stomata_opened.png")
+stclosed <- png::readPNG("Images/Stomata_closed.png")
+dayLogo <- png::readPNG("Images/sun-128x128.png")
+nightLogo <- png::readPNG("Images/Moon.png")
+
+#GxE drought
+
+DroughtTime <- data.frame("Time" = seq(from=0, to=7, by=1),  "Soil_moisture" = c(80,60,60,40,40,20,20,20), "temp" = rep(24, 8))
+
+#Plot
+plot(x=DroughtTime$Time, y=DroughtTime$Soil_moisture, ylim=c(0,105), xlab = "", ylab="", type = "n", frame.plot = F, axes = F)
+
+#Add day/night rectangles
+nightstart <- seq(from=1, to = 5, by=2)
+for(i in 1:length(nightstart)){
+  rect(xleft = nightstart[i], ybottom = -10, xright = nightstart[i]+1, ytop = 100, col = "grey", border=NA)
+}
+
+#Add logo of stomata
+stopenx <- seq(from=0.5, to=4.5, by=2)
+for(i in 1:length(stopenx)){
+  addImg(stopen, x = stopenx[i], y = 90, width = 0.5)
+}
+
+stclosedx <- c(seq(from=1.5, to=7, by=2), 6.5)
+for(i in 1:length(stclosedx)){
+  addImg(stclosed, x = stclosedx[i], y = 90, width = 0.5)
+}
+
+#Add moisture data
+lines(x=DroughtTime$Time, y=DroughtTime$Soil_moisture, lwd=2, col="black")
+
+#Add side axis with temperature
+lines(x=DroughtTime$Time, y=2*DroughtTime$temp, lwd=2, col="blue")
+
+#Add temperature axis
+axis(side=4, at=2*seq(from=0, to=45, by=5), labels = seq(from=0, to=45, by=5), pos=c(7.1,0))
+mtext(side=4, line = 1.2, "Temperature (Celsius)", col="blue", font=1, cex=1)
+
+#Add soil moisture axis
+axis(side=2, at=seq(from=0, to=100, by=20), labels = seq(from=0, to=100, by=20), pos=c(-0.1,0))
+mtext(side=2, line=2.2, "Soil moisture (%)", col="black", font=1, cex=1)
+
+#Add time axis
+axis(side=1, at=DroughtTime$Time, labels = DroughtTime$Time/2)
+mtext(side=1, line = 2.2, "Time (days)", col="black", font=1, cex=1)
+
+#Add cavitation threshold
+segments(x0=0, x1=7, y0=10, y1=10, lty=2)
+text(x=0.5, y=11, "Cavitation\nthreshold", cex=0.8)
+#Add safety margin
+arrows(x0=6.1, x1=6.1, y0=10, y1=20, angle=10, code=3, length = 0.1)
+text(x=6.5, y=15, "Safety\nmargin", cex=0.8)
+
+#Add logo of day
+dayx <- seq(from=0.5, to=6.5, by=2)
+for(i in 1:length(dayx)){
+  addImg(dayLogo, x = dayx[i], y = 2, width = 0.4)
+}
+
+#Add logo of night
+nightx <- seq(from=1.5, to=7, by=2)
+for(i in 1:length(nightx)){
+  addImg(nightLogo, x = nightx[i], y = 2, width = 0.3)
+}
+
+#Add harvesting of tissues
+#Controls
+text(x=0.1, y=83, expression(paste("RNA-seq,", Psi[x])), srt=90, cex=0.8, adj=c(0,0))
+points(x=0, y=80, pch=16, cex=1.5)
+
+#Treated
+text(x=6.2, y=22, expression(paste("RNA-seq,", Psi[x])), srt=45, cex=0.8, adj=c(0,0))
+points(x=6.2, y=20, pch=16, cex=1.5)
+
+```
+
+
+
+**Growing conditions:** at constant 24<span>&deg;</span>C. 
+
+**Vital measureme
+
+**Treatments:**
+
+Two treatments will be conducted to assess the effect of drought on gene expression patterns:
+
+  - T~C~: well-watered (control). 
+  - T~D~: drought. 
+
+**Sampling**
+
+Each T~D~ plantlet will be sampled at the onset of drought (upon wilting), whereas T~C~ plantlets will only be sampled at the end of the experiment (when all the T~D~ plantlets are wilted). A response curve will be drawn to estimate phenotypic plasticity within each individual line. Hydraulic conductivity upon sampling will be measured for each plantlet.
+
 
 #### Heat experiment
 
@@ -229,22 +355,6 @@ One treatment will be conducted to assess the effect of heat on gene expression 
 
 Each T~H~ plantlet will be sampled at the onset of heat (upon chlorosis). A response curve will be drawn to estimate phenotypic plasticity within each individual line. Hydraulic conductivity upon sampling will be measured for each individual.
 
-
-#### Drought experiment
-
-**Growing conditions:** at constant 24<span>&deg;</span>C. 
-
-
-**Treatments:**
-
-Two treatments will be conducted to assess the effect of drought on gene expression patterns:
-
-  - T~C~: well-watered (control). 
-  - T~D~: drought. 
-
-**Sampling**
-
-Each T~D~ plantlet will be sampled at the onset of drought (upon wilting), whereas T~C~ plantlets will only be sampled at the end of the experiment (when all the T~D~ plantlets are wilted). A response curve will be drawn to estimate phenotypic plasticity within each individual line. Hydraulic conductivity upon sampling will be measured for each plantlet.
 
 #### Heat and drought experiment
 
