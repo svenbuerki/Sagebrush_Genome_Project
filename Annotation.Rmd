@@ -65,7 +65,7 @@ Descriptions of the three stages of this approach is provided below.
 
 ## Individual lines
 
-GxE experiments were conducted on `G1_b2` (from ID representing drought tolerant genotype, but undergoing low summer heat stress) and `G2_b24` (from UT representing drought sensitive genotype, but undergoing high summer heat stress) individual lines. 30 plantlets were generated per individual line per treatment (n=30) with 5 plantlets for associated control treatments (n=5). Please see Figure \@ref(fig:timetab) for more details (see below for more details). Plantlets were grown in PhytoCon 946 ml vessels with XX gr of soil (4 sand: 1 vermiculite ratio) and acclimitized to condtions in the P4 Percival culture chamber. One week prior to imposing treatment a sealed plastic lid covering the soil was applied to prevent evaporation and only support water movement via transpiration. This setting was key to infer timing of stomatal closure as a response to applied treatments (see below for more details). 
+GxE experiments were conducted on `G1_b2` (from ID representing drought tolerant genotype, but undergoing low summer heat stress) and `G2_b24` (from UT representing drought sensitive genotype, but undergoing high summer heat stress) individual lines. 30 plantlets were generated per individual line per treatment (n=30) with 5 plantlets for associated control treatments (n=5). Please see Figure \@ref(fig:timetab) for more details (see below for more details). Plantlets were grown in PhytoCon 946 ml vessels with XX gr of soil (4 sand: 1 vermiculite ratio) and acclimatized to condtions in the P4 Percival culture chamber. One week prior to imposing treatment a sealed plastic lid covering the soil was applied to prevent evaporation and only support water movement via transpiration. This setting was key to infer timing of stomatal closure as a response to applied treatments (see below for more details). 
 
 ## Vital measurements
 
@@ -74,7 +74,7 @@ Soil moisture, water potential ($\Psi~soil~$) and air relative humidity were mon
 Estimating this process will be facilitated by the lid preventing evaporation (see above). To further estimate cavitation upon stomatal closure stem xylem pressure ($\Psi~x~$) was measured when plantlets were harvested using the XXX device. This trait corresponds to the plant's ability to undergo high xylem pressure caused by drought resulting in air bubbles entering the xylem and disrupting the water flow therefore causing cavitation. To avoid death by cavitation, plants evolved mechanisms to close their stomata, which are mostly regulated by ABA. The ability of a plant to sustain high xylem pressure and therefore minimize cavitation can be predicted by its vessels' pore diameters. In this context, stem and root xylem anatomies of our individual lines were quantified and compared using SEM and light microscopy. Finally, transpiration rates have been shown to be associated to stomata density. Stomata density on both side of the blade were quantified and compared between individual lines using SEM.
 
 
-**GxE experiments:** Drought (D), Heat (H) and drought + heat (DH) treatments were conducted on 30 plantlets per individual line per treatment. Treatments were conducted in the P4 Percival culture chamber were all plantlets were distributed on one shelf to avoid any light or temperature effects. Five control (C) plantlets associated to each treatment were harvested at 0 d (just before applying the treatment) to enable assessing treatment efficacy and identifying differentially expressed genes (DEGs) in leaves and roots using RNA-seq technique.  
+**GxE experiments:** Drought (D), Heat (H) and drought x heat (DH) treatments were conducted on 30 plantlets per individual line per treatment. Treatments were conducted in the P4 Percival culture chamber and all plantlets were distributed on one shelf to avoid any light or temperature effects. To further investigate any culture chamber effect, plantlets were equally subdivided into three groups (each including 10 plantlets) depending on their position on the shelf: right side, middle and left side. Estimation of transpiration rates for each group were inferred by randomly selecting two plantlets per group and tracking changes of water content through time using a METER EC-5 probe. Five control (C) plantlets associated to each treatment were harvested at 0 d (just before applying the treatment) to enable assessing treatment efficacy and identifying differentially expressed genes (DEGs) in leaves and roots using RNA-seq technique. Treatment were stopped and data harvested upon inference of stomatal closure at mid-day. This was inferred by conducting t-tests were night and day water content data were compared. No significant difference in water content should be inferred between night and day data since plantlets closed their stomata during the day to avoid death by cavitation and therefore entered into starvation. Prior to merging the water content data, statistical tests were conducted to ensure that there is no cluture chamber effect on plantlet's transpiration. Finally, the level of cavitation upon stomata closure was inferred by recording stem xylem pressure and compared to control plantlets.      
 
 
 **Transcriptomics:** Transcriptomic analyses were conducted on leaf and root tissues. Since all individuals are clones, RNA extractions were conducted on 5 randomly selected plantlets and pooled (by tissue and treatment) to conduct Illumina NovaSeq RNA-seq. Controls associated to each treatment (D, H, DH) were kept distinct (= distinct libraries) to allow for accurate comparisons and identifications of DEGs. In this context, a total of 12 Illumina libraries were built and sequenced on 2 Illumina NovaSeq runs (= 6 libraries per run).
@@ -243,6 +243,11 @@ nightLogo <- png::readPNG("Images/Moon.png")
 
 #GxE drought
 
+#Get soil moisture data for figure
+soilmoist <- rev(seq(from=20, to=80, by=10))
+soilmoist <- c(soilmoist[1], sort(rep(soilmoist[2:length(soilmoist)], 2), decreasing=T))
+
+#GxE drought
 DroughtTime <- data.frame("Time" = seq(from=0, to=7, by=1),  "Soil_moisture" = c(80,60,60,40,40,20,20,20), "temp" = rep(24, 8))
 
 #Plot
@@ -304,11 +309,11 @@ for(i in 1:length(nightx)){
 
 #Add harvesting of tissues
 #Controls
-text(x=0.1, y=83, expression(paste("RNA-seq,", Psi[x])), srt=90, cex=0.8, adj=c(0,0))
+text(x=0.1, y=83, expression(paste("RNA-Seq,", Psi[x])), srt=90, cex=0.8, adj=c(0,0))
 points(x=0, y=80, pch=16, cex=1.5)
 
 #Treated
-text(x=6.2, y=22, expression(paste("RNA-seq,", Psi[x])), srt=45, cex=0.8, adj=c(0,0))
+text(x=6.2, y=22, expression(paste("RNA-Seq,", Psi[x])), srt=45, cex=0.8, adj=c(0,0))
 points(x=6.2, y=20, pch=16, cex=1.5)
 
 ```

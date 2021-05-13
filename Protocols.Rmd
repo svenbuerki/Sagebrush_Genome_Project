@@ -422,6 +422,16 @@ UUID=00148BDE148BD4D6 /media/WD/    exfat-fuse        auto,user,rw 0 0
 
 5. Reboot system and you should be good to go.
 
+# Sending email upon job completion
+
+Some jobs take a long time to run. If you want, you can add a command to send you an email upon completion of the job. Ue the following syntax:
+
+```{bash, eval=F}
+command; echo "JOB COMPETED! Go online to check output." | mail -s "Job is completed" username@boisestate.edu
+```
+
+Your email might be redirected into your SPAM box, so please check for it.
+
 # Install and configure samba
 
 A Samba file server enables file sharing across different operating systems over a network. It lets you access your desktop files from a laptop and share files with Windows and macOS users. Here, we will be using this protocol to share our external hard drive remotely via  smb protocol.

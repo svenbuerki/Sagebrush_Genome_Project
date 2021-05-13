@@ -735,19 +735,25 @@ UUID=00148BDE148BD4D6 /media/WD/    exfat-fuse        auto,user,rw 0 0</code></p
 <li>Reboot system and you should be good to go.</li>
 </ol>
 </div>
-<div id="install-and-configure-samba" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Install and configure samba</h1>
+<div id="sending-email-upon-job-completion" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Sending email upon job completion</h1>
+<p>Some jobs take a long time to run. If you want, you can add a command to send you an email upon completion of the job. Ue the following syntax:</p>
+<pre class="bash"><code>command; echo &quot;JOB COMPETED! Go online to check output.&quot; | mail -s &quot;Job is completed&quot; username@boisestate.edu</code></pre>
+<p>Your email might be redirected into your SPAM box, so please check for it.</p>
+</div>
+<div id="install-and-configure-samba" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Install and configure samba</h1>
 <p>A Samba file server enables file sharing across different operating systems over a network. It lets you access your desktop files from a laptop and share files with Windows and macOS users. Here, we will be using this protocol to share our external hard drive remotely via smb protocol.</p>
-<div id="installing-samba" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Installing Samba</h2>
+<div id="installing-samba" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Installing Samba</h2>
 <p>If it is not done yet, please install Samba on Ubuntu computer as follows:</p>
 <pre class="bash"><code>sudo apt update
 sudo apt install samba</code></pre>
 <p>We can check if the installation was successful by running:</p>
 <pre class="bash"><code>whereis samba</code></pre>
 </div>
-<div id="sharing-folder-with-samba-protocol" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Sharing folder with Samba protocol</h2>
+<div id="sharing-folder-with-samba-protocol" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Sharing folder with Samba protocol</h2>
 <p>Now that Samba is installed, we can share a folder, here <code>/media/SeaGate</code>.</p>
 <p>To share the folder, you have to edit the configuration file for Samba located at <code>/etc/samba/smb.conf</code>. To add the new directory as a share, we edit the file by running:</p>
 <pre class="bash"><code>sudo vim /etc/samba/smb.conf</code></pre>
@@ -762,16 +768,16 @@ sudo apt install samba</code></pre>
 <p>Update the firewall rules to allow Samba traffic:</p>
 <pre class="bash"><code>sudo ufw allow samba</code></pre>
 </div>
-<div id="setting-up-user-accounts-and-connecting-to-share" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Setting up User Accounts and Connecting to Share</h2>
+<div id="setting-up-user-accounts-and-connecting-to-share" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Setting up User Accounts and Connecting to Share</h2>
 <p>Since Samba doesn’t use the system account password, we need to set up a Samba password for our user account:</p>
 <pre class="bash"><code>#General syntax
 sudo smbpasswd -a username
 #Example  for us
 sudo smbpasswd -a anthonymelton</code></pre>
 </div>
-<div id="connecting-to-share" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Connecting to Share</h2>
+<div id="connecting-to-share" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Connecting to Share</h2>
 <p>You can now access this folder remotely by using <code>smb</code> protocol.</p>
 <p>On macOS: In the Finder menu, click Go &gt; Connect to Server then enter:</p>
 <pre class="bash"><code>#General syntax (where share =  the name of the share)
@@ -781,8 +787,8 @@ smb://ip-address/share
 smb://132.178.142.223/SeaGate</code></pre>
 </div>
 </div>
-<div id="mount-a-smb-server-on-ubuntu" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Mount a smb server on Ubuntu</h1>
+<div id="mount-a-smb-server-on-ubuntu" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Mount a smb server on Ubuntu</h1>
 <ol style="list-style-type: decimal">
 <li>Create (<code>mkdir</code>) or identify a folder on your Ubuntu computer where the smb server will be connected to. In this example, we use our shared folder in <code>/home/Genomics_shared</code> and created a folder for smb protocols (<code>smbshare</code>).</li>
 </ol>
@@ -805,17 +811,17 @@ sudo cp -r IDT2-2_NovaSeq_Illumina_April2019/ /home/Genomics_shared/sambashare/<
 <p>If you are interested in setting-up a samba (smb) served from your Linux computer to be shared with Windows users follow this approach:</p>
 <p><a href="https://ubuntu.com/tutorials/install-and-configure-samba#1-overview" class="uri">https://ubuntu.com/tutorials/install-and-configure-samba#1-overview</a></p>
 </div>
-<div id="sftp-protocol" class="section level1" number="9">
-<h1><span class="header-section-number">9</span> SFTP protocol</h1>
+<div id="sftp-protocol" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> SFTP protocol</h1>
 <p>You might have to download NGS data from different providers (e.g. GeneWIZ) and they will set-up an <code>sftp</code> server for you. Here is a short tutorial on the procedure used to download data:</p>
-<div id="start-a-tmux-session" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Start a tmux session</h2>
+<div id="start-a-tmux-session" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Start a tmux session</h2>
 <p>Open a Terminal and start a tmux session as follows:</p>
 <pre class="bash"><code>tmux</code></pre>
 <p>This will open a safe working environment that can be accessed very easily. Please read protocol on <code>tmux</code> sessions <a href="https://svenbuerki.github.io/Genomics-Bioinformatics/Tutorials.html#3_Running_bioinformatic_analyses_-_tmux">here</a>.</p>
 </div>
-<div id="connect-to-sftp-server" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Connect to sftp server</h2>
+<div id="connect-to-sftp-server" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Connect to sftp server</h2>
 <p>To connect to an sftp server you need:</p>
 <ul>
 <li>username (here anthonymelton_boisestate).</li>
@@ -827,14 +833,14 @@ sftp username@sftp.IP
 #Example with GeneWIZ
 sftp anthonymelton_boisestate@sftp.genewiz.com</code></pre>
 </div>
-<div id="set-destination-path" class="section level2" number="9.3">
-<h2><span class="header-section-number">9.3</span> Set destination path</h2>
+<div id="set-destination-path" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Set destination path</h2>
 <p>The <code>get</code> or <code>mget</code> protocols used to copy files over don’t allow to set the destinations path (where the files will be saved on your local computer), but you can easily set this by using the <code>lcd</code> command. Here is an example based on our project structure.</p>
 <pre class="bash"><code>#Copy files from sftp server to /home/Genomics_shared/G1_b2_1/
 lcd /home/Genomics_shared/G1_b2_1/</code></pre>
 </div>
-<div id="copy-whole-project-folder" class="section level2" number="9.4">
-<h2><span class="header-section-number">9.4</span> Copy whole project folder</h2>
+<div id="copy-whole-project-folder" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Copy whole project folder</h2>
 <p>The best practice is to copy the whole project folder over onto your local computer. This can be done by using <code>get -r</code> command. Here is an example with some GeneWIZ data.</p>
 <pre class="bash"><code>#Copy whole project over
 get -r 30-470086959</code></pre>
