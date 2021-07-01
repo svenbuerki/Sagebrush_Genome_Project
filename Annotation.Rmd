@@ -95,10 +95,10 @@ The time allocated for each phase of the workflow (and representing the time ass
 - <span style="color: blue;font-weight:bold">Bioinformatics</span>: 20 weeks. Assembling transcriptomes, conducting comparative analyses to isolate adaptive loci and starting genome annotation will take 20 weeks.  
 
 
-```{r timetab, echo=F, warning=F, fig.cap= "Timetable associated to GxE experiments and subsequent RNA sequencing and biorinformatic analyses used for annotate the sagebrush genome. Please see text for more details on individual lines."}
+```{r timetab, echo=F, warning=F, fig.cap= "Timetable associated to GxE experiments and subsequent RNA sequencing and bioinformatic analyses used for annotate the sagebrush genome. Please see text for more details on individual lines."}
 #Timetable
 
-timetab <- data.frame("Individual_line" = c("G2_b27", "G2_b24", "G1_b2"), "Start_ExPlanting" = lubridate::mdy(c("NA", "NA", "NA")), "End_ExPlanting" = lubridate::mdy(c("NA", "NA", "NA")), "GxE_End" = lubridate::mdy(c("NA", "NA", "NA")), "RNA-seqEnd" = lubridate::mdy(c("NA", "NA", "NA")), "Bioinfo_End" = lubridate::mdy(c("NA", "NA", "NA")))
+timetab <- data.frame("Individual_line" = sort(rep(c("G2_b24", "G1_b2"),2)), "Replicate" = rep(c("1","2"),2), "Start_ExPlanting" = lubridate::mdy(c("NA", "NA", "NA","NA")), "End_ExPlanting" = lubridate::mdy(c("NA", "NA", "NA","NA")), "GxE_End" = lubridate::mdy(c("NA", "NA", "NA","NA")), "RNA-seqEnd" = lubridate::mdy(c("NA", "NA", "NA","NA")), "Bioinfo_End" = lubridate::mdy(c("NA", "NA", "NA","NA")))
 
 
 ###
@@ -107,20 +107,73 @@ timetab <- data.frame("Individual_line" = c("G2_b27", "G2_b24", "G1_b2"), "Start
 ###
 
 #When ready for ex planting?
-timetab$Start_ExPlanting[1] <- as.Date("04-01-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(2)
+#timetab$Start_ExPlanting[1] <- as.Date("04-01-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(2)
 
 #When ready for GxE
-timetab$End_ExPlanting[1] <- timetab$Start_ExPlanting[1] + lubridate::weeks(10)
+#timetab$End_ExPlanting[1] <- timetab$Start_ExPlanting[1] + lubridate::weeks(10)
 
 #When GxE end?
-timetab$GxE_End[1] <- timetab$End_ExPlanting[1] + lubridate::weeks(4)
+#timetab$GxE_End[1] <- timetab$End_ExPlanting[1] + lubridate::weeks(4)
 
 ###
 # G2_b24
 ###
 
+###REPLICATE 1
+#When ready for ex planting? Replicate 1
+timetab$Start_ExPlanting[3] <- as.Date("04-01-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(5)
+
+#When ready for GxE
+timetab$End_ExPlanting[3] <- timetab$Start_ExPlanting[3] + lubridate::weeks(11)
+
+#When GxE end?
+timetab$GxE_End[3] <- timetab$End_ExPlanting[3] + lubridate::weeks(4)
+
+#When RNA-seq end?
+timetab$RNA.seqEnd[3] <-  timetab$GxE_End[3] + lubridate::weeks(10)
+
+#When Bioinfo end?
+timetab$Bioinfo_End[3] <-  timetab$RNA.seqEnd[3] + lubridate::weeks(20)
+
+###REPLICATE 2
+#When ready for ex planting? Replicate 2
+timetab$Start_ExPlanting[4] <- as.Date("06-16-21", tryFormats = c("%m-%d-%y"))
+
+#When ready for GxE
+timetab$End_ExPlanting[4] <- timetab$Start_ExPlanting[4] + lubridate::weeks(11)
+
+#When GxE end?
+timetab$GxE_End[4] <- timetab$End_ExPlanting[4] + lubridate::weeks(4)
+
+#When RNA-seq end?
+timetab$RNA.seqEnd[4] <-  timetab$GxE_End[4] + lubridate::weeks(10)
+
+#When Bioinfo end?
+timetab$Bioinfo_End[4] <-  timetab$RNA.seqEnd[4] + lubridate::weeks(20)
+
+###
+# G1_b2
+###
+
+###REPLICATE 1
 #When ready for ex planting?
-timetab$Start_ExPlanting[2] <- as.Date("04-01-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(5)
+timetab$Start_ExPlanting[1] <- as.Date("04-09-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(13)
+
+#When ready for GxE
+timetab$End_ExPlanting[1] <- timetab$Start_ExPlanting[1] + lubridate::weeks(11)
+
+#When GxE end?
+timetab$GxE_End[1] <- timetab$End_ExPlanting[1] + lubridate::weeks(4)
+
+#When RNA-seq end?
+timetab$RNA.seqEnd[1] <-  timetab$GxE_End[1] + lubridate::weeks(10)
+
+#When Bioinfo end?
+timetab$Bioinfo_End[1] <-  timetab$RNA.seqEnd[1] + lubridate::weeks(20)
+
+###REPLICATE 2
+#When ready for ex planting?
+timetab$Start_ExPlanting[2] <- as.Date("07-14-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(10)
 
 #When ready for GxE
 timetab$End_ExPlanting[2] <- timetab$Start_ExPlanting[2] + lubridate::weeks(11)
@@ -136,36 +189,15 @@ timetab$Bioinfo_End[2] <-  timetab$RNA.seqEnd[2] + lubridate::weeks(20)
 
 
 ###
-# G1_b2
-###
-
-#When ready for ex planting?
-timetab$Start_ExPlanting[3] <- as.Date("04-09-21", tryFormats = c("%m-%d-%y")) + lubridate::weeks(13)
-
-#When ready for GxE
-timetab$End_ExPlanting[3] <- timetab$Start_ExPlanting[3] + lubridate::weeks(11)
-
-#When GxE end?
-timetab$GxE_End[3] <- timetab$End_ExPlanting[3] + lubridate::weeks(4)
-
-#When RNA-seq end?
-timetab$RNA.seqEnd[3] <-  timetab$GxE_End[3] + lubridate::weeks(10)
-
-#When Bioinfo end?
-timetab$Bioinfo_End[3] <-  timetab$RNA.seqEnd[3] + lubridate::weeks(20)
-
-
-
-###
 #PLOT
 ###
 
 #Plot timetable
-plot(x=c(lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), lubridate::round_date(max(timetab$Bioinfo_End, na.rm = T), "month")), y= c(0,3), type="n", axes = F, ylab = "", xlab = "")
+plot(x=c(lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), lubridate::round_date(max(timetab$Bioinfo_End, na.rm = T), "month")), y= c(0,5), type="n", axes = F, ylab = "", xlab = "")
 
 #Add customed axes
 #Y axis = Individual lines
-axis(side = 2, at = c(0.5, 1.5, 2.5), labels = timetab$Individual_line)
+axis(side = 2, at = c(0.5, 1.5, 2.5, 3.5), labels = timetab$Individual_line, cex.axis=.6)
 
 #X axis = time
 datespan <- seq(from = lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), to = lubridate::round_date(max(timetab$Bioinfo_End, na.rm = T), "month"), "month")
@@ -187,7 +219,7 @@ for(i in 1:nrow(timetab)){
 
   
   #Dates
-  text(x = c(timetab$Start_ExPlanting[i], timetab$End_ExPlanting[i], timetab$GxE_End[i], timetab$RNA.seqEnd[i], timetab$Bioinfo_End[i]), y = rep(i-0.2, 3), c(timetab$Start_ExPlanting[i], timetab$End_ExPlanting[i], timetab$GxE_End[i], timetab$RNA.seqEnd[i], timetab$Bioinfo_End[i]), srt=90, cex=.5)
+  text(x = c(timetab$Start_ExPlanting[i], timetab$End_ExPlanting[i], timetab$GxE_End[i], timetab$RNA.seqEnd[i], timetab$Bioinfo_End[i]), y = rep(i-0.1, 3), c(timetab$Start_ExPlanting[i], timetab$End_ExPlanting[i], timetab$GxE_End[i], timetab$RNA.seqEnd[i], timetab$Bioinfo_End[i]), srt=90, cex=.5)
 }
 
 #Arrows with fiscal years
@@ -196,17 +228,17 @@ arrows(x0 = lubridate::floor_date(min(timetab$Start_ExPlanting), "month"), x1 = 
 text(x = as.Date("06-01-21", tryFormats = c("%m-%d-%y")), y = 0.2, "Year 3", cex = 0.8)
 
 #Y4
-arrows(x0 = as.Date("10-01-21", tryFormats = c("%m-%d-%y")), x1 = as.Date("06-01-22", tryFormats = c("%m-%d-%y")), y0 = 0.1, y1 = 0.1, length = 0.1, angle = 10, code = 1)
+arrows(x0 = as.Date("10-01-21", tryFormats = c("%m-%d-%y")), x1 = as.Date("09-30-22", tryFormats = c("%m-%d-%y")), y0 = 0.1, y1 = 0.1, length = 0.1, angle = 10, code = 1)
 text(x = as.Date("02-01-22", tryFormats = c("%m-%d-%y")), y = 0.2, "Year 4", cex= 0.8)
 
 # Add a legend
 legend("bottomright", 
-  legend = c("Ex planting (11 w.)", "GxE exp. (4 w.)", "RNA-seq (10 w.)", "Bioinformatics (20 w.)"), 
+  legend = c("Ex plant. (11 w.)", "GxE (4 w.)", "RNA-seq (10 w.)", "Bioinfo. (20 w.)"), 
   col = c("black","grey", "green", "blue"), 
   lwd = rep(2, 4),
   horiz = F , 
   inset = c(0, 0.1),
-  cex = 0.6)
+  cex = 0.5)
 ```
 
 ### Climatic growing conditions
